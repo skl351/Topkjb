@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/id_big_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <com.top.kjb.customview.roundimage
+            android:id="@+id/id_head"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@color/gray"
+            app:round="5dp" />
+        <LinearLayout
+            android:layout_alignTop="@id/id_head"
+            android:layout_alignBottom="@id/id_head"
+            android:layout_marginLeft="8dp"
+           android:layout_toRightOf="@id/id_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/id_name"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/title_size_15"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/id_summary"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/title_size_12"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_a4a4a4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/id_show_score"
+                    android:textSize="@dimen/title_size_12"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_a4a4a4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/id_location_long"
+                    android:textSize="@dimen/title_size_11"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_a4a4a4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_f4f4f4" />
+
+</LinearLayout>

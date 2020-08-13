@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Topkjb</string>
+    <string name="tab_one_text">场地</string>
+    <string name="tab_two_text">社区</string>
+    <string name="tab_three_text">我的</string>
+    <string name="string_login">登录</string>
+    <string name="default_text1">推荐场馆</string>
+</resources>
