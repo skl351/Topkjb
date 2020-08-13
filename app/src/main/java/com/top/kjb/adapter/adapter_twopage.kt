@@ -47,6 +47,12 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             p0.settag(1)
         }
 
+        p0.big_view?.setOnClickListener(object :View.OnClickListener{
+            override fun onClick(v: View?) {
+
+            }
+
+        })
     }
 
     class ItemViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
@@ -63,7 +69,7 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         constructor(itemView: View) : super(itemView) {
 
-//            big_view = itemView.findViewById(R.id.big_view)
+            big_view = itemView.findViewById(R.id.id_click_big_view)
         }
     }
 }

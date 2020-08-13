@@ -26,9 +26,9 @@ class MyApplicatipn : Application() {
      */
     private fun init_image() {
         val defaultOptions = DisplayImageOptions.Builder()
-            .showImageForEmptyUri(R.color.black)
-            .showImageOnFail(R.color.black)
-            .showImageOnLoading(R.color.black)
+            .showImageForEmptyUri(R.drawable.default_image)
+            .showImageOnFail(R.drawable.default_image)
+            .showImageOnLoading(R.drawable.default_image)
             .cacheInMemory(true)
             .cacheOnDisc(true)
             .imageScaleType(ImageScaleType.NONE)//设置图片以如何的编码方式显示

@@ -52,6 +52,18 @@
             android:name=".tabfragment.fragmentone_view.user_comment_list"
             android:launchMode="singleTask" />
         <activity
+            android:name=".tabfragment.Mysetting"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tabfragment.Myselfinfo"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tabfragment.Mysafety"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".tabfragment.fragmentthree_view.fragmentthree_attention"
             android:launchMode="singleTask" />
 

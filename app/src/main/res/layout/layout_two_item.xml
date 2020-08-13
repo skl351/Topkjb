@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:padding="15dp"
+    android:id="@+id/id_click_big_view"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout

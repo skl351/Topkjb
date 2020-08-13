@@ -21,6 +21,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/id_click_setting"
             android:layout_width="50dp"
             android:layout_height="50dp">
 

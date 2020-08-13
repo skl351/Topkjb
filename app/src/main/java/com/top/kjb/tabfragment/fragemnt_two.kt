@@ -53,6 +53,15 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
     var currentpage = 1
     var pagesize = 10
     fun init_list() {
+        list_3he1 = ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>()
+        list_3he1.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
+        list_3he1.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
+        list_3he1.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
+        list_3he1.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
+        list_3he1.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
+        adapter = adapter_twopage(activity!!, list_3he1)
+        id_RecyclerView.adapter = adapter
+        return
         twoModel.twoselectAllCircle(functionClass.getToken(), currentpage, pagesize)
             .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
                 override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
