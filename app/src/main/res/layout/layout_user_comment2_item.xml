@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout
+    android:layout_margin="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.top.kjb.customview.RoundImageView
+            android:id="@+id/id_head_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"/>
+        <LinearLayout
+            android:layout_alignTop="@id/id_head_img"
+            android:layout_alignBottom="@id/id_head_img"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/id_head_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/color_333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="大冷泡子"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:textSize="@dimen/title_size_12"
+                    android:textColor="@color/color_a4a4a4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019-09-21"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_marginRight="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp">
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_usercomment2_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginRight="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp">
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/check_zan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/color_333333"
+        android:lineHeight="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:text="倦客新丰，貂裘敝、征尘满目。弹短铗、青蛇三尺， 浩歌谁续。不念英雄江左老，用之可以尊中国。叹诗 书、万卷致君人，番沈陆。"/>
+</LinearLayout>
+    <ImageView
+        android:background="@color/color_f4f4f4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

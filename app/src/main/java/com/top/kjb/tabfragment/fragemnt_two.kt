@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.top.kjb.R
+import com.top.kjb.Userabout.LoginActivity
 import com.top.kjb.adapter.adapter_twopage
 import com.top.kjb.bean.Result
 import com.top.kjb.bean.bean_twopage_item_3he1
 import com.top.kjb.model.TwoModel
 import com.top.kjb.originpack.BaseFragment
+import com.top.kjb.tabfragment.fragmenttwo_view.publish_item
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.functionClass
-import kotlinx.android.synthetic.main.layout_fragmentone.*
 import kotlinx.android.synthetic.main.layout_fragmentone.id_RecyclerView
 import kotlinx.android.synthetic.main.layout_fragmenttwo.*
 import retrofit2.Call
@@ -101,19 +102,30 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
         id_click_two.setOnClickListener(this)
         id_click_three.setOnClickListener(this)
         id_click_four.setOnClickListener(this)
+        id_click_publish.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.id_click_publish -> {
+                if (!functionClass.islogin()) {
+                    var intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    return
+                }
+                var intent = Intent(activity, publish_item::class.java)
+                startActivity(intent)
+
+            }
             R.id.id_click_one -> {
                 id_click_one_text.setTextColor(resources.getColor(R.color.color_333333))
                 id_click_two_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
                 id_click_three_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
                 id_click_four_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_id_click_one_img.visibility=View.VISIBLE
-                id_click_two_img.visibility=View.INVISIBLE
-                id_click_three_img.visibility=View.INVISIBLE
-                id_click_four_img.visibility=View.INVISIBLE
+                id_id_click_one_img.visibility = View.VISIBLE
+                id_click_two_img.visibility = View.INVISIBLE
+                id_click_three_img.visibility = View.INVISIBLE
+                id_click_four_img.visibility = View.INVISIBLE
 
                 init_list()
             }
@@ -122,10 +134,10 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
                 id_click_two_text.setTextColor(resources.getColor(R.color.color_333333))
                 id_click_three_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
                 id_click_four_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_id_click_one_img.visibility=View.INVISIBLE
-                id_click_two_img.visibility=View.VISIBLE
-                id_click_three_img.visibility=View.INVISIBLE
-                id_click_four_img.visibility=View.INVISIBLE
+                id_id_click_one_img.visibility = View.INVISIBLE
+                id_click_two_img.visibility = View.VISIBLE
+                id_click_three_img.visibility = View.INVISIBLE
+                id_click_four_img.visibility = View.INVISIBLE
                 init_list()
             }
             R.id.id_click_three -> {
@@ -133,10 +145,10 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
                 id_click_two_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
                 id_click_three_text.setTextColor(resources.getColor(R.color.color_333333))
                 id_click_four_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_id_click_one_img.visibility=View.INVISIBLE
-                id_click_two_img.visibility=View.INVISIBLE
-                id_click_three_img.visibility=View.VISIBLE
-                id_click_four_img.visibility=View.INVISIBLE
+                id_id_click_one_img.visibility = View.INVISIBLE
+                id_click_two_img.visibility = View.INVISIBLE
+                id_click_three_img.visibility = View.VISIBLE
+                id_click_four_img.visibility = View.INVISIBLE
                 init_list()
             }
             R.id.id_click_four -> {
@@ -144,10 +156,10 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
                 id_click_two_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
                 id_click_three_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
                 id_click_four_text.setTextColor(resources.getColor(R.color.color_333333))
-                id_id_click_one_img.visibility=View.INVISIBLE
-                id_click_two_img.visibility=View.INVISIBLE
-                id_click_three_img.visibility=View.INVISIBLE
-                id_click_four_img.visibility=View.VISIBLE
+                id_id_click_one_img.visibility = View.INVISIBLE
+                id_click_two_img.visibility = View.INVISIBLE
+                id_click_three_img.visibility = View.INVISIBLE
+                id_click_four_img.visibility = View.VISIBLE
                 init_list()
             }
 

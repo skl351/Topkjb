@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white2"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/back_top_15cir_white"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+
+                android:textStyle="bold"
+                android:textSize="@dimen/title_size_16"
+                android:textColor="@color/color_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部门店"/>
+        </LinearLayout>
+        <RelativeLayout
+
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/title_size_16"
+                android:textColor="@color/color_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOP健身公馆"/>
+            <ImageView
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/check_selectplace"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/title_size_16"
+                android:textColor="@color/color_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="大冷泡子健身公馆"/>
+            <ImageView
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/check_selectplace"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/title_size_16"
+                android:textColor="@color/color_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="美国队长健身公馆"/>
+            <ImageView
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/check_selectplace"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

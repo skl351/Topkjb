@@ -61,6 +61,9 @@
             android:name=".tabfragment.Mysafety"
             android:launchMode="singleTask" />
         <activity
+            android:name=".tabfragment.fragmenttwo_view.publish_item"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail"
             android:launchMode="singleTask" />
         <activity

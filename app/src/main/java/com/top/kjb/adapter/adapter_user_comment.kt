@@ -12,6 +12,7 @@ import com.top.kjb.bean.bean_main_item
 import com.top.kjb.bean.bean_twopage_item_3he1
 
 /**
+ * 用户动态评
  * Created by MaiBenBen on 2019/1/22.
  */
 class adapter_user_comment : RecyclerView.Adapter<RecyclerView.ViewHolder> {

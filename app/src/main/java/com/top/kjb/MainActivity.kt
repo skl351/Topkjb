@@ -74,9 +74,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         id_text_1.isSelected = true
         myViewpage.offscreenPageLimit = 2
         myViewpage.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
-            override fun getItem(p0: Int): Fragment? {
-
-                return bottom_tabist?.get(p0)
+            override fun getItem(position: Int): Fragment {
+                return bottom_tabist?.get(position)!!
             }
 
             override fun getCount(): Int {

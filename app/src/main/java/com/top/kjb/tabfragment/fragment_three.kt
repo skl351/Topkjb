@@ -126,6 +126,7 @@ class fragment_three : BaseFragment(), View.OnClickListener {
                 if (!functionClass.islogin()) {
                     var intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
+                    return
                 }
                 var intent=Intent(activity, fragmentthree_attention::class.java)
                 startActivity(intent)
@@ -134,6 +135,7 @@ class fragment_three : BaseFragment(), View.OnClickListener {
                 if (!functionClass.islogin()) {
                     var intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
+                    return
                 }
                 var intent=Intent(activity, fragmentthree_attention::class.java)
                 startActivity(intent)
@@ -142,6 +144,7 @@ class fragment_three : BaseFragment(), View.OnClickListener {
                 if (!functionClass.islogin()) {
                     var intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
+                    return
                 }
 
             }

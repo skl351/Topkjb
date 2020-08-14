@@ -5,22 +5,20 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.nostra13.universalimageloader.core.ImageLoader
 import com.top.kjb.R
-import com.top.kjb.bean.bean_attention_fans
 import com.top.kjb.bean.bean_main_item
-import com.top.kjb.tabfragment.fragmentone_view.fragmentone_detail
+import com.top.kjb.bean.bean_twopage_item_3he1
+import com.top.kjb.bean.bean_user_comment
 
 /**
+ * 用户普通评论
  * Created by MaiBenBen on 2019/1/22.
  */
-class adapter_user_attention_fans : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class adapter_user_comment2 : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     var mInflater: LayoutInflater? = null
-    var mData: ArrayList<bean_attention_fans>? = null
+    var mData: ArrayList<bean_user_comment>? = null
     override fun getItemCount(): Int {
         return mData?.size!!
     }
@@ -31,14 +29,14 @@ class adapter_user_attention_fans : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     var mycontent: Context? = null
 
-    constructor(context: Context, list: ArrayList<bean_attention_fans>) : super() {
+    constructor(context: Context, list: ArrayList<bean_user_comment>) : super() {
         mData = list
         mInflater = LayoutInflater.from(context)
         mycontent = context
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
-        val view = mInflater?.inflate(R.layout.layout_user_attention_fans, p0, false)
+        val view = mInflater?.inflate(R.layout.layout_user_comment2_item, p0, false)
         val itemViewholder = ItemViewHolder(view!!)
         return itemViewholder
     }
@@ -50,8 +48,6 @@ class adapter_user_attention_fans : RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             p0.settag(1)
         }
-
-        var bean=mData?.get(p1)
 
     }
 
@@ -67,20 +63,7 @@ class adapter_user_attention_fans : RecyclerView.Adapter<RecyclerView.ViewHolder
 
         var big_view: LinearLayout? = null
 
-        lateinit var id_head:ImageView
-        lateinit var id_name:TextView
-        lateinit var id_summary:TextView
-        lateinit var id_show_score:TextView
-        lateinit var id_location_long:TextView
-        lateinit var id_big_view:View
         constructor(itemView: View) : super(itemView) {
-
-//            id_head=itemView.findViewById(R.id.id_head)
-//            id_big_view=itemView.findViewById(R.id.id_big_view)
-//            id_name=itemView.findViewById(R.id.id_name)
-//            id_summary=itemView.findViewById(R.id.id_summary)
-//            id_show_score=itemView.findViewById(R.id.id_show_score)
-//            id_location_long=itemView.findViewById(R.id.id_location_long)
 
 //            big_view = itemView.findViewById(R.id.big_view)
         }

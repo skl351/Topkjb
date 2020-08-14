@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.top.kjb.R
 import com.top.kjb.bean.bean_main_item
 import com.top.kjb.bean.bean_twopage_item_3he1
+import com.top.kjb.tabfragment.fragmenttwo_view.fragmenttwo_detail
 
 /**
  * Created by MaiBenBen on 2019/1/22.
@@ -27,19 +28,28 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     var mycontent: Context? = null
 
-    constructor(context: Context, list: ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>) : super() {
+    constructor(
+        context: Context,
+        list: ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>
+    ) : super() {
         mData = list
         mInflater = LayoutInflater.from(context)
         mycontent = context
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(
+        p0: ViewGroup,
+        p1: Int
+    ): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val view = mInflater?.inflate(R.layout.layout_two_item, p0, false)
         val itemViewholder = ItemViewHolder(view!!)
         return itemViewholder
     }
 
-    override fun onBindViewHolder(p0: androidx.recyclerview.widget.RecyclerView.ViewHolder, p1: Int) {
+    override fun onBindViewHolder(
+        p0: androidx.recyclerview.widget.RecyclerView.ViewHolder,
+        p1: Int
+    ) {
         p0 as ItemViewHolder
         if (p0.gettag() == 1) {
             return
@@ -47,9 +57,10 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             p0.settag(1)
         }
 
-        p0.big_view?.setOnClickListener(object :View.OnClickListener{
+        p0.big_view?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-
+                var intent = Intent(mycontent, fragmenttwo_detail::class.java)
+                mycontent?.startActivity(intent)
             }
 
         })
