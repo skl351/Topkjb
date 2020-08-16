@@ -58,6 +58,9 @@
             android:name=".tabfragment.Myselfinfo"
             android:launchMode="singleTask" />
         <activity
+            android:name=".tabfragment.fragmentone_view.fragmentone_place_info"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".tabfragment.Mysafety"
             android:launchMode="singleTask" />
         <activity

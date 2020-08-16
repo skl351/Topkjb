@@ -331,17 +331,47 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_margin="20dp"
+    <RelativeLayout
+        android:id="@+id/id_click_pay"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/gray">
-        <TextView
-            android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/icon_buy_itemback">
+        <LinearLayout
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="购买相关"/>
-    </LinearLayout>
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="限时优惠，低至"
+                android:layout_marginLeft="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_size_13"
+                android:textColor="@color/white"/>
+            <TextView
+                android:text="￥15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_size_16"
+                android:textColor="@color/color_eebf98"/>
+            <TextView
+                android:text="/次"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_size_10"
+                android:textColor="@color/color_eebf98"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginRight="37dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="购买次卡"
+            android:textColor="@color/color_394159"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </RelativeLayout>

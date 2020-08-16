@@ -88,8 +88,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         id_click_send_sms.setOnClickListener(this)
         id_click_login.setOnClickListener(this)
         id_click_yzm.setOnClickListener(this)
-        id_click_password.setOnClickListener(this)
-        id_click_forget_password.setOnClickListener(this)
         id_top.findViewById<View>(R.id.id_back).setOnClickListener(this)
     }
 
@@ -110,19 +108,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.id_click_yzm -> {
                 id_click_yzm_text.setTextColor(resources.getColor(R.color.black))
-                id_click_password_text.setTextColor(resources.getColor(R.color.gray))
                 id_yzm_line.visibility = View.VISIBLE
-                id_password_line.visibility = View.GONE
                 id_yzm_big.visibility = View.VISIBLE
-                id_password_big.visibility = View.GONE
-            }
-            R.id.id_click_password -> {
-                id_click_yzm_text.setTextColor(resources.getColor(R.color.gray))
-                id_click_password_text.setTextColor(resources.getColor(R.color.black))
-                id_yzm_line.visibility = View.GONE
-                id_password_line.visibility = View.VISIBLE
-                id_yzm_big.visibility = View.GONE
-                id_password_big.visibility = View.VISIBLE
             }
         }
     }

@@ -9,7 +9,7 @@ import com.top.kjb.R
 import com.top.kjb.originpack.BaseActivity
 import kotlinx.android.synthetic.main.layout_fragmentthree_user_center.*
 
-class fragmentthree_user_center:BaseActivity() {
+class fragmentthree_user_center : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +22,10 @@ class fragmentthree_user_center:BaseActivity() {
         getfragment()
         init_adapter()
     }
+
     var mAdapter: FragmentPagerAdapter? = null
     var currentIndex: Int = 0
-    var num_item_page=2
+    var num_item_page = 2
     private fun init_adapter() {
 
         view_pager_myself.offscreenPageLimit = 2
@@ -48,21 +49,32 @@ class fragmentthree_user_center:BaseActivity() {
             view_pager_myself.setCurrentItem(1)
 
         })
-        view_pager_myself.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
+        view_pager_myself.addOnPageChangeListener(object :
+            androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 if (currentIndex == 0 && position == 0) {//0->1
                     chagetext(0)
                     val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
-                    lp.leftMargin = (positionOffset * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(num_item_page)).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    lp.leftMargin =
+                        (positionOffset * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
                     myImgtag.setLayoutParams(lp)
                 } else if (currentIndex == 1 && position == 0) {//1->0
                     chagetext(1)
                     val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
-                    lp.leftMargin = (-(1 - positionOffset) * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(num_item_page)).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    lp.leftMargin =
+                        (-(1 - positionOffset) * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
                     myImgtag.setLayoutParams(lp)
                 }
 
@@ -75,6 +87,7 @@ class fragmentthree_user_center:BaseActivity() {
         })
 
     }
+
     fun chagetext(i: Int) {
         id_line1.setTypeface(Typeface.DEFAULT);
         id_line1.setTextColor(resources.getColor(R.color.color_a4a4a4))
@@ -92,12 +105,13 @@ class fragmentthree_user_center:BaseActivity() {
         }
 
     }
+
     var mFragments = ArrayList<Fragment>()
     var framgent1: Fragment? = null
     var framgent2: Fragment? = null
     private fun getfragment() {
-        framgent1=Dongtai_list()
-        framgent2=Dongtai_list()
+        framgent1 = Dongtai_list()
+        framgent2 = Dongtai_list()
         mFragments.add(framgent1 as Fragment)
         mFragments.add(framgent2 as Fragment)
     }

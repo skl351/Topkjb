@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <com.top.kjb.customview.ObservableScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="50dp">
@@ -448,7 +448,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </com.top.kjb.customview.ObservableScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"

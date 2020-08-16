@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.top.kjb.R
 import com.top.kjb.Userabout.LoginActivity
 import com.top.kjb.adapter.adapter_twopage
+import com.top.kjb.adapter.adapter_twopage_zixun
 import com.top.kjb.bean.Result
+import com.top.kjb.bean.bean_twopage_item2
 import com.top.kjb.bean.bean_twopage_item_3he1
 import com.top.kjb.model.TwoModel
 import com.top.kjb.originpack.BaseFragment
@@ -48,12 +50,15 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
 
     lateinit var list_3he1: ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>
     lateinit var adapter: adapter_twopage
+    lateinit var list_zixun: ArrayList<bean_twopage_item2>
+    lateinit var adapter2: adapter_twopage_zixun
 
 
     val twoModel: TwoModel by lazy { TwoModel() }
     var currentpage = 1
     var pagesize = 10
     fun init_list() {
+        currentpage = 1
         list_3he1 = ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>()
         list_3he1.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
         list_3he1.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
@@ -91,6 +96,19 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
 
     }
 
+    fun init_zixun() {
+        currentpage = 1
+        list_zixun = ArrayList<bean_twopage_item2>()
+        list_zixun.add(bean_twopage_item2())
+        list_zixun.add(bean_twopage_item2())
+        list_zixun.add(bean_twopage_item2())
+        list_zixun.add(bean_twopage_item2())
+        list_zixun.add(bean_twopage_item2())
+        adapter2 = adapter_twopage_zixun(activity!!, list_zixun)
+        id_RecyclerView.adapter = adapter2
+
+
+    }
     override fun init_view() {
         super.init_view()
 
@@ -160,7 +178,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener {
                 id_click_two_img.visibility = View.INVISIBLE
                 id_click_three_img.visibility = View.INVISIBLE
                 id_click_four_img.visibility = View.VISIBLE
-                init_list()
+                init_zixun()
             }
 
         }
