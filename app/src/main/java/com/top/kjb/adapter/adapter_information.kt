@@ -5,23 +5,21 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.nostra13.universalimageloader.core.ImageLoader
 import com.top.kjb.R
+import com.top.kjb.bean.bean_cikausejilu
+import com.top.kjb.bean.bean_infomation
 import com.top.kjb.bean.bean_main_item
-import com.top.kjb.bean.bean_twopage_item2
-import com.top.kjb.tabfragment.fragmentone_view.fragmentone_detail
-import com.top.kjb.tabfragment.fragmenttwo_view.fragmenttwo_detail2
+import com.top.kjb.bean.bean_twopage_item_3he1
 
 /**
+ * 用户动态评
  * Created by MaiBenBen on 2019/1/22.
  */
-class adapter_twopage_zixun : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class adapter_information : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     var mInflater: LayoutInflater? = null
-    var mData: ArrayList<bean_twopage_item2>? = null
+    var mData: ArrayList<bean_infomation>? = null
     override fun getItemCount(): Int {
         return mData?.size!!
     }
@@ -32,14 +30,14 @@ class adapter_twopage_zixun : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     var mycontent: Context? = null
 
-    constructor(context: Context, list: ArrayList<bean_twopage_item2>) : super() {
+    constructor(context: Context, list: ArrayList<bean_infomation>) : super() {
         mData = list
         mInflater = LayoutInflater.from(context)
         mycontent = context
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
-        val view = mInflater?.inflate(R.layout.layout_zixun_view_item, p0, false)
+        val view = mInflater?.inflate(R.layout.layout_information_item, p0, false)
         val itemViewholder = ItemViewHolder(view!!)
         return itemViewholder
     }
@@ -51,14 +49,6 @@ class adapter_twopage_zixun : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             p0.settag(1)
         }
-
-        p0.id_click_zixun_view.setOnClickListener(object :View.OnClickListener{
-            override fun onClick(p0: View?) {
-                var intent=Intent(mycontent, fragmenttwo_detail2::class.java)
-                mycontent?.startActivity(intent)
-            }
-
-        })
 
     }
 
@@ -72,11 +62,11 @@ class adapter_twopage_zixun : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return tag
         }
 
+        var big_view: LinearLayout? = null
 
-        lateinit var id_click_zixun_view:View
         constructor(itemView: View) : super(itemView) {
-        id_click_zixun_view=itemView.findViewById<View>(R.id.id_click_zixun_detail)
 
+//            big_view = itemView.findViewById(R.id.big_view)
         }
     }
 }

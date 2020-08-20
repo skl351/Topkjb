@@ -62,4 +62,8 @@ object functionClass {
         }
         return select
     }
+
+    fun error_open(errorstring:String){
+        println("数据异常"+errorstring)
+    }
 }

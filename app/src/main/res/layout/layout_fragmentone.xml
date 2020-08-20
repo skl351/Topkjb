@@ -16,6 +16,7 @@
         android:background="@color/white">
 
       <LinearLayout
+          android:id="@+id/id_click_location"
           android:layout_marginRight="10dp"
           android:layout_weight="1"
           android:gravity="center_vertical"
@@ -221,12 +222,6 @@
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/id_lishi"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="点击登录"/>
 
 </LinearLayout>
     <LinearLayout

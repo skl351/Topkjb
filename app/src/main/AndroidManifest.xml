@@ -61,6 +61,15 @@
             android:name=".tabfragment.fragmentone_view.fragmentone_place_info"
             android:launchMode="singleTask" />
         <activity
+            android:name=".tabfragment.fragmentthree_view.fragmentthree_cikajilu"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tabfragment.fragmentthree_view.Information"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail2"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".tabfragment.Mysafety"
             android:launchMode="singleTask" />
         <activity

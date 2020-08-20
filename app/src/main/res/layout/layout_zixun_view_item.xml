@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="horizontal"
+    android:id="@+id/id_click_zixun_detail"
     android:padding="15dp">
 
     <com.top.kjb.customview.roundimage

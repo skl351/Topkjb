@@ -8,5 +8,12 @@
 <!--        <item name="android:textColorHint">@color/default_texthintColor</item>-->
 <!--        <item name="android:windowBackground">@color/white</item>-->
     </style>
+    <style name="MyProgressDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/white2</item>
+        <item name="android:windowFrame">@color/white2</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
 </resources>

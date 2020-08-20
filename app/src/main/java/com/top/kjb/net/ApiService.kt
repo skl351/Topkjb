@@ -49,6 +49,13 @@ interface ApiService {
     fun main_zonghe(
 
     ): Call<Result<ArrayList<bean_main_item>>>
+    /**
+     * 根据id 查看详情
+     */
+    @GET("gymnasium/searchGymnasiumById")
+    fun getplacedetailByid(
+        @Query("gymnasiumId") gymnasiumId: Int
+    ): Call<Result<bean_main_detail_top>>
 
     /**
      *获取评分排序

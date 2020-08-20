@@ -1,5 +1,6 @@
 package auntschool.think.com.mynettest.net
 
+import com.top.kjb.MyApplicatipn
 import com.top.kjb.net.ApiService
 import com.top.kjb.net.GsonDConverterFactory
 import retrofit2.Retrofit
@@ -13,9 +14,10 @@ object RetrofitManager {
 
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(UrlConstant.BASE_URL) // 设置 网络请求 Url
-                .addConverterFactory(GsonDConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
-                .build()
+            .baseUrl(UrlConstant.BASE_URL) // 设置 网络请求 Url
+            .addConverterFactory(GsonDConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+            .client(MyApplicatipn.okHttpClient.build())//打印数据--
+            .build()
     }
 
 }

@@ -101,11 +101,20 @@
                     android:text="清除缓存" />
 
                 <ImageView
+                    android:id="@+id/id_biaozhi7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/icon_myself_right_jiantou" />
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/id_biaozhi7"
+                    android:id="@+id/id_cache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/id_click_xieyiandtiaokuan"

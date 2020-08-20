@@ -15,7 +15,9 @@ import com.top.kjb.bean.Result
 import com.top.kjb.bean.user_info
 import com.top.kjb.model.ThreeModel
 import com.top.kjb.originpack.BaseFragment
+import com.top.kjb.tabfragment.fragmentthree_view.Information
 import com.top.kjb.tabfragment.fragmentthree_view.fragmentthree_attention
+import com.top.kjb.tabfragment.fragmentthree_view.fragmentthree_cikajilu
 import com.top.kjb.tabfragment.fragmentthree_view.fragmentthree_user_center
 import com.top.kjb.utils.Sp
 import com.top.kjb.utils.functionClass
@@ -94,16 +96,37 @@ class fragment_three : BaseFragment(), View.OnClickListener {
 
     override fun init_click() {
         super.init_click()
+        id_click_information.setOnClickListener(this)
         id_click_dynamic.setOnClickListener(this)
         id_click_collection.setOnClickListener(this)
         id_click_fans.setOnClickListener(this)
         id_click_follow.setOnClickListener(this)
         id_click_user_info.setOnClickListener(this)
         id_click_setting.setOnClickListener(this)
+        id_click_cikajilu.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.id_click_information -> {
+                if (!functionClass.islogin()) {
+                    var intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    return
+                }
+                var intent = Intent(activity, Information::class.java)
+                startActivity(intent)
+            }
+
+            R.id.id_click_cikajilu -> {
+                if (!functionClass.islogin()) {
+                    var intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    return
+                }
+                var intent = Intent(activity!!, fragmentthree_cikajilu::class.java)
+                startActivity(intent)
+            }
             R.id.id_click_setting -> {
                 if (!functionClass.islogin()) {
                     var intent = Intent(activity, LoginActivity::class.java)
@@ -128,7 +151,7 @@ class fragment_three : BaseFragment(), View.OnClickListener {
                     startActivity(intent)
                     return
                 }
-                var intent=Intent(activity, fragmentthree_attention::class.java)
+                var intent = Intent(activity, fragmentthree_attention::class.java)
                 startActivity(intent)
             }
             R.id.id_click_fans -> {
@@ -137,7 +160,7 @@ class fragment_three : BaseFragment(), View.OnClickListener {
                     startActivity(intent)
                     return
                 }
-                var intent=Intent(activity, fragmentthree_attention::class.java)
+                var intent = Intent(activity, fragmentthree_attention::class.java)
                 startActivity(intent)
             }
             R.id.id_click_collection -> {

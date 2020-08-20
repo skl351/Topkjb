@@ -28,22 +28,17 @@ public class HeaderInterceptor implements Interceptor {
                 .addHeader("x-versionname", BuildConfig.VERSION_NAME)
                 .addHeader("x-versioncode", BuildConfig.VERSION_CODE + "");
         Request newRequest = requestBuilder.build();
-        System.out.println("请求网址"+newRequest.toString());
+        Logger.e("请求网址"+newRequest.toString());
         Response response = null;
-//        try {
-//            response = chain.proceed(request);
-//            Sp.INSTANCE.setNetwork_flag(true);
-//        } catch (UnknownHostException e) {
-//            if (Sp.INSTANCE.getNetwork_flag()) {
-//                Show_toast.showText(MyApplication.Companion.getA(), "网络不可用，请稍后重试");
-//                Sp.INSTANCE.setNetwork_flag(false);
-//            }
-//            throw e;
-//        } catch (IOException e) {
-//            Logger.e("请求到的内容" + response);
-//            throw e;
-//        }
-
+        try {
+            response = chain.proceed(request);
+        } catch (UnknownHostException e) {
+            Logger.e("请求到的内容1" + response);
+            throw e;
+        } catch (IOException e) {
+            Logger.e("请求到的内容2" + response);
+            throw e;
+        }
 
         return response;
 

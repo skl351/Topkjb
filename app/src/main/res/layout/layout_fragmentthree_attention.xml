@@ -9,11 +9,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:top_text="关注"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/id_RecyclerView"
+    <RelativeLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_guanzhu_no"/>
+            <TextView
+                android:text="您还没有关注过谁呢"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_size_13"
+                android:textColor="@color/color_a4a4a4"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
 
 </LinearLayout>

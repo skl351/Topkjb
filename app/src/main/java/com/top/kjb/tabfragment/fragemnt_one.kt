@@ -20,6 +20,7 @@ import com.baidu.location.BDLocation
 import com.baidu.location.LocationClient
 import com.baidu.location.LocationClientOption
 import com.baidu.location.LocationClientOption.LocationMode
+import com.top.kjb.MainActivity
 import com.top.kjb.MyApplicatipn
 import com.top.kjb.R
 import com.top.kjb.Userabout.LoginActivity
@@ -31,6 +32,7 @@ import com.top.kjb.originpack.BaseFragment
 import com.top.kjb.utils.MyLocationListener
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.Sp
+import com.top.kjb.utils.functionClass
 import kotlinx.android.synthetic.main.layout_fragmentone.*
 import retrofit2.Call
 import retrofit2.Response
@@ -100,6 +102,7 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
         mainModel.mainbannergetad().enqueue(object : retrofit2.Callback<Result<ArrayList<String>>> {
             override fun onFailure(call: Call<Result<ArrayList<String>>>, t: Throwable) {
                 println("失败" + t.toString())
+                functionClass.error_open(t.toString())
             }
 
             override fun onResponse(
@@ -224,10 +227,14 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
         id_zonghe_click_big.setOnClickListener(this)
         id_pingfen_click_big.setOnClickListener(this)
         id_nearest_click_big.setOnClickListener(this)
+        id_click_location.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.id_click_location->{
+                (activity as MainActivity).init_questlocation()
+            }
             R.id.id_nearest_click_big -> {
                 id_zonghe_click.setTextColor(resources.getColor(R.color.color_a4a4a4))
                 id_zonghe_line.visibility = View.INVISIBLE

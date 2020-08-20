@@ -39,6 +39,9 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         init_loction()
         init_golocation()
     }
+    fun init_questlocation(){
+        mLocationClient?.requestLocation()
+    }
     open fun init_golocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val checkCallPhonePermission = ContextCompat.checkSelfPermission(this!!, Manifest.permission.ACCESS_COARSE_LOCATION)

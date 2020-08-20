@@ -59,6 +59,7 @@ class adapter_mainpage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         p0.id_big_view?.setOnClickListener(object :View.OnClickListener{
             override fun onClick(v: View?) {
                 var intent=Intent(mycontent, fragmentone_detail::class.java)
+                intent.putExtra("id",bean?.id)
                 mycontent?.startActivity(intent)
             }
 

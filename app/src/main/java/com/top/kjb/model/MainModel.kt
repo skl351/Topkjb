@@ -4,6 +4,7 @@ import auntschool.think.com.mynettest.net.RetrofitManager
 import auntschool.think.com.mynettest.net.UrlConstant
 import com.top.kjb.bean.Result
 import com.top.kjb.bean.bean_UpdataBean
+import com.top.kjb.bean.bean_main_detail_top
 import com.top.kjb.bean.bean_main_item
 import retrofit2.Call
 
@@ -22,6 +23,9 @@ class MainModel {
     }
     fun main_pingfen():Call<Result<ArrayList<bean_main_item>>>{
         return RetrofitManager.service.main_pingfen()
+    }
+    fun getplacedetailByid(gymnasiumId:Int):Call<Result<bean_main_detail_top>>{
+        return RetrofitManager.service.getplacedetailByid(gymnasiumId)
     }
 
 
