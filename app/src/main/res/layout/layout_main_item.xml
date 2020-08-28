@@ -65,14 +65,25 @@
                 android:layout_weight="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <per.wsj.library.AndRatingBar
+                    android:id="@+id/id_star_view"
+                    android:isIndicator="true"
+                    app:starSpacing="1dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="14dp"
+                    android:numStars="5"
+                    app:keepOriginColor="true"
+                    app:starDrawable="@mipmap/icon_star"
+                    app:bgDrawable="@mipmap/icon_star_un"/>
                 <TextView
+                    android:layout_marginLeft="5dp"
                     android:id="@+id/id_show_score"
-                    android:textSize="@dimen/title_size_12"
-                    android:textStyle="bold"
-                    android:textColor="@color/color_a4a4a4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/color_F58324"
+                    android:textSize="@dimen/title_size_13"
+                    android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
                 android:gravity="center_vertical"

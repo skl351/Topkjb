@@ -10,6 +10,7 @@
     android:layout_height="wrap_content"
     app:top_text="个人资料"/>
     <RelativeLayout
+        android:id="@+id/id_click_updata_image"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="54dp"
@@ -31,6 +32,7 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_myself_right_jiantou" />
         <com.top.kjb.customview.RoundImageView
+            android:id="@+id/id_head_img"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/id_biaozhi1"
             android:layout_centerVertical="true"
@@ -60,13 +62,17 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_myself_right_jiantou" />
-        <TextView
+        <EditText
+            android:gravity="right|center_vertical"
+            android:background="@null"
+            android:hint="请输入昵称"
+            android:id="@+id/id_user_name"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/id_biaozhi2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="名字"/>
+            android:layout_height="match_parent"
+            android:text=""/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -90,13 +96,17 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_myself_right_jiantou" />
-        <TextView
+        <EditText
+            android:gravity="right|center_vertical"
+            android:hint="请输入个性签名"
+            android:background="@null"
+            android:id="@+id/id_user_motto"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/id_biaozhi3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="个性签名"/>
+            android:layout_height="match_parent"
+            android:text=""/>
     </RelativeLayout>
     <RelativeLayout
         android:paddingRight="15dp"
@@ -120,6 +130,7 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_myself_right_jiantou" />
         <TextView
+            android:id="@+id/id_user_sex"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/id_biaozhi4"
@@ -149,12 +160,13 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_myself_right_jiantou" />
         <TextView
+            android:id="@+id/id_birthday"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/id_biaozhi5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2020"/>
+            android:text=""/>
     </RelativeLayout>
     <RelativeLayout
         android:paddingRight="15dp"
@@ -178,11 +190,27 @@
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_myself_right_jiantou" />
         <TextView
+            android:id="@+id/id_city"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/id_biaozhi6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="浙江省，宁波市"/>
+            android:text=""/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/id_click_save"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/title_size_16"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/back_5cir_1cbe6f"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="保存"/>
     </RelativeLayout>
 </LinearLayout>

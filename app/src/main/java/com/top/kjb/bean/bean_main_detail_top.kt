@@ -7,10 +7,12 @@ class bean_main_detail_top :baseBean(){
     var id=0
     var address=""
     var gDescribe=""
-    var rank=""
+    var comprehensiveScore=0f
     var name=""
     var lat=""
+    var pic=""
     var lng=""
+    var distance=""
 
 
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white2"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+  <LinearLayout
+      android:background="@drawable/back_10cir_white"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <TextView
+          android:gravity="center"
+          android:textColor="@color/color_027BFF"
+          android:textSize="@dimen/title_size_20"
+          android:text="回复"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"/>
+      <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/color_eaeaea"/>
+      <TextView
+          android:gravity="center"
+          android:textColor="@color/color_027BFF"
+          android:textSize="@dimen/title_size_20"
+          android:text="举报"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"/>
+  </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="取消"/>
+
+</LinearLayout>

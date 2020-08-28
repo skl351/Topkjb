@@ -33,6 +33,7 @@ import com.top.kjb.utils.MyLocationListener
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.Sp
 import com.top.kjb.utils.functionClass
+import com.yzq.zxinglibrary.android.CaptureActivity
 import kotlinx.android.synthetic.main.layout_fragmentone.*
 import retrofit2.Call
 import retrofit2.Response
@@ -56,8 +57,6 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
         init_view()
         init_data()
     }
-
-
 
 
     private fun registerBoradcastReceiver() {
@@ -99,7 +98,7 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
 
     val mainModel: MainModel by lazy { MainModel() }
     private fun init_banner() {
-        mainModel.mainbannergetad().enqueue(object : retrofit2.Callback<Result<ArrayList<String>>> {
+        mainModel.mainbannergetad(functionClass.getToken()).enqueue(object : retrofit2.Callback<Result<ArrayList<String>>> {
             override fun onFailure(call: Call<Result<ArrayList<String>>>, t: Throwable) {
                 println("失败" + t.toString())
                 functionClass.error_open(t.toString())
@@ -109,7 +108,6 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
                 call: Call<Result<ArrayList<String>>>,
                 response: Response<Result<ArrayList<String>>>
             ) {
-                println("首页banner" + response?.body()?.result)
                 var bean = response?.body()
                 if ("success".equals(bean?.flag)) {
                     var list = bean?.result
@@ -125,7 +123,7 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
     lateinit var list_main_data: ArrayList<bean_main_item>
     lateinit var adapter_main_data: adapter_mainpage
     fun init_listone() {
-        mainModel.main_zonghe()
+        mainModel.main_zonghe(functionClass.getToken())
             .enqueue(object : retrofit2.Callback<Result<ArrayList<bean_main_item>>> {
                 override fun onFailure(
                     call: Call<Result<ArrayList<bean_main_item>>>,
@@ -138,7 +136,6 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
                     call: Call<Result<ArrayList<bean_main_item>>>,
                     response: Response<Result<ArrayList<bean_main_item>>>
                 ) {
-                    println("首页场地综合" + response?.body()?.result)
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
                         list_main_data = bean?.result!!
@@ -156,7 +153,7 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
     }
 
     fun init_listtwo() {
-        mainModel.main_zonghe()
+        mainModel.main_zonghe(functionClass.getToken())
             .enqueue(object : retrofit2.Callback<Result<ArrayList<bean_main_item>>> {
                 override fun onFailure(
                     call: Call<Result<ArrayList<bean_main_item>>>,
@@ -187,7 +184,7 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
     }
 
     fun init_listthree(lat: String, lng: String) {
-        mainModel.main_zuijing(lat, lng)
+        mainModel.main_zuijing(lat, lng,functionClass.getToken())
             .enqueue(object : retrofit2.Callback<Result<ArrayList<bean_main_item>>> {
                 override fun onFailure(
                     call: Call<Result<ArrayList<bean_main_item>>>,
@@ -228,12 +225,42 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
         id_pingfen_click_big.setOnClickListener(this)
         id_nearest_click_big.setOnClickListener(this)
         id_click_location.setOnClickListener(this)
+        id_click_erweima.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.id_click_location->{
-                (activity as MainActivity).init_questlocation()
+            R.id.id_click_erweima -> {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    val checkCallPhonePermission = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA)
+                    if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE), Sp.REQUEST_CODE_camera)
+                        return
+                    } else {
+                        var intent = Intent(activity, CaptureActivity::class.java)
+                        activity?.startActivityForResult(intent, Sp.REQUEST_CODE_SCAN);
+                    }
+                } else {
+                    var intent = Intent(activity, CaptureActivity::class.java)
+                    activity?.startActivityForResult(intent, Sp.REQUEST_CODE_SCAN);
+                }
+
+
+            }
+            R.id.id_click_location -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    val checkCallPhonePermission = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), Sp.REQUEST_CODE_Location2)
+                        return
+                    } else {
+                        (activity as MainActivity).init_questlocation()
+                    }
+                } else {
+                    (activity as MainActivity).init_questlocation()
+                }
+
             }
             R.id.id_nearest_click_big -> {
                 id_zonghe_click.setTextColor(resources.getColor(R.color.color_a4a4a4))
@@ -271,9 +298,6 @@ class fragemnt_one : BaseFragment(), View.OnClickListener {
             }
         }
     }
-
-
-
 
 
 }

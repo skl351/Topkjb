@@ -6,4 +6,9 @@ package com.top.kjb.bean
 class bean_attention_fans :baseBean(){
 
 
+    var fansID=0
+    var id = 0
+    var nickName = ""
+    var imgUrl = ""
+    var motto = ""
 }

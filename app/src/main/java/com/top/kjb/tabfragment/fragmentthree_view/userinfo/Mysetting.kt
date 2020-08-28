@@ -7,7 +7,12 @@ import android.view.View
 import com.top.kjb.R
 import com.top.kjb.customview.MyclearDialog
 import com.top.kjb.originpack.BaseActivity
+import com.top.kjb.tabfragment.fragmentthree_view.userinfo.mysettingactivity.informationAndtixing
+import com.top.kjb.tabfragment.fragmentthree_view.userinfo.mysettingactivity.xieyiAndtiaokuan
 import com.top.kjb.utils.CacheDataManager
+import com.top.kjb.utils.Show_toast
+import com.top.kjb.utils.Sp
+import com.top.kjb.utils.functionClass
 import kotlinx.android.synthetic.main.layout_mysetting.*
 
 class Mysetting : BaseActivity(), View.OnClickListener {
@@ -28,13 +33,35 @@ class Mysetting : BaseActivity(), View.OnClickListener {
         id_click_myselfinfoseting.setOnClickListener(this)
         id_click_safe.setOnClickListener(this)
         id_click_cleardata.setOnClickListener(this)
+        id_click_loginout.setOnClickListener(this)
+        id_click_xieyiandtiaokuan.setOnClickListener(this)
+        id_click_information.setOnClickListener(this)
         id_click_information.setOnClickListener(this)
         id_top.findViewById<View>(R.id.id_back).setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.id_click_cleardata->{
+            R.id.id_click_information -> {
+                val intent = Intent(this, informationAndtixing::class.java)
+                startActivity(intent)
+            }
+            R.id.id_click_xieyiandtiaokuan -> {
+                val intent = Intent(this, xieyiAndtiaokuan::class.java)
+                startActivity(intent)
+            }
+            R.id.id_click_loginout -> {
+                functionClass.setToken("")
+                functionClass.setUserId(0)
+                functionClass.setUsername("")
+                functionClass.setmotto("")
+                functionClass.setHeadImg("")
+                Show_toast.showText(this, "退出登录成功")
+                var intent = Intent(Sp.loginoutsuccess)
+                sendBroadcast(intent)
+                finish()
+            }
+            R.id.id_click_cleardata -> {
                 var thred = Thread({
                     try {
                         CacheDataManager.clearAllCache(this)
@@ -48,18 +75,18 @@ class Mysetting : BaseActivity(), View.OnClickListener {
                 thred.start()
 
             }
-            R.id.id_click_information->{
+            R.id.id_click_information -> {
 
             }
-            R.id.id_back->{
+            R.id.id_back -> {
                 onBackPressed()
             }
             R.id.id_click_myselfinfoseting -> {
-                var intent=Intent(this,Myselfinfo::class.java)
+                var intent = Intent(this, Myselfinfo::class.java)
                 startActivity(intent)
             }
-            R.id.id_click_safe->{
-                var intent=Intent(this,Mysafety::class.java)
+            R.id.id_click_safe -> {
+                var intent = Intent(this, Mysafety::class.java)
                 startActivity(intent)
             }
         }

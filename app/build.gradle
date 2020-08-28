@@ -94,5 +94,32 @@ dependencies {
      * 气泡弹窗
      */
     implementation 'com.lxj:xpopup:1.8.10'
+    /**
+     * 评分
+     */
+    implementation 'com.github.giswangsj:AndRatingBar:1.0.4'
+    /*二维码*/
+    implementation 'com.github.yuzhiqiang1993:zxing:2.2.5'
+
+    /*
+    七牛
+     */
+    implementation project(path: ':library')
+    /**
+     * 沉浸式
+     */
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    /**
+     * 点击大图
+     */
+    implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-6.0.1'
+    //switch button
+    implementation 'com.kyleduo.switchbutton:library:2.0.0'
+
+    /**
+     *   聪明的刷新控件
+     */
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-18'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-18'
 
 }

@@ -20,6 +20,7 @@
 
         </androidx.recyclerview.widget.RecyclerView>
         <LinearLayout
+            android:id="@+id/id_attion_view_back"
             android:visibility="gone"
             android:gravity="center"
             android:layout_centerInParent="true"
@@ -32,6 +33,25 @@
                 android:src="@mipmap/icon_guanzhu_no"/>
             <TextView
                 android:text="您还没有关注过谁呢"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_size_13"
+                android:textColor="@color/color_a4a4a4"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/id_fans_view_back"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_fans"/>
+            <TextView
+                android:text="您暂时还没有粉丝哦"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/title_size_13"

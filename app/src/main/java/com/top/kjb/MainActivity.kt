@@ -1,6 +1,8 @@
 package com.top.kjb
 
 import android.Manifest
+import android.R.attr
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -13,20 +15,19 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.baidu.location.LocationClient
 import com.baidu.location.LocationClientOption
-import com.top.kjb.bean.bean_UpdataBean
-import com.top.kjb.model.MainModel
 import com.top.kjb.originpack.BaseActivity
 import com.top.kjb.originpack.BaseFragment
 import com.top.kjb.tabfragment.fragemnt_one
 import com.top.kjb.tabfragment.fragemnt_two
 import com.top.kjb.tabfragment.fragment_three
-import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Response
-import java.util.ArrayList
-import com.top.kjb.bean.Result
 import com.top.kjb.utils.MyLocationListener
 import com.top.kjb.utils.Show_toast
+import com.top.kjb.utils.Sp
+import com.yzq.zxinglibrary.android.CaptureActivity
+import com.yzq.zxinglibrary.common.Constant
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+
 
 class MainActivity : BaseActivity(), View.OnClickListener {
 
@@ -46,7 +47,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val checkCallPhonePermission = ContextCompat.checkSelfPermission(this!!, Manifest.permission.ACCESS_COARSE_LOCATION)
             if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this!!, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 200)
+                ActivityCompat.requestPermissions(this!!, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), Sp.REQUEST_CODE_Location)
                 return
             } else {
                 mLocationClient?.start()
@@ -63,10 +64,33 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 200) {
-            mLocationClient?.start()
-        } else {
-            Show_toast.showText(this, "请打定位相关权限")
+        println(""+requestCode+","+"相关"+grantResults)
+        if (requestCode == Sp.REQUEST_CODE_Location) {
+            if (grantResults[0]=== PackageManager.PERMISSION_GRANTED){
+                mLocationClient?.start()
+            }else{
+                Show_toast.showText(this,"用户拒绝定位相关权限")
+            }
+
+
+        }
+        if (requestCode == Sp.REQUEST_CODE_Location2) {
+            if (grantResults[0]=== PackageManager.PERMISSION_GRANTED){
+                mLocationClient?.requestLocation()
+            }else{
+                Show_toast.showText(this,"用户拒绝定位相关权限")
+            }
+
+
+        }
+            if (requestCode == Sp.REQUEST_CODE_camera) {
+            if (grantResults[0]=== PackageManager.PERMISSION_GRANTED){
+                var intent = Intent(this, CaptureActivity::class.java)
+                startActivityForResult(intent, Sp.REQUEST_CODE_SCAN);
+            }else{
+                Show_toast.showText(this,"用户拒绝拍照相关权限")
+            }
+
         }
     }
 
@@ -228,5 +252,17 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 //mLocationClient为第二步初始化过的LocationClient对象
 //需将配置好的LocationClientOption对象，通过setLocOption方法传递给LocationClient对象使用
 //更多LocationClientOption的配置，请参照类参考中LocationClientOption类的详细说明
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+// 扫描二维码/条码回传
+        // 扫描二维码/条码回传
+        if (requestCode == Sp.REQUEST_CODE_SCAN && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                val content= data.getStringExtra(Constant.CODED_CONTENT)
+                Show_toast.showText(this,"扫描结果为$content")
+            }
+        }
     }
 }

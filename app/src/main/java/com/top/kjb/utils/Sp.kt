@@ -2,7 +2,16 @@ package com.top.kjb.utils
 
 object Sp {
 
-    val location_goto="com.topkjb.location_goto"
+    val REQUEST_CODE_Location=200
+    val REQUEST_CODE_Location2=203
+    val REQUEST_CODE_SCAN=201
+    val REQUEST_CODE_camera=202
+
+    var qiniu_token=""
+
     val location_send="com.topkjb.location"
-    val loginsuccess="com.topkjb.loginsuccess"
+    val loginoutsuccess="com.topkjb.loginoutsuccess"
+    val publishsuccess="com.topkjb.publishsuccess"
+    val huifuintent="com.topkjb.huifuintent"
+    val selectplacelast="com.topkjb.selectplacelast"
 }

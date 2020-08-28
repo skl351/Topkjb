@@ -8,7 +8,7 @@ class bean_main_item :baseBean(){
     var name=""
     var distance=""
     var gDescribe=""
-    var comprehensiveScore=""
+    var userEvaluate = 0f
     var gymID=0
     var pic=""
 

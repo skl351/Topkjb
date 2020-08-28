@@ -1,50 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_click_zixun_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="horizontal"
-    android:id="@+id/id_click_zixun_detail"
-    android:padding="15dp">
-
-    <com.top.kjb.customview.roundimage
-        android:layout_width="113dp"
-        android:layout_height="85dp"
-        android:src="@color/color_333333" />
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:layout_marginLeft="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
-        <TextView
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="快健贝今日市值847亿，靠什么撑 起这么高的估值" />
+        <com.top.kjb.customview.roundimage
+            android:id="@+id/id_image"
+            android:layout_width="113dp"
+            android:layout_height="85dp"
+            android:src="@color/color_333333" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
 
             <TextView
-                android:textColor="@color/color_a4a4a4"
-                android:textSize="@dimen/title_size_13"
+                android:id="@+id/id_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#增肌达人#" />
-            <TextView
-                android:textColor="@color/color_a4a4a4"
-                android:textSize="@dimen/title_size_13"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#增肌达人#" />
-        </RelativeLayout>
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/id_tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/color_a4a4a4"
+                    android:textSize="@dimen/title_size_13" />
+
+                <TextView
+                    android:id="@+id/id_read_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text=""
+                    android:textColor="@color/color_a4a4a4"
+                    android:textSize="@dimen/title_size_13" />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_f9f9f9" />
 </LinearLayout>

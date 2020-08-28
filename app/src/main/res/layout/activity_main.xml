@@ -73,7 +73,7 @@
                         android:id="@+id/id_icon_2"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:background="@drawable/tabselect_one_icon" />
+                        android:background="@drawable/tabselect_two_icon" />
 
                     <TextView
                         android:id="@+id/id_text_2"
@@ -99,7 +99,7 @@
                         android:id="@+id/id_icon_3"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:background="@drawable/tabselect_one_icon" />
+                        android:background="@drawable/tabselect_three_icon" />
 
                     <TextView
                         android:id="@+id/id_text_3"

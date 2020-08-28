@@ -42,6 +42,7 @@
                         android:textSize="20sp" />
 
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/id_yzm_line"
                         android:layout_width="30dp"
                         android:layout_height="3dp"
@@ -51,16 +52,16 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="40dp"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/id_phone_edit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入11位手机号"
                     android:inputType="number"
@@ -68,11 +69,11 @@
                     android:textSize="@dimen/title_size_16" />
 
                 <ImageView
+                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
                     android:background="@color/color_f4f4f4" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/id_yzm_big"
@@ -81,15 +82,16 @@
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:orientation="horizontal">
 
                     <EditText
+                        android:inputType="number"
                         android:id="@+id/id_yzm_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="请输入6位验证码"
@@ -97,25 +99,23 @@
                         android:textSize="@dimen/title_size_16" />
 
                     <TextView
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
                         android:id="@+id/id_click_send_sms"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/yzm_button"
-                        android:enabled="false"
-                        android:paddingLeft="15dp"
-                        android:paddingTop="9.5dp"
-                        android:paddingRight="15dp"
-                        android:paddingBottom="9.5dp"
+                        android:layout_width="100dp"
+                        android:layout_height="39dp"
+                        android:background="@drawable/back_90cir_1cbe6f"
                         android:text="发送验证码"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/title_size_14" />
-                </LinearLayout>
+                    <ImageView
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_f4f4f4" />
+                </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/color_f4f4f4" />
+
 
                 <TextView
                     android:layout_width="wrap_content"

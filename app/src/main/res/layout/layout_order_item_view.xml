@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:elevation="4dp"
+        android:padding="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/back_10cir_white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/icon_order_small_image" />
+
+            <TextView
+                android:textColor="@color/color_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="订单编号:" />
+
+            <TextView
+                android:textColor="@color/color_333333"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123123123" />
+        </LinearLayout>
+        <ImageView
+            android:layout_marginTop="11dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_f4f4f4"/>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/color_5c5c5c"
+                android:text="类型"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:text="余额充值"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/color_5c5c5c"
+                android:text="金额"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:text="¥8754"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <ImageView
+            android:layout_marginTop="11dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_f4f4f4"/>
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/color_5c5c5c"
+                android:text="2020-03-12 09:23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:text="已完成"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

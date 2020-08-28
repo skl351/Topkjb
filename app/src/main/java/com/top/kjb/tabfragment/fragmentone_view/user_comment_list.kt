@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.top.kjb.R
 import com.top.kjb.adapter.adapter_user_comment
+import com.top.kjb.bean.bean_main_item_about_xuanliangdiann
 import com.top.kjb.bean.bean_twopage_item_3he1
 import com.top.kjb.originpack.BaseActivity
 import kotlinx.android.synthetic.main.layout_fragemntone_detail.*
@@ -21,13 +22,10 @@ class user_comment_list : BaseActivity(), View.OnClickListener {
         init_data()
     }
 
-    lateinit var list: ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>
+    lateinit var list: ArrayList<bean_main_item_about_xuanliangdiann.bean_main_item_about_xuanliangdiann_highlightsGymVOList>
     var adapter: adapter_user_comment? = null
     private fun init_data() {
-        list = ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>()
-        list.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
-        list.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
-        list.add(bean_twopage_item_3he1.bean_twopage_item_3he1_item())
+        list = ArrayList<bean_main_item_about_xuanliangdiann.bean_main_item_about_xuanliangdiann_highlightsGymVOList>()
         adapter = adapter_user_comment(this, list)
         id_RecyclerView.adapter = adapter
     }

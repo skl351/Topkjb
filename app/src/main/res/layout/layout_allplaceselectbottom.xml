@@ -28,75 +28,17 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <RelativeLayout
+      <LinearLayout
+          android:id="@+id/id_big_view_all_mendian"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
 
+      </LinearLayout>
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="TOP健身公馆"
-                android:textColor="@color/color_333333"
-                android:textSize="@dimen/title_size_16" />
-
-            <ImageView
-
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/check_selectplace" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="大冷泡子健身公馆"
-                android:textColor="@color/color_333333"
-                android:textSize="@dimen/title_size_16" />
-
-            <ImageView
-
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/check_selectplace" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="美国队长健身公馆"
-                android:textColor="@color/color_333333"
-                android:textSize="@dimen/title_size_16" />
-
-            <ImageView
-
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/check_selectplace" />
-        </RelativeLayout>
+            android:background="@color/white"/>
     </LinearLayout>
 
 </LinearLayout>

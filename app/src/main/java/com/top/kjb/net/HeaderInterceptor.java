@@ -28,17 +28,15 @@ public class HeaderInterceptor implements Interceptor {
                 .addHeader("x-versionname", BuildConfig.VERSION_NAME)
                 .addHeader("x-versioncode", BuildConfig.VERSION_CODE + "");
         Request newRequest = requestBuilder.build();
-        Logger.e("请求网址"+newRequest.toString());
+        Logger.v("请求网址" + newRequest.toString());
         Response response = null;
         try {
             response = chain.proceed(request);
-        } catch (UnknownHostException e) {
-            Logger.e("请求到的内容1" + response);
-            throw e;
         } catch (IOException e) {
-            Logger.e("请求到的内容2" + response);
+            Logger.e("请求到的内容" + response);
             throw e;
         }
+
 
         return response;
 

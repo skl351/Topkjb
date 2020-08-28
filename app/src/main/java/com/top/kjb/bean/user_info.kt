@@ -5,8 +5,9 @@ class user_info:baseBean() {
 
     var username=""
     var headImg=""
-    var dynamicNum=""
-    var collectionNum=""
-    var fansNum=""
-    var followNum=""
+    var dynamicNum=0
+    var collectionNum=0
+    var fansNum=0
+    var followNum=0
+    var motto=""
 }

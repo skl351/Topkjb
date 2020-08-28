@@ -1,12 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <com.top.kjb.customview.Topnavigationbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:top_text="账号与安全"/>
+        app:top_text="账号与安全" />
 
+    <RelativeLayout
+        android:id="@+id/id_click_safe"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/id_user_tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="" />
+
+        <ImageView
+
+            android:id="@+id/id_flag_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_myself_right_jiantou" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/id_flag_"
+            android:text="更换"
+            android:textColor="@color/color_333333" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="第三方账号绑定"
+            android:textColor="@color/color_a4a4a4"
+            android:textSize="@dimen/title_size_12" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:paddingRight="45dp"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textColor="@color/color_333333"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信"/>
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/my_system_switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="4dp"
+            app:kswAnimationDuration="300"
+            app:kswBackDrawable="@drawable/ios_back_drawable"
+            app:kswThumbDrawable="@drawable/ios_thumb_selector"
+            app:kswThumbMarginBottom="-8dp"
+            app:kswThumbMarginLeft="-5dp"
+            app:kswThumbMarginRight="-5dp"
+            app:kswThumbMarginTop="-2.5dp"
+            app:kswThumbRangeRatio="1.5" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:paddingRight="45dp"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textColor="@color/color_333333"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" QQ"/>
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/my_system_switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="4dp"
+            app:kswAnimationDuration="300"
+            app:kswBackDrawable="@drawable/ios_back_drawable"
+            app:kswThumbDrawable="@drawable/ios_thumb_selector"
+            app:kswThumbMarginBottom="-8dp"
+            app:kswThumbMarginLeft="-5dp"
+            app:kswThumbMarginRight="-5dp"
+            app:kswThumbMarginTop="-2.5dp"
+            app:kswThumbRangeRatio="1.5" />
+
+    </RelativeLayout>
 </LinearLayout>

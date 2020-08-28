@@ -48,9 +48,9 @@
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_below="@id/topTab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/topTab"
         android:background="@color/white">
 
         <LinearLayout
@@ -64,9 +64,31 @@
                 android:orientation="vertical"
                 android:padding="15dp">
 
-                <com.top.kjb.customview.Imagebanner
+                <!--广告top-->
+                <RelativeLayout
+
+                    android:id="@+id/id_banner_big"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp" />
+                    android:layout_height="wrap_content">
+
+                    <com.top.kjb.customview.Imagebanner
+
+                        android:id="@+id/id_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:background="@color/white"
+                        app:autoPlayDuration="5000"
+                        app:indicatorPosition="centerBottom"
+                        app:indicatorShape="oval"
+                        app:indicatorSpace="6dp"
+                        app:isAutoPlay="true"
+                        app:selectedIndicatorColor="@color/white"
+                        app:selectedIndicatorHeight="6dp"
+                        app:selectedIndicatorWidth="6dp"
+                        app:unSelectedIndicatorColor="@color/gray"
+                        app:unSelectedIndicatorHeight="6dp"
+                        app:unSelectedIndicatorWidth="6dp" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -86,12 +108,29 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <per.wsj.library.AndRatingBar
+                        android:id="@+id/id_star_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="14dp"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        app:bgDrawable="@mipmap/icon_star_un"
+                        app:keepOriginColor="true"
+                        app:starDrawable="@mipmap/icon_star"
+                        app:starSpacing="1dp" />
 
                     <TextView
+                        android:id="@+id/id_show_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="评分" />
+                        android:layout_marginLeft="5dp"
+                        android:text=""
+                        android:textColor="@color/color_F58324"
+                        android:textSize="@dimen/title_size_13"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <ImageView
@@ -127,10 +166,11 @@
                                 android:textSize="@dimen/title_size_13" />
 
                             <TextView
+                                android:id="@+id/id_time_long"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:text="周一至周五 08:00-23:00"
+                                android:text=""
                                 android:textColor="@color/color_333333"
                                 android:textSize="@dimen/title_size_13" />
                         </LinearLayout>
@@ -142,23 +182,26 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/id_years"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@color/color_f4f4f4"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="五年" />
+                                android:text="" />
 
                             <TextView
+                                android:id="@+id/id_all_area"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:background="@color/color_f4f4f4"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="五年" />
+                                android:text="" />
 
                             <TextView
+                                android:id="@+id/id_all_peoples"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
@@ -202,10 +245,11 @@
                             android:textSize="@dimen/title_size_13" />
 
                         <TextView
+                            android:id="@+id/id_place_address2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="保集府电梯2F"
+                            android:text=""
                             android:textColor="@color/color_a4a4a4"
                             android:textSize="@dimen/title_size_13" />
                     </LinearLayout>
@@ -269,11 +313,30 @@
                     android:layout_marginBottom="13dp"
                     android:src="@color/color_f4f4f4" />
 
-                <com.top.kjb.customview.roundimage
+                <!--广告top-->
+                <RelativeLayout
+
+                    android:id="@+id/id_banner_big2"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:background="@color/color_a4a4a4"
-                    app:round="8dp" />
+                    android:layout_height="wrap_content">
+
+                    <com.top.kjb.customview.Imagebanner
+                        android:id="@+id/id_banner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:background="@color/white"
+                        app:autoPlayDuration="5000"
+                        app:indicatorPosition="centerBottom"
+                        app:indicatorShape="oval"
+                        app:indicatorSpace="6dp"
+                        app:isAutoPlay="true"
+                        app:selectedIndicatorColor="@color/white"
+                        app:selectedIndicatorHeight="6dp"
+                        app:selectedIndicatorWidth="6dp"
+                        app:unSelectedIndicatorColor="@color/gray"
+                        app:unSelectedIndicatorHeight="6dp"
+                        app:unSelectedIndicatorWidth="6dp" />
+                </RelativeLayout>
             </LinearLayout>
 
             <ImageView
@@ -282,9 +345,9 @@
                 android:background="@color/color_f4f4f4" />
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="15dp">
 
@@ -305,14 +368,24 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:gravity="center_vertical"
                         android:id="@+id/id_click_commtent_list"
-                        android:padding="5dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="5dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="全部评价9527"
+                            android:text="全部评价"
+                            android:textColor="@color/color_a4a4a4"
+                            android:textSize="@dimen/title_size_13" />
+
+                        <TextView
+                            android:id="@+id/id_all_num_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
                             android:textColor="@color/color_a4a4a4"
                             android:textSize="@dimen/title_size_13" />
 
@@ -325,55 +398,63 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_weight="1"
                 android:id="@+id/id_RecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <RelativeLayout
         android:id="@+id/id_click_pay"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
         android:background="@mipmap/icon_buy_itemback">
+
         <LinearLayout
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
             <TextView
-                android:text="限时优惠，低至"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
+                android:text="限时优惠，低至"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_size_13" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/title_size_13"
-                android:textColor="@color/white"/>
-            <TextView
                 android:text="￥15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/title_size_16"
-                android:textColor="@color/color_eebf98"/>
+                android:textColor="@color/color_eebf98"
+                android:textSize="@dimen/title_size_16" />
+
             <TextView
-                android:text="/次"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/title_size_10"
-                android:textColor="@color/color_eebf98"/>
+                android:text="/次"
+                android:textColor="@color/color_eebf98"
+                android:textSize="@dimen/title_size_10" />
         </LinearLayout>
 
         <TextView
-            android:layout_marginRight="37dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:text="购买次卡"
-            android:textColor="@color/color_394159"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="37dp"
+            android:text="购买次卡"
+            android:textColor="@color/color_394159" />
     </RelativeLayout>
 </RelativeLayout>

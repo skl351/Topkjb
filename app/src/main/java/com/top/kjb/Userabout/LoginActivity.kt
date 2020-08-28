@@ -2,6 +2,8 @@ package com.top.kjb.Userabout
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,29 +34,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     override fun init_view() {
         super.init_view()
-        id_phone_edit.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                var text = s.toString()
-                if (text.length == 11) {
-                    id_click_send_sms.isEnabled = true
-                    id_click_send_sms.setTextColor(resources.getColor(R.color.black))
-                } else {
-                    id_click_send_sms.isEnabled = false
-                    id_click_send_sms.setTextColor(resources.getColor(R.color.gray))
-                }
-                loginbutton_check()
-            }
-
-        })
-        id_yzm_edit.addTextChangedListener(object : TextWatcher {
+        var a=object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
             }
@@ -68,7 +48,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 loginbutton_check()
             }
 
-        })
+        }
+        id_phone_edit.addTextChangedListener(a)
+        id_yzm_edit.addTextChangedListener(a)
     }
 
     private fun loginbutton_check() {
@@ -76,7 +58,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         var yzm = id_yzm_edit.text.toString()
         if (phone.length == 11 && yzm.length == 6) {
             id_click_login.isEnabled = true
-            id_click_login.setTextColor(resources.getColor(R.color.black))
+            id_click_login.setTextColor(resources.getColor(R.color.white))
         } else {
             id_click_login.isEnabled = false
             id_click_login.setTextColor(resources.getColor(R.color.gray))
@@ -91,12 +73,31 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         id_top.findViewById<View>(R.id.id_back).setOnClickListener(this)
     }
 
+    var flag_60=59
+    var handler_60=object :Handler(){
+        override fun handleMessage(msg: Message?) {
+            super.handleMessage(msg)
+            if (flag_60==1){
+                id_click_send_sms.setText("发送验证码")
+            }else{
+                id_click_send_sms.setText(flag_60.toString())
+                flag_60--
+                sendEmptyMessageDelayed(0,1000)
+            }
+
+        }
+    }
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.id_click_login -> {
                 init_login()
             }
             R.id.id_click_send_sms -> {
+                if(id_phone_edit.text.toString().length!=11){
+                    Show_toast.showText(this,"手机号码不正确")
+                    return
+                }
+                handler_60.sendEmptyMessage(0)
                 init_sendmsm()
             }
             R.id.id_back -> {
@@ -133,10 +134,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
 
-
-                        functionClass.setToken(bean?.result?.taken.toString())
+                        functionClass.setToken(bean?.result?.token.toString())
+                        functionClass.setUserId(bean?.result?.user?.id!!)
+                        functionClass.setUsername(bean?.result?.user?.username.toString())
+                        functionClass.setmotto(bean?.result?.user?.motto.toString())
+                        functionClass.setHeadImg(bean?.result?.user?.headImg.toString())
                         Show_toast.showText(this@LoginActivity, "登录成功")
-                        var intent=Intent(Sp.loginsuccess)
+                        var intent=Intent(Sp.loginoutsuccess)
                         sendBroadcast(intent)
                         finish()
 

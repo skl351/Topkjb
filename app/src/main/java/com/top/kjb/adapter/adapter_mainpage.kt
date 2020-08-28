@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.core.ImageLoader
 import com.top.kjb.R
 import com.top.kjb.bean.bean_main_item
 import com.top.kjb.tabfragment.fragmentone_view.fragmentone_detail
+import per.wsj.library.AndRatingBar
 
 /**
  * Created by MaiBenBen on 2019/1/22.
@@ -54,13 +55,21 @@ class adapter_mainpage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageLoader.getInstance().displayImage(bean?.pic,p0.id_head)
         p0.id_name.setText(bean?.name)
         p0.id_summary.setText(bean?.gDescribe)
-        p0.id_show_score.setText(bean?.comprehensiveScore)
-        p0.id_location_long.setText(bean?.distance)
+        p0.id_show_score.setText(bean?.userEvaluate.toString())
+        p0.id_location_long.setText("距您："+bean?.distance)
+        p0.id_star_view.rating= bean?.userEvaluate!!
         p0.id_big_view?.setOnClickListener(object :View.OnClickListener{
             override fun onClick(v: View?) {
-                var intent=Intent(mycontent, fragmentone_detail::class.java)
-                intent.putExtra("id",bean?.id)
-                mycontent?.startActivity(intent)
+                if(bean?.id!=0){
+                    var intent=Intent(mycontent, fragmentone_detail::class.java)
+                    intent.putExtra("id",bean?.id)
+                    mycontent?.startActivity(intent)
+                }else{
+                    var intent=Intent(mycontent, fragmentone_detail::class.java)
+                    intent.putExtra("id",bean?.gymID)
+                    mycontent?.startActivity(intent)
+                }
+
             }
 
         })
@@ -84,8 +93,10 @@ class adapter_mainpage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         lateinit var id_show_score:TextView
         lateinit var id_location_long:TextView
         lateinit var id_big_view:View
+        lateinit var id_star_view: AndRatingBar
         constructor(itemView: View) : super(itemView) {
 
+            id_star_view=itemView.findViewById(R.id.id_star_view)
             id_head=itemView.findViewById(R.id.id_head)
             id_big_view=itemView.findViewById(R.id.id_big_view)
             id_name=itemView.findViewById(R.id.id_name)

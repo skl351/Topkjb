@@ -115,30 +115,43 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_below="@id/id_top_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_top_view">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/id_RecyclerView"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:srlEnableAutoLoadMore="true">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/id_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/id_click_publish"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="40dp"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
         android:background="@drawable/back_90cir_1cbe6f">
-    <ImageView
-        android:layout_centerInParent="true"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:src="@mipmap/icon_picture"/>
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/icon_picture" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.appbar.CollapsingToolbarLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
@@ -23,55 +24,64 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/id_back_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="280dp"
-                        android:background="@color/black"/>
                     <LinearLayout
-                        android:id="@+id/id_user_info"
-                        android:paddingRight="15dp"
-                        android:paddingLeft="15dp"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="-40dp"
-                        android:layout_below="@id/id_back_image"
+                        android:id="@+id/id_linshi_big_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/id_back_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="280dp"
+                            android:background="@color/black"/>
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="90dp">
+                            android:id="@+id/id_user_info"
+                            android:paddingRight="15dp"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="-40dp"
+                            android:layout_below="@id/id_back_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                             <LinearLayout
-                                android:gravity="center_vertical"
-                                android:layout_weight="1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <TextView
-                                    android:textStyle="bold"
-                                    android:textColor="@color/color_333333"
-                                    android:textSize="@dimen/title_size_23"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="大冷泡子"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:gravity="center_vertical"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:layout_weight="1">
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="90dp">
+                                <LinearLayout
+                                    android:gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:id="@+id/id_user_name"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/color_333333"
+                                        android:textSize="@dimen/title_size_23"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:gravity="center_vertical"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="签名"/>
+                                    android:orientation="vertical"
+                                    android:layout_weight="1">
+                                    <TextView
+                                        android:id="@+id/id_user_summary"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""/>
+                                </LinearLayout>
                             </LinearLayout>
+                            <com.top.kjb.customview.RoundImageView
+                                android:id="@+id/id_user_headimg"
+                                android:layout_width="94dp"
+                                android:layout_height="94dp"
+                                android:src="@mipmap/ic_launcher"
+                                />
                         </LinearLayout>
-                        <com.top.kjb.customview.RoundImageView
-                            android:layout_width="94dp"
-                            android:layout_height="94dp"
-                            android:src="@mipmap/ic_launcher"
-                            />
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/id_attention_fans_changeinfo"
@@ -88,14 +98,16 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <TextView
+                                android:gravity="center"
+                                android:id="@+id/id_followNum"
                                 android:textSize="@dimen/title_size_16"
                                 android:textColor="@color/color_333333"
                                 android:textStyle="bold"
-                                android:layout_width="wrap_content"
+                                android:layout_width="50dp"
                                 android:layout_height="wrap_content"
-                                android:text="123123"/>
+                                android:text=""/>
                             <TextView
-                                android:layout_marginTop="14dp"
+                                android:layout_marginTop="10dp"
                                 android:textSize="@dimen/title_size_12"
                                 android:textColor="@color/color_a4a4a4"
                                 android:textStyle="bold"
@@ -104,26 +116,28 @@
                                 android:text="关注"/>
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginLeft="30dp"
                             android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <TextView
+                                android:gravity="center"
+                                android:id="@+id/id_fansNum"
                                 android:textSize="@dimen/title_size_16"
                                 android:textColor="@color/color_333333"
                                 android:textStyle="bold"
-                                android:layout_width="wrap_content"
+                                android:layout_width="50dp"
                                 android:layout_height="wrap_content"
-                                android:text="123123"/>
+                                android:text=""/>
                             <TextView
-                                android:layout_marginTop="14dp"
+                                android:layout_marginTop="10dp"
                                 android:textSize="@dimen/title_size_12"
                                 android:textColor="@color/color_a4a4a4"
                                 android:textStyle="bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="关注"/>
+                                android:text="粉丝"/>
                         </LinearLayout>
                         <LinearLayout
                             android:gravity="right"
@@ -131,6 +145,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <TextView
+                                android:visibility="gone"
+                                android:id="@+id/id_edit_ziliao"
                                 android:gravity="center"
                                 android:paddingBottom="4dp"
                                 android:paddingTop="4dp"
@@ -138,6 +154,19 @@
                                 android:layout_width="78dp"
                                 android:layout_height="wrap_content"
                                 android:text="修改资料"/>
+                            <TextView
+                                android:visibility="gone"
+                                android:id="@+id/id_click_attion"
+                                android:layout_width="wrap_content"
+                                android:layout_height="26dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/check_attention2"
+                                android:gravity="center"
+                                android:paddingLeft="18dp"
+                                android:paddingRight="18dp"
+                                android:text="关注"
+                                android:textColor="@color/white" />
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -157,7 +186,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:background="@color/white"
+                    android:background="@color/white2"
                     app:layout_collapseMode="pin">
 
                     <RelativeLayout
@@ -177,6 +206,7 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <LinearLayout
+
                 android:background="@color/white"
                 android:id="@+id/id_parent1"
                 android:layout_width="match_parent"
