@@ -10,4 +10,5 @@ class user_info:baseBean() {
     var fansNum=0
     var followNum=0
     var motto=""
+    var dynamicBackground=""
 }

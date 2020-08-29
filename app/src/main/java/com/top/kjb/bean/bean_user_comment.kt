@@ -10,10 +10,13 @@ class bean_user_comment : baseBean() {
         var id = 0
         var commentsText = ""
         var username = ""
+        var parentUserName = ""
         var headImg = ""
         var replyText = ""
         var motto = ""
+        var parentId = 0
         var publisherId = 0
+        var responderId = 0
         var likesTimes = ""
         var likeStatus = false
         var replyCounts = 0

@@ -15,10 +15,11 @@ import com.top.kjb.R
 import com.top.kjb.bean.Result
 import com.top.kjb.bean.bean_user_comment
 import com.top.kjb.customview.RoundImageView
-import com.top.kjb.customview.huifu_bottom
+import com.top.kjb.customview.commentjubao_bottom
 import com.top.kjb.model.TwoModel
 import com.top.kjb.tabfragment.fragmentthree_view.fragmentthree_user_center
 import com.top.kjb.utils.Show_toast
+import com.top.kjb.utils.Sp
 import com.top.kjb.utils.functionClass
 import retrofit2.Call
 import retrofit2.Response
@@ -28,6 +29,7 @@ import retrofit2.Response
  * Created by MaiBenBen on 2019/1/22.
  */
 class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    var mainid=0
     var mInflater: LayoutInflater? = null
     var mData: ArrayList<bean_user_comment.bean_user_comment>? = null
     override fun getItemCount(): Int {
@@ -71,13 +73,21 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
         p0.id_head_img.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 var intent = Intent(mycontent, fragmentthree_user_center::class.java)
-                intent.putExtra("userId", bean?.publisherId)
+                intent.putExtra("userId", bean?.responderId)
                 mycontent?.startActivity(intent)
 
             }
 
         })
         p0.id_username.setText(bean?.username)
+        if (!"".equals(bean?.parentUserName)&&null!=bean?.parentUserName){
+            p0.id_huifu_flag.visibility=View.VISIBLE
+            p0.id_huifu_username.visibility=View.VISIBLE
+            p0.id_huifu_username.setText(bean?.parentUserName)
+        }else{
+            p0.id_huifu_flag.visibility=View.GONE
+            p0.id_huifu_username.visibility=View.GONE
+        }
         p0.id_use_commit_text.setText(bean?.replyText)
         p0.id_love_num.setText(bean?.likesTimes)
         p0.id_time.setText(functionClass.getTime_ms(bean?.startTime.toString(), "yyyy-MM-dd hh:mm"))
@@ -91,21 +101,33 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
             override fun onClick(v: View?) {
                 when(textType){
                     1->{
-                        gotozanquanzi(p0.id_zan_img,bean?.id!!)
+                        gotozanquanzi(p0.id_zan_img,bean?.id!!,p0.id_love_num)
                     }
                     2->{
-                        gotozan(p0.id_zan_img,bean?.id!!)
+                        gotozan(p0.id_zan_img,bean?.id!!,p0.id_love_num)
                     }
                     1->{
-                        gotozan_zixun(p0.id_zan_img,bean?.id!!)
+                        gotozan_zixun(p0.id_zan_img,bean?.id!!,p0.id_love_num)
                     }
                 }
 
             }
 
         })
-        p0.id_comment_view.setOnClickListener(object :View.OnClickListener{
+        p0.id_comment_view.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
+//隐藏
+                var intent=Intent(Sp.huifudimess)
+                mycontent?.sendBroadcast(intent)
+                var bottom = commentjubao_bottom(mycontent!!)
+                bottom.setbean(bean)
+                bottom.setmaind(mainid)
+                bottom.setreplyType(1)
+                XPopup.Builder(mycontent)
+                    .hasShadowBg(true)
+                    .atView(p0)
+                    .asCustom(bottom)
+                    .show()
 
             }
 
@@ -129,12 +151,16 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
         lateinit var id_time: TextView
         lateinit var id_use_commit_text: TextView
         lateinit var id_love_num: TextView
+        lateinit var id_huifu_username: TextView
         lateinit var id_click_zan: View
         lateinit var id_zan_img: ImageView
         lateinit var id_comment_view: View
+        lateinit var id_huifu_flag: View
 
         constructor(itemView: View) : super(itemView) {
 
+            id_huifu_username = itemView.findViewById(R.id.id_huifu_username)
+            id_huifu_flag = itemView.findViewById(R.id.id_huifu_flag)
             id_comment_view = itemView.findViewById(R.id.id_comment_view)
             id_zan_img = itemView.findViewById(R.id.id_zan_img)
             id_click_zan = itemView.findViewById(R.id.id_click_zan)
@@ -149,7 +175,7 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     val twoModel: TwoModel by lazy { TwoModel() }
     //点赞圈子
-    private fun gotozanquanzi(idZanImg: ImageView, id: Int) {
+    private fun gotozanquanzi(idZanImg: ImageView, id: Int,       idLoveNum: TextView) {
         var zanstatus = 0
         if (idZanImg.isSelected) {
             zanstatus = 0
@@ -173,8 +199,22 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
                 if ("success".equals(bean?.flag)) {
                     if (idZanImg.isSelected) {
                         idZanImg.isSelected = false
+                        try {
+                            var zan = idLoveNum.text.toString().toInt()
+                            zan--
+                            idLoveNum.text = zan.toString()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     } else {
                         idZanImg.isSelected = true
+                        try {
+                            var zan = idLoveNum.text.toString().toInt()
+                            zan++
+                            idLoveNum.text = zan.toString()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
 
                 } else {
@@ -185,7 +225,11 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
         })
     }
     //点赞炫亮点
-    private fun gotozan(idZanImg: ImageView, id: Int) {
+    private fun gotozan(
+        idZanImg: ImageView,
+        id: Int,
+        idLoveNum: TextView
+    ) {
         var zanstatus = 0
         if (idZanImg.isSelected) {
             zanstatus = 0
@@ -209,8 +253,22 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
                 if ("success".equals(bean?.flag)) {
                     if (idZanImg.isSelected) {
                         idZanImg.isSelected = false
+                        try {
+                            var zan = idLoveNum.text.toString().toInt()
+                            zan--
+                            idLoveNum.text = zan.toString()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     } else {
                         idZanImg.isSelected = true
+                        try {
+                            var zan = idLoveNum.text.toString().toInt()
+                            zan++
+                            idLoveNum.text = zan.toString()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
 
                 } else {
@@ -220,7 +278,11 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         })
     }
-    private fun gotozan_zixun(idZanImg: ImageView, id: Int) {
+    private fun gotozan_zixun(
+        idZanImg: ImageView,
+        id: Int,
+        idLoveNum: TextView
+    ) {
         var zanstatus = 0
         if (idZanImg.isSelected) {
             zanstatus = 0
@@ -244,8 +306,22 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
                 if ("success".equals(bean?.flag)) {
                     if (idZanImg.isSelected) {
                         idZanImg.isSelected = false
+                        try {
+                            var zan = idLoveNum.text.toString().toInt()
+                            zan--
+                            idLoveNum.text = zan.toString()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     } else {
                         idZanImg.isSelected = true
+                        try {
+                            var zan = idLoveNum.text.toString().toInt()
+                            zan++
+                            idLoveNum.text = zan.toString()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
 
                 } else {

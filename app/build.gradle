@@ -77,6 +77,8 @@ dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
     implementation 'com.lcw.library:imagepicker:2.2.7'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //图片压缩
+    implementation 'top.zibin:Luban:1.1.8'
     /**
      *   网络请求
      */

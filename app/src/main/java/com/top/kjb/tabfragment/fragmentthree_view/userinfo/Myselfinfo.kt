@@ -167,7 +167,7 @@ class Myselfinfo : BaseActivity(), View.OnClickListener {
                                 ) {
                                     println("=====" + p0 + "," + p1 + "," + p2)
                                     image_no =
-                                        "http://qevzr2czw.hd-bkt.clouddn.com/" + p0.toString()
+                                        Sp.qiiu + p0.toString()
                                     init_save()
                                 }
 

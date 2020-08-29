@@ -100,6 +100,18 @@ object functionClass {
         return displayMetrics.widthPixels //返回屏幕宽度像素
     }
 
+    /**
+     * 获取bar高度
+     */
+    fun getbarHight(context: Context): Int {
+        var result = 0;
+        var resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result
+    }
+
     fun selectMatisse(context: Context, index: Int, selectionData: ArrayList<LocalMedia>) {
 
 //                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code

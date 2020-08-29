@@ -2,6 +2,8 @@ package com.top.kjb.utils
 
 object Sp {
 
+    val qiiu="http://qiniu.topdxm.com/"
+
     val REQUEST_CODE_Location=200
     val REQUEST_CODE_Location2=203
     val REQUEST_CODE_SCAN=201
@@ -14,4 +16,6 @@ object Sp {
     val publishsuccess="com.topkjb.publishsuccess"
     val huifuintent="com.topkjb.huifuintent"
     val selectplacelast="com.topkjb.selectplacelast"
+    val updatabackimage="com.topkjb.updatabackimage"
+    val huifudimess="com.topkjb.huifudimess"
 }

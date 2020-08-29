@@ -53,18 +53,18 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
         registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
-    var parentId=0
-    var replyType=0
-    var commentsId=0
+    var parentId = 0
+    var replyType = 0
+    var commentsId = 0
     var sendtype = 1//1评论 2回复
     var mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
                 Sp.huifuintent -> {
-                    parentId=intent.getIntExtra("parentId",0)
-                    replyType=intent.getIntExtra("replyType",0)
-                    commentsId=intent.getIntExtra("commentsId",0)
+                    parentId = intent.getIntExtra("parentId", 0)
+                    replyType = intent.getIntExtra("replyType", 0)
+                    commentsId = intent.getIntExtra("commentsId", 0)
                     sendtype = 2
                     id_edit.requestFocus()
                     id_edit.setText("")
@@ -120,9 +120,9 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
         id_edit.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(p0: TextView?, actionId: Int, p2: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    if (sendtype==1){
+                    if (sendtype == 1) {
                         init_send()
-                    }else{
+                    } else {
                         init_huifu()
                     }
 
@@ -260,8 +260,14 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
                     ImageLoader.getInstance().displayImage(bean?.result?.headImg, id_head_img)
                     id_author_name.setText(bean?.result?.username)
                     id_author_motto.setText(bean?.result?.motto)
-                    id_text.setText(bean?.result?.text)
-                    userId=bean?.result?.userId!!
+                    if ("".equals(bean?.result?.text)){
+                        id_text.visibility=View.GONE
+                    }else{
+                        id_text.visibility=View.VISIBLE
+                        id_text.setText(bean?.result?.text)
+                    }
+
+                    userId_1 = bean?.result?.userId!!
                     var pic = bean?.result?.pic
                     if ("".equals(pic)) {
                         id_RecyclerView_image.visibility = View.GONE
@@ -494,12 +500,12 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
 
     var attion_booble = false
     val threeModel: ThreeModel by lazy { ThreeModel() }
-    var userId = 0
+    var userId_1 = 0
     private fun guanzhuto() {
         threeModel.fansbecome_cancel_fans(
             functionClass.getToken(),
-            userId,
-            userId
+            userId_1,
+            userId_1
         )
             .enqueue(object : retrofit2.Callback<Result<String>> {
                 override fun onFailure(call: Call<Result<String>>, t: Throwable) {

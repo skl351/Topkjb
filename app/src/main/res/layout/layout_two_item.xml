@@ -68,13 +68,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
             android:lineSpacingExtra="6dp"
             android:maxLines="3"
             android:text=""
             android:textColor="@color/color_5c5c5c" />
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/id_RecyclerView_image_big"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

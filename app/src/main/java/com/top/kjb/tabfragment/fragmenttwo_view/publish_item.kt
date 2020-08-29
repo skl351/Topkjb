@@ -35,6 +35,8 @@ import kotlinx.android.synthetic.main.layout_publish_item_view.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import top.zibin.luban.Luban
+import top.zibin.luban.OnCompressListener
 import java.io.File
 
 class publish_item : BaseActivity(), View.OnClickListener {
@@ -53,6 +55,11 @@ class publish_item : BaseActivity(), View.OnClickListener {
         val intentFilter = IntentFilter()
         intentFilter.addAction(Sp.selectplacelast)
         registerReceiver(mBroadcastReceiver, intentFilter)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(mBroadcastReceiver)
     }
     var mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
 
@@ -253,35 +260,74 @@ class publish_item : BaseActivity(), View.OnClickListener {
         var imagelist = adapter_nine.data
         var imagenow = imagelist.get(curr_image).realPath
         var newFile = File(imagenow)
-        val uploadManager = UploadManager()
-        uploadManager.put(newFile, key, Sp.qiniu_token, object : UpCompletionHandler {
-            override fun complete(p0: String?, p1: ResponseInfo?, p2: JSONObject?) {
-                println("=====" + p0 + "," + p1 + "," + p2)
-                list_image.add("http://qevzr2czw.hd-bkt.clouddn.com/" + p0.toString())
-                curr_image++
-                if (curr_image >= adapter_nine.data.size) {
-                    if (current_item == 0) {
 
-                        pubilsh_goto()
-                    } else {
 
-                        pubilsh_goto_quanzi()
-                    }
-                    return
+        Luban.with(this)
+            .load(newFile)
+            .ignoreBy(100)
+            .setCompressListener(object : OnCompressListener {
+                override fun onSuccess(file: File?) {
+                    val uploadManager = UploadManager()
+                    uploadManager.put(file, key, Sp.qiniu_token, object : UpCompletionHandler {
+                        override fun complete(p0: String?, p1: ResponseInfo?, p2: JSONObject?) {
+                            println("=====" + p0 + "," + p1 + "," + p2)
+                            list_image.add(Sp.qiiu + p0.toString())
+                            curr_image++
+                            if (curr_image >= adapter_nine.data.size) {
+                                if (current_item == 0) {
+
+                                    pubilsh_goto()
+                                } else {
+
+                                    pubilsh_goto_quanzi()
+                                }
+                                return
+                            }
+                            init_getqiniutoken()
+                        }
+
+                    }, null)
                 }
-                init_getqiniutoken()
-            }
 
-        }, null)
+                override fun onError(e: Throwable?) {
+                    val uploadManager = UploadManager()
+                    uploadManager.put(newFile, key, Sp.qiniu_token, object : UpCompletionHandler {
+                        override fun complete(p0: String?, p1: ResponseInfo?, p2: JSONObject?) {
+                            println("=====" + p0 + "," + p1 + "," + p2)
+                            list_image.add(Sp.qiiu + p0.toString())
+                            curr_image++
+                            if (curr_image >= adapter_nine.data.size) {
+                                if (current_item == 0) {
+
+                                    pubilsh_goto()
+                                } else {
+
+                                    pubilsh_goto_quanzi()
+                                }
+                                return
+                            }
+                            init_getqiniutoken()
+                        }
+
+                    }, null)
+                }
+
+                override fun onStart() {
+
+                }
+
+            })
+            .launch()
+
+
+
     }
 
     val twoModel: TwoModel by lazy { TwoModel() }
-    var nowgymnasiumId=0
+    var nowgymnasiumId=1
     private fun pubilsh_goto() {
         var text = id_edit_content.text.toString()
-        if (text.length == 0) {
-            Show_toast.showText(this@publish_item, "发表内容不能为空")
-        }
+
         var pic = ""
         for (i in 0..list_image.size - 1) {
             pic += list_image.get(i)
@@ -292,6 +338,10 @@ class publish_item : BaseActivity(), View.OnClickListener {
             }
         }
 
+        if (text.length == 0&&pic.equals("")) {
+            Show_toast.showText(this@publish_item, "发表内容不能为空")
+            return
+        }
         var userId = functionClass.getUserId()
         var token = functionClass.getToken()
         var gymnasiumId = nowgymnasiumId

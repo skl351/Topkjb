@@ -21,6 +21,10 @@ class ThreeModel {
         return RetrofitManager.service.userupdateUserDataUserVO(token, userDataVO)
 
     }
+    fun userupdateDynamicBackground(token: String, imgUrl: String): Call<Result<Int>> {
+        return RetrofitManager.service.userupdateDynamicBackground(token, imgUrl)
+
+    }
 
     fun usergetUserData(token: String): Call<Result<bean_gerenziliao>> {
         return RetrofitManager.service.usergetUserData(token)

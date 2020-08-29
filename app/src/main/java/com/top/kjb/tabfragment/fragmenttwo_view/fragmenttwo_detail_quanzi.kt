@@ -46,6 +46,10 @@ class fragmenttwo_detail_quanzi : BaseActivity(), View.OnClickListener {
         init_data()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(mBroadcastReceiver)
+    }
     private fun registerBoradcastReceiver() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(Sp.huifuintent)
@@ -257,7 +261,12 @@ class fragmenttwo_detail_quanzi : BaseActivity(), View.OnClickListener {
                     ImageLoader.getInstance().displayImage(bean?.result?.headImg, id_head_img)
                     id_author_name.setText(bean?.result?.username)
                     id_author_motto.setText(bean?.result?.motto)
-                    id_text.setText(bean?.result?.text)
+                    if ("".equals(bean?.result?.text)){
+                        id_text.visibility=View.GONE
+                    }else{
+                        id_text.visibility=View.VISIBLE
+                        id_text.setText(bean?.result?.text)
+                    }
                     var pic = bean?.result?.pic
                     if ("".equals(pic)) {
                         id_RecyclerView_image.visibility = View.GONE

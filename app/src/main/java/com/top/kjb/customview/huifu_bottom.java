@@ -1,6 +1,9 @@
 package com.top.kjb.customview;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ import com.top.kjb.bean.Result;
 import com.top.kjb.bean.bean_user_comment;
 import com.top.kjb.model.TwoModel;
 import com.top.kjb.utils.Show_toast;
+import com.top.kjb.utils.Sp;
 import com.top.kjb.utils.functionClass;
 
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +53,8 @@ public class huifu_bottom extends BottomPopupView {
     @Override
     protected void onCreate() {
         super.onCreate();
+
+        registerBoradcastReceiver();
         id_RecyclerView = findViewById(R.id.id_RecyclerView);
         id_click_big_view = findViewById(R.id.id_click_big_view);
         id_head_img = findViewById(R.id.id_head_img);
@@ -60,14 +66,20 @@ public class huifu_bottom extends BottomPopupView {
         LinearLayoutManager layoutmanager = new LinearLayoutManager(getContext());
         id_RecyclerView.setLayoutManager(layoutmanager);
 
-        ImageLoader.getInstance().displayImage(bean.getHeadImg(),id_head_img);
-        id_username.setText(bean.getUsername());
-        id_time.setText(functionClass.INSTANCE.getTime_ms(bean.getStartTime().toString(), "yyyy-MM-dd hh:mm"));
-        id_use_commit_text.setText(bean.getCommentsText());
-        switch (textType){
-            case 1:quanzi();break;
-            case 2:xuanliangdian();break;
-            case 3:zixun();break;
+        ImageLoader.getInstance().displayImage(bean_main.getHeadImg(), id_head_img);
+        id_username.setText(bean_main.getUsername());
+        id_time.setText(functionClass.INSTANCE.getTime_ms(bean_main.getStartTime().toString(), "yyyy-MM-dd hh:mm"));
+        id_use_commit_text.setText(bean_main.getCommentsText());
+        switch (textType) {
+            case 1:
+                quanzi();
+                break;
+            case 2:
+                xuanliangdian();
+                break;
+            case 3:
+                zixun();
+                break;
 
         }
 
@@ -85,26 +97,46 @@ public class huifu_bottom extends BottomPopupView {
         });
 
     }
-    TwoModel  twoModel=new TwoModel();
-    int currentpage=1;
-    int pagesize=10;
+
+    private void registerBoradcastReceiver() {
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Sp.INSTANCE.getHuifudimess());
+        getContext().registerReceiver(receiver, intentFilter);
+    }
+
+    BroadcastReceiver receiver=new BroadcastReceiver(){
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Sp.INSTANCE.getHuifudimess().equals(intent.getAction() )){
+                dismiss();
+            }
+        }
+    };
+
+    TwoModel twoModel = new TwoModel();
+    int currentpage = 1;
+    int pagesize = 10;
     ArrayList list;
     adapter_user_comment_huifu adapter_comment;
+
     private void xuanliangdian() {
         twoModel.highlightsReplyselectReply(
                 functionClass.INSTANCE.getToken(),
-                bean.getId(),
+                bean_main.getId(),
                 currentpage,
                 pagesize
         ).enqueue(new Callback<Result<bean_user_comment>>() {
             @Override
             public void onResponse(Call<Result<bean_user_comment>> call, Response<Result<bean_user_comment>> response) {
                 bean_user_comment bean = response.body().getResult();
-                if ("success".equals( response.body().getFlag())) {
+                if ("success".equals(response.body().getFlag())) {
                     list = bean.list;
-                            adapter_comment =
+                    adapter_comment =
                             new adapter_user_comment_huifu(getContext(), list);
                     adapter_comment.setTextType(2);
+                    adapter_comment.setMainid(bean_main.getId());
                     id_RecyclerView.setAdapter(adapter_comment);
                 } else {
                     Show_toast.showText(getContext(), "炫亮点回复评论list失败");
@@ -118,24 +150,26 @@ public class huifu_bottom extends BottomPopupView {
         });
 
     }
+
     private void quanzi() {
         twoModel.circleReplyselectReply(
                 functionClass.INSTANCE.getToken(),
-                bean.getId(),
+                bean_main.getId(),
                 currentpage,
                 pagesize
         ).enqueue(new Callback<Result<bean_user_comment>>() {
             @Override
             public void onResponse(Call<Result<bean_user_comment>> call, Response<Result<bean_user_comment>> response) {
                 bean_user_comment bean = response.body().getResult();
-                if ("success".equals( response.body().getFlag())) {
+                if ("success".equals(response.body().getFlag())) {
                     list = bean.list;
                     adapter_comment =
                             new adapter_user_comment_huifu(getContext(), list);
                     adapter_comment.setTextType(2);
+                    adapter_comment.setMainid(bean_main.getId());
                     id_RecyclerView.setAdapter(adapter_comment);
                 } else {
-                    Show_toast.showText(getContext(), "炫亮点回复评论list失败");
+                    Show_toast.showText(getContext(), "圈子回复评论list失败");
                 }
             }
 
@@ -146,24 +180,26 @@ public class huifu_bottom extends BottomPopupView {
         });
 
     }
+
     private void zixun() {
         twoModel.informationReplyselectReply(
                 functionClass.INSTANCE.getToken(),
-                bean.getId(),
+                bean_main.getId(),
                 currentpage,
                 pagesize
         ).enqueue(new Callback<Result<bean_user_comment>>() {
             @Override
             public void onResponse(Call<Result<bean_user_comment>> call, Response<Result<bean_user_comment>> response) {
                 bean_user_comment bean = response.body().getResult();
-                if ("success".equals( response.body().getFlag())) {
+                if ("success".equals(response.body().getFlag())) {
                     list = bean.list;
                     adapter_comment =
                             new adapter_user_comment_huifu(getContext(), list);
                     adapter_comment.setTextType(2);
+                    adapter_comment.setMainid(bean_main.getId());
                     id_RecyclerView.setAdapter(adapter_comment);
                 } else {
-                    Show_toast.showText(getContext(), "炫亮点回复评论list失败");
+                    Show_toast.showText(getContext(), "咨询回复评论list失败");
                 }
             }
 
@@ -174,13 +210,16 @@ public class huifu_bottom extends BottomPopupView {
         });
 
     }
-    bean_user_comment.bean_user_comment bean;
+
+    bean_user_comment.bean_user_comment bean_main;
+
     public void setbean(@Nullable bean_user_comment.bean_user_comment bean) {
-        this.bean=bean;
+        this.bean_main = bean;
     }
 
     int textType;
+
     public void settexttype(int textType) {
-        this.textType=textType;
+        this.textType = textType;
     }
 }

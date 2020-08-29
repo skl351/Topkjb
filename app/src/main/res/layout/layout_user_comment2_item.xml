@@ -81,9 +81,9 @@
 
                 <LinearLayout
                     android:id="@+id/id_click_zan"
-                    android:layout_marginLeft="30dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -115,18 +115,19 @@
             android:lineSpacingExtra="6dp"
             android:maxLines="3"
             android:textColor="@color/color_333333" />
+
         <TextView
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp"
-            android:paddingLeft="9dp"
-            android:paddingRight="9dp"
-            android:textColor="@color/color_5c5c5c"
-            android:layout_marginLeft="50dp"
-            android:background="@drawable/back_90cir_f4f4f4"
             android:id="@+id/id_show_num_rely"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/back_90cir_f4f4f4"
+            android:paddingLeft="9dp"
+            android:paddingTop="3dp"
+            android:paddingRight="9dp"
+            android:paddingBottom="3dp"
+            android:text=""
+            android:textColor="@color/color_5c5c5c" />
     </LinearLayout>
 
     <ImageView

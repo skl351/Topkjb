@@ -20,7 +20,8 @@
             <com.top.kjb.customview.RoundImageView
                 android:id="@+id/id_head_img"
                 android:layout_width="40dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:src="@mipmap/ic_launcher"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
@@ -39,6 +41,21 @@
                     <TextView
                         android:id="@+id/id_username"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="zxczxc"
+                        android:textColor="@color/color_333333" />
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/id_huifu_flag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="回复"
+                        android:textColor="@color/color_333333" />
+                    <TextView
+                        android:singleLine="true"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/id_huifu_username"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="@color/color_333333" />

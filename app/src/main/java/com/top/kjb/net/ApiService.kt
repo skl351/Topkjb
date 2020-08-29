@@ -24,6 +24,14 @@ interface ApiService {
         @Header("x-auth-token") token: String,
         @Body userDataVO: JsonObject
     ): Call<Result<String>>
+    /**
+     * 更新用户信息
+     */
+    @POST("user/updateDynamicBackground")
+    fun userupdateDynamicBackground(
+        @Header("x-auth-token") token: String,
+        @Query("imgUrl") imgUrl:String
+    ): Call<Result<Int>>
 
     /**
      * 个人资料
