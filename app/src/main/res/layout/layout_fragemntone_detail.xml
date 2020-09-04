@@ -208,7 +208,7 @@
                                 android:background="@color/color_f4f4f4"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
-                                android:text="五年" />
+                                android:text="" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -368,10 +368,10 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:gravity="center_vertical"
                         android:id="@+id/id_click_commtent_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:padding="5dp">
 
                         <TextView
@@ -398,15 +398,16 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_weight="1"
                 android:id="@+id/id_RecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
             </androidx.recyclerview.widget.RecyclerView>
+
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"/>
+                android:layout_height="80dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

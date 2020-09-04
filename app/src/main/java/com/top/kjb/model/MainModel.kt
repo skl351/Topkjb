@@ -15,6 +15,9 @@ class MainModel {
     fun main_zuijing(lat:String,lng:String,token:String):Call<Result<ArrayList<bean_main_item>>>{
         return RetrofitManager.service.main_zuijing(lat,lng,token)
     }
+    fun gymnasiumgymnasiumList(lat:String,lng:Double,token:Double,gymType:String):Call<Result<ArrayList<bean_main_item>>>{
+        return RetrofitManager.service.gymnasiumgymnasiumList(lat,lng,token,gymType)
+    }
     fun main_zonghe(token:String):Call<Result<ArrayList<bean_main_item>>>{
         return RetrofitManager.service.main_zonghe(token)
     }
@@ -26,6 +29,18 @@ class MainModel {
     }
     fun gymnasiumgymnasiumDetails(token:String,gymId:Int):Call<Result<bean_main_item_about_xuanliangdiann>>{
         return RetrofitManager.service.gymnasiumgymnasiumDetails(token,gymId)
+    }
+    fun selectAllGroundingSports():Call<Result<ArrayList<bean_type_item>>>{
+        return RetrofitManager.service.selectAllGroundingSports()
+    }
+    fun gymnasiumgymLikeSearch(token:String,keyword:String):Call<Result<ArrayList<bean_main_item>>>{
+        return RetrofitManager.service.gymnasiumgymLikeSearch(token,keyword)
+    }
+    fun gymnasiumselectGymDetailPage(token:String,gymID:Int):Call<Result<bean_main_item_newdetail>>{
+        return RetrofitManager.service.gymnasiumselectGymDetailPage(token,gymID)
+    }
+    fun coachselectCoach(token:String,coachID:Int):Call<Result<bean_coach_item>>{
+        return RetrofitManager.service.coachselectCoach(token,coachID)
     }
 
 

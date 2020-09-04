@@ -51,6 +51,7 @@ class publish_item : BaseActivity(), View.OnClickListener {
         init_refre()
         init_data()
     }
+
     private fun registerBoradcastReceiver() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(Sp.selectplacelast)
@@ -61,13 +62,14 @@ class publish_item : BaseActivity(), View.OnClickListener {
         super.onDestroy()
         unregisterReceiver(mBroadcastReceiver)
     }
+
     var mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
                 Sp.selectplacelast -> {
-                    nowgymnasiumId=intent.getIntExtra("id",0)
-                    var place=intent.getStringExtra("place")
+                    nowgymnasiumId = intent.getIntExtra("id", 0)
+                    var place = intent.getStringExtra("place")
                     id_text_place_name.setText(place)
                 }
 
@@ -103,19 +105,11 @@ class publish_item : BaseActivity(), View.OnClickListener {
 
     override fun init_view() {
         super.init_view()
-        if (current_item == 0) {
-            id_click_select_place.visibility = View.VISIBLE
-            id_dafen.visibility = View.VISIBLE
-        } else {
-            id_click_select_place.visibility = View.GONE
-            id_dafen.visibility = View.GONE
-        }
+
     }
 
-    var current_item = 0
     override fun init_intent() {
         super.init_intent()
-        current_item = intent.getIntExtra("current_item", 0)
     }
 
     var key = ""
@@ -242,13 +236,7 @@ class publish_item : BaseActivity(), View.OnClickListener {
         list_image = ArrayList()
         var imagelist = adapter_nine.data
         if (imagelist.size == 0) {
-            if (current_item == 0) {
-
-                pubilsh_goto()
-            } else {
-
-                pubilsh_goto_quanzi()
-            }
+            pubilsh_goto()
         } else {
             init_getqiniutoken()
         }
@@ -274,13 +262,7 @@ class publish_item : BaseActivity(), View.OnClickListener {
                             list_image.add(Sp.qiiu + p0.toString())
                             curr_image++
                             if (curr_image >= adapter_nine.data.size) {
-                                if (current_item == 0) {
-
-                                    pubilsh_goto()
-                                } else {
-
-                                    pubilsh_goto_quanzi()
-                                }
+                                pubilsh_goto()
                                 return
                             }
                             init_getqiniutoken()
@@ -297,13 +279,7 @@ class publish_item : BaseActivity(), View.OnClickListener {
                             list_image.add(Sp.qiiu + p0.toString())
                             curr_image++
                             if (curr_image >= adapter_nine.data.size) {
-                                if (current_item == 0) {
-
-                                    pubilsh_goto()
-                                } else {
-
-                                    pubilsh_goto_quanzi()
-                                }
+                                pubilsh_goto()
                                 return
                             }
                             init_getqiniutoken()
@@ -320,11 +296,10 @@ class publish_item : BaseActivity(), View.OnClickListener {
             .launch()
 
 
-
     }
 
     val twoModel: TwoModel by lazy { TwoModel() }
-    var nowgymnasiumId=1
+    var nowgymnasiumId = 0
     private fun pubilsh_goto() {
         var text = id_edit_content.text.toString()
 
@@ -338,20 +313,18 @@ class publish_item : BaseActivity(), View.OnClickListener {
             }
         }
 
-        if (text.length == 0&&pic.equals("")) {
+        if (text.length == 0 && pic.equals("")) {
             Show_toast.showText(this@publish_item, "发表内容不能为空")
             return
         }
         var userId = functionClass.getUserId()
         var token = functionClass.getToken()
         var gymnasiumId = nowgymnasiumId
-        var userScore = id_star_view.rating
 
 
 
         twoModel.highlightsinsertHighlights(
-            token, userId, text, pic, gymnasiumId,
-            userScore.toInt().toString()
+            token, userId, text, pic, gymnasiumId
         )
             .enqueue(object : retrofit2.Callback<Result<String>> {
                 override fun onFailure(call: Call<Result<String>>, t: Throwable) {

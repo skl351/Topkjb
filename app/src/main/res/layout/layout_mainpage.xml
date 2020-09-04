@@ -1,11 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:visibility="invisible" />
+
+<LinearLayout
+    android:id="@+id/id_top_bar_1_big"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageView
+        android:background="@color/white"
+        android:id="@+id/id_top_bar_1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/topTab"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+
+            <LinearLayout
+                android:id="@+id/id_click_location"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@mipmap/icon_location" />
+
+                <TextView
+                    android:id="@+id/id_locationplace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/title_size_18" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/id_click_erweima"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_sao_one_sao" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/id_click_search"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_small_search" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_main_tab_group_big"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/topTab"
+            android:background="@color/white"
+            android:visibility="visible">
+
+            <HorizontalScrollView
+                android:id="@+id/id_main_tab_group_hor"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginRight="60dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/id_main_tab_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+            <RelativeLayout
+                android:id="@+id/id_click_more_top"
+                android:layout_width="57dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_launcher" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/id_click_location_left_bottom"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="90dp"
+        android:background="@mipmap/ic_launcher" />
 
 </RelativeLayout>

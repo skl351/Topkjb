@@ -206,33 +206,8 @@ class fragmenttwo_detail_quanzi : BaseActivity(), View.OnClickListener {
     lateinit var adapter_comment: adapter_user_comment2
     private fun init_data() {
         init_quanzi()
-        init_getzanhead()
     }
 
-    private fun init_getzanhead() {
-        twoModel.highlightsLikesselectHighlightsLikesCount(functionClass.getToken(), id)
-            .enqueue(object : retrofit2.Callback<Result<Int>> {
-                override fun onFailure(call: Call<Result<Int>>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<Result<Int>>, response: Response<Result<Int>>) {
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        id_dianzanshu.text = bean?.result.toString() + "人点赞"
-                        var listhead = bean?.message
-                        for (i in 0..listhead?.size!! - 1) {
-                            list_head_big.get(i).visibility = View.VISIBLE
-                            ImageLoader.getInstance()
-                                .displayImage(listhead.get(i), list_head.get(i))
-                        }
-                    } else {
-
-                    }
-                }
-
-            })
-    }
 
     var id = 0
     var gymnasiumId = 0

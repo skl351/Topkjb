@@ -1,10 +1,14 @@
 package com.top.kjb
 
 import android.Manifest
-import android.R.attr
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -15,14 +19,16 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.baidu.location.LocationClient
 import com.baidu.location.LocationClientOption
+import com.gyf.immersionbar.ImmersionBar
 import com.top.kjb.originpack.BaseActivity
 import com.top.kjb.originpack.BaseFragment
-import com.top.kjb.tabfragment.fragemnt_one
 import com.top.kjb.tabfragment.fragemnt_two
 import com.top.kjb.tabfragment.fragment_three
+import com.top.kjb.tabfragment.newfragmentone.fragment_one
 import com.top.kjb.utils.MyLocationListener
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.Sp
+import com.top.kjb.utils.functionClass
 import com.yzq.zxinglibrary.android.CaptureActivity
 import com.yzq.zxinglibrary.common.Constant
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,27 +39,47 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ImmersionBar.with(this).statusBarDarkFont(true).init()
         setContentView(R.layout.activity_main)
+
         init_click()
         init_view()
         init_viewpage()
         init_loction()
         init_golocation()
     }
-    fun init_questlocation(){
+
+
+
+
+
+    fun init_questlocation() {
         mLocationClient?.requestLocation()
     }
+
+    fun init_start() {
+        mLocationClient?.start()
+    }
+
+
     open fun init_golocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val checkCallPhonePermission = ContextCompat.checkSelfPermission(this!!, Manifest.permission.ACCESS_COARSE_LOCATION)
+            val checkCallPhonePermission = ContextCompat.checkSelfPermission(
+                this!!,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
             if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this!!, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), Sp.REQUEST_CODE_Location)
+                ActivityCompat.requestPermissions(
+                    this!!,
+                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+                    Sp.REQUEST_CODE_Location
+                )
                 return
             } else {
-                mLocationClient?.start()
+                init_start()
             }
         } else {
-            mLocationClient?.start()
+            init_start()
         }
 
     }
@@ -64,31 +90,31 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        println(""+requestCode+","+"相关"+grantResults)
+        println("" + requestCode + "," + "相关" + grantResults)
         if (requestCode == Sp.REQUEST_CODE_Location) {
-            if (grantResults[0]=== PackageManager.PERMISSION_GRANTED){
-                mLocationClient?.start()
-            }else{
-                Show_toast.showText(this,"用户拒绝定位相关权限")
+            if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
+                init_start()
+            } else {
+                Show_toast.showText(this, "用户拒绝定位相关权限")
             }
 
 
         }
         if (requestCode == Sp.REQUEST_CODE_Location2) {
-            if (grantResults[0]=== PackageManager.PERMISSION_GRANTED){
-                mLocationClient?.requestLocation()
-            }else{
-                Show_toast.showText(this,"用户拒绝定位相关权限")
+            if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
+                init_start()
+            } else {
+                Show_toast.showText(this, "用户拒绝定位相关权限")
             }
 
 
         }
-            if (requestCode == Sp.REQUEST_CODE_camera) {
-            if (grantResults[0]=== PackageManager.PERMISSION_GRANTED){
+        if (requestCode == Sp.REQUEST_CODE_camera) {
+            if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
                 var intent = Intent(this, CaptureActivity::class.java)
                 startActivityForResult(intent, Sp.REQUEST_CODE_SCAN);
-            }else{
-                Show_toast.showText(this,"用户拒绝拍照相关权限")
+            } else {
+                Show_toast.showText(this, "用户拒绝拍照相关权限")
             }
 
         }
@@ -135,7 +161,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     override fun init_view() {
         super.init_view()
         bottom_tabist = ArrayList()
-        val fragment1 = fragemnt_one()
+        val fragment1 = fragment_one()
         val fragment2 = fragemnt_two()
         val fragment3 = fragment_three()
         bottom_tabist?.add(fragment1)
@@ -200,6 +226,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
         }
     }
+
     var mLocationClient: LocationClient? = null
     private val myListener: MyLocationListener = MyLocationListener()
 
@@ -260,9 +287,36 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         // 扫描二维码/条码回传
         if (requestCode == Sp.REQUEST_CODE_SCAN && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                val content= data.getStringExtra(Constant.CODED_CONTENT)
-                Show_toast.showText(this,"扫描结果为$content")
+                val content = data.getStringExtra(Constant.CODED_CONTENT)
+                Show_toast.showText(this, "扫描结果为$content")
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mLocationClient?.stop()
+    }
+
+    fun showbottom() {
+        functionClass.setanimvisible_totop(id_myBottomview)
+    }
+
+    fun hidebottom() {
+        functionClass.setanimgone_tobottomy(id_myBottomview)
+    }
+
+    fun showbottom_location(view: View) {
+        functionClass.setanimvisible_totop(id_locatio_view_bottom)
+        id_locatio_view_bottom.addView(view)
+    }
+
+    fun hidebottom_location() {
+        functionClass.setanimgone_tobottomy(id_locatio_view_bottom)
+        id_locatio_view_bottom.removeAllViews()
+    }
+
+
+
+
 }

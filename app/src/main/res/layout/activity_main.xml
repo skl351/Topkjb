@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.viewpager.widget.ViewPager
+        <com.top.kjb.customview.NoScrollViewPager
             android:id="@+id/myViewpage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/id_myBottomview" />
+            android:layout_height="match_parent" />
 
 
         <LinearLayout
+            android:background="@drawable/back_top_15cir_white"
             android:id="@+id/id_myBottomview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +28,6 @@
 
 
             <LinearLayout
-                android:background="@color/white"
                 android:id="@+id/myBottomview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="@string/tab_one_text"
+                        android:text="@string/tab_two_text"
                         android:textColor="@drawable/tabcheckcolor"
                         android:textSize="@dimen/title_size_10" />
 
@@ -106,7 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="@string/tab_one_text"
+                        android:text="@string/tab_three_text"
                         android:textColor="@drawable/tabcheckcolor"
                         android:textSize="@dimen/title_size_10" />
 
@@ -117,5 +117,13 @@
 
 
     </RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/id_locatio_view_bottom"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"></LinearLayout>
 
 </RelativeLayout>

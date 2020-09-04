@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Result<T> {
     private String flag;
     private T result;
-    private ArrayList<String> message;
 
     public String getFlag() {
         return flag;
@@ -31,11 +30,4 @@ public class Result<T> {
         this.result = result;
     }
 
-    public ArrayList<String> getMessage() {
-        return message;
-    }
-
-    public void setMessage(ArrayList<String> message) {
-        this.message = message;
-    }
 }

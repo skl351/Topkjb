@@ -1,7 +1,10 @@
 package com.top.kjb.tabfragment
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.media.Image
 import android.os.Bundle
 import android.view.View
@@ -9,6 +12,7 @@ import com.google.gson.JsonObject
 import com.lcw.library.imagepicker.ImagePicker
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
+import com.lxj.xpopup.XPopup
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.UpCompletionHandler
@@ -17,6 +21,7 @@ import com.top.kjb.R
 import com.top.kjb.bean.Result
 import com.top.kjb.bean.bean_gerenziliao
 import com.top.kjb.bean.bean_qiniu_token
+import com.top.kjb.customview.dialog.sex_bottom
 import com.top.kjb.model.ThreeModel
 import com.top.kjb.model.TwoModel
 import com.top.kjb.originpack.BaseActivity
@@ -36,8 +41,28 @@ class Myselfinfo : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_myselefinfo)
+        registerBoradcastReceiver()
         init_click()
         init_data()
+    }
+
+    private fun registerBoradcastReceiver() {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(Sp.sexselect)
+        registerReceiver(mBroadcastReceiver, intentFilter)
+    }
+
+
+    var mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.action) {
+                Sp.sexselect -> {
+                    sex=intent.getStringExtra("sex")
+                    id_user_sex.setText(sex)
+                }
+            }
+        }
     }
 
     val threeModel: ThreeModel by lazy { ThreeModel() }
@@ -55,7 +80,9 @@ class Myselfinfo : BaseActivity(), View.OnClickListener {
 
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
-                        ImageLoader.getInstance().displayImage(bean?.result?.headImg, id_head_img)
+                        image_no=bean?.result?.headImg.toString()
+                        ImageLoader.getInstance()
+                            .displayImage(bean?.result?.headImg, id_head_img)
                         id_user_name.setText(bean?.result?.username)
                         id_user_motto.setText(bean?.result?.motto)
                         id_user_sex.setText(bean?.result?.gender)
@@ -71,11 +98,20 @@ class Myselfinfo : BaseActivity(), View.OnClickListener {
         super.init_click()
         id_click_updata_image.setOnClickListener(this)
         id_click_save.setOnClickListener(this)
+        id_click_sex.setOnClickListener(this)
         id_top.findViewById<View>(R.id.id_back).setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.id_click_sex -> {
+                var bottom = sex_bottom(this)
+                XPopup.Builder(this)
+                    .hasShadowBg(false)
+                    .atView(id_click_sex)
+                    .asCustom(bottom)
+                    .show()
+            }
             R.id.id_click_save -> {
                 if (list_image_media.size != 0) {
                     init_getqiniutoken()
@@ -93,16 +129,17 @@ class Myselfinfo : BaseActivity(), View.OnClickListener {
         }
     }
 
+    var sex="男"
     private fun init_save() {
-        var jsonObject=JsonObject()
+        var jsonObject = JsonObject()
 
 
         if (!image_no.equals("")) {
-            jsonObject.addProperty("headImg",image_no)
+            jsonObject.addProperty("headImg", image_no)
         }
-        jsonObject.addProperty("username",id_user_name.text.toString())
-        jsonObject.addProperty("motto",id_user_motto.text.toString())
-        jsonObject.addProperty("gender","男")
+        jsonObject.addProperty("username", id_user_name.text.toString())
+        jsonObject.addProperty("motto", id_user_motto.text.toString())
+        jsonObject.addProperty("gender", sex)
         println("展示" + jsonObject.toString())
 
         threeModel.userupdateUserDataUserVO(functionClass.getToken(), jsonObject)
@@ -198,13 +235,17 @@ class Myselfinfo : BaseActivity(), View.OnClickListener {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 PictureConfig.CHOOSE_REQUEST -> {
-                    val selectList = data?.getStringArrayListExtra(ImagePicker.EXTRA_SELECT_IMAGES)
+                    val selectList =
+                        data?.getStringArrayListExtra(ImagePicker.EXTRA_SELECT_IMAGES)
 
                     if (selectList?.size != 0) {
                         list_image_media =
                             functionClass.str2localmedia(selectList!!) as ArrayList<LocalMedia>
                         ImageLoader.getInstance()
-                            .displayImage("file:/" + list_image_media.get(0).realPath, id_head_img)
+                            .displayImage(
+                                "file:/" + list_image_media.get(0).realPath,
+                                id_head_img
+                            )
                     }
 
                 }

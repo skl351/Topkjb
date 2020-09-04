@@ -53,6 +53,11 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
         registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(mBroadcastReceiver)
+    }
+
     var parentId = 0
     var replyType = 0
     var commentsId = 0
@@ -79,6 +84,7 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
     lateinit var list_head_big: ArrayList<View>
     override fun init_view() {
         super.init_view()
+
 
         list_head_big = ArrayList<View>()
         list_head_big.add(id_head_1)
@@ -206,39 +212,15 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
     lateinit var adapter_comment: adapter_user_comment2
     private fun init_data() {
         init_xuanliangdian()
-        init_getzanhead()
     }
 
-    private fun init_getzanhead() {
-        twoModel.highlightsLikesselectHighlightsLikesCount(functionClass.getToken(), id)
-            .enqueue(object : retrofit2.Callback<Result<Int>> {
-                override fun onFailure(call: Call<Result<Int>>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<Result<Int>>, response: Response<Result<Int>>) {
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        id_dianzanshu.text = bean?.result.toString() + "人点赞"
-                        var listhead = bean?.message
-                        for (i in 0..listhead?.size!! - 1) {
-                            list_head_big.get(i).visibility = View.VISIBLE
-                            ImageLoader.getInstance()
-                                .displayImage(listhead.get(i), list_head.get(i))
-                        }
-                    } else {
-
-                    }
-                }
-
-            })
-    }
 
     var id = 0
     var gymnasiumId = 0
     var collect_check = 0
     var like_check = 0
 
+    var followStatus = false
     private fun init_xuanliangdian() {
         twoModel.highlightsselectHighlightsById(
             functionClass.getToken(), id
@@ -257,17 +239,37 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
             ) {
                 var bean = response?.body()
                 if ("success".equals(bean?.flag)) {
+                    println("bean?.result?.username" + bean?.result?.username)
                     ImageLoader.getInstance().displayImage(bean?.result?.headImg, id_head_img)
                     id_author_name.setText(bean?.result?.username)
                     id_author_motto.setText(bean?.result?.motto)
-                    if ("".equals(bean?.result?.text)){
-                        id_text.visibility=View.GONE
-                    }else{
-                        id_text.visibility=View.VISIBLE
+                    if ("".equals(bean?.result?.text)) {
+                        id_text.visibility = View.GONE
+                    } else {
+                        id_text.visibility = View.VISIBLE
                         id_text.setText(bean?.result?.text)
+                    }
+                    followStatus = bean?.result?.followStatus!!
+                    if (followStatus) {
+                        id_click_attion.setTextColor(resources.getColor(R.color.color_1cbe6f))
+                        id_click_attion.background =
+                            resources.getDrawable(R.drawable.check_attention)
+                        id_click_attion.isSelected = true
+
+
+                    } else {
+                        id_click_attion.background =
+                            resources.getDrawable(R.drawable.check_attention2)
+                        id_click_attion.isSelected = false
+                        id_click_attion.setTextColor(resources.getColor(R.color.white))
                     }
 
                     userId_1 = bean?.result?.userId!!
+                    if (userId_1 == functionClass.getUserId()) {
+                        id_click_attion.visibility = View.GONE
+                    } else {
+                        id_click_attion.visibility = View.VISIBLE
+                    }
                     var pic = bean?.result?.pic
                     if ("".equals(pic)) {
                         id_RecyclerView_image.visibility = View.GONE
@@ -290,6 +292,7 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
                         id_location_long.setText("距您：" + bean?.result?.distance)
                     } catch (e: Exception) {
                         e.printStackTrace()
+                        id_big_view.visibility = View.GONE
                     }
 
                     id_time.setText(
@@ -318,6 +321,14 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
                         id_like_image.setImageResource(R.mipmap.icon_love_off)
                     } else {
                         id_like_image.setImageResource(R.mipmap.icon_love_on)
+                    }
+
+                    id_dianzanshu.text = bean?.result.likeCounts + "人点赞"
+                    var listhead = bean?.result?.likeHeadImg
+                    for (i in 0..listhead?.size!! - 1) {
+                        list_head_big.get(i).visibility = View.VISIBLE
+                        ImageLoader.getInstance()
+                            .displayImage(listhead.get(i), list_head.get(i))
                     }
 
                 } else {
@@ -421,7 +432,6 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
         }
     }
 
-    var type_send = 0//0是作品1是评论2是回复
     private fun gotozan() {
         var goint = 0
         if (like_check == 1) {
@@ -498,7 +508,6 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
         })
     }
 
-    var attion_booble = false
     val threeModel: ThreeModel by lazy { ThreeModel() }
     var userId_1 = 0
     private fun guanzhuto() {
@@ -519,7 +528,7 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
                     id_click_attion.isEnabled = true
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
-                        if (attion_booble) {
+                        if (followStatus) {
                             id_click_attion.background =
                                 resources.getDrawable(R.drawable.check_attention2)
                             id_click_attion.isSelected = false
@@ -531,7 +540,7 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
                                 resources.getDrawable(R.drawable.check_attention)
                             id_click_attion.isSelected = true
                         }
-                        attion_booble = !attion_booble
+                        followStatus = !followStatus
 
                         Show_toast.showText(this@fragmenttwo_detail_xuanliangdian2, bean?.result)
                     } else {

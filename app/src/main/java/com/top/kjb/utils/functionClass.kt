@@ -2,18 +2,48 @@ package com.top.kjb.utils
 
 import android.content.Context
 import android.util.DisplayMetrics
+import android.view.View
 import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
 import com.lcw.library.imagepicker.ImagePicker
 import com.lcw.library.imagepicker.manager.SelectionManager
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
 import com.top.kjb.originpack.BaseActivity
+import java.lang.Exception
 import java.lang.Long
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 object functionClass {
+
+    fun setStep(step: Int) {
+        SharedPreferenceUtils.save("step", step)
+    }
+
+    fun getStep(): Int {
+        return SharedPreferenceUtils.getInt("step", 0)
+    }
+
+    //当前第一次
+    fun setcurStep(date: String, step: Int) {
+        SharedPreferenceUtils.save("step" + date, step)
+    }
+    //当前第一次
+    fun getcurStep(date: String): Int {
+        return SharedPreferenceUtils.getInt("step" + date, 0)
+    }
+
+    fun setlike(coachid: Int, boolean: Boolean) {
+        SharedPreferenceUtils.save("coachid" + coachid, boolean)
+    }
+
+    fun getlike(coachid: Int): Boolean {
+        return SharedPreferenceUtils.getBoolean("coachid" + coachid, false)
+    }
+
 
     fun setToken(token: String) {
         SharedPreferenceUtils.save("token", token)
@@ -46,6 +76,7 @@ object functionClass {
     fun getHeadImg(): String {
         return SharedPreferenceUtils.getString("headImg", "")
     }
+
     fun setmotto(motto: String) {
         SharedPreferenceUtils.save("motto", motto)
     }
@@ -77,7 +108,13 @@ object functionClass {
      */
     fun getTime_ms(beginDate: String, type: String): String {
         val sdf = SimpleDateFormat(type)
-        return sdf.format(Date(Long.parseLong(beginDate)))
+        var str = ""
+        try {
+            str = sdf.format(Date(Long.parseLong(beginDate)))
+        } catch (e: Exception) {
+            str = ""
+        }
+        return str
     }
 
     fun islogin(): Boolean {
@@ -105,7 +142,8 @@ object functionClass {
      */
     fun getbarHight(context: Context): Int {
         var result = 0;
-        var resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        var resourceId =
+            context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
@@ -152,6 +190,54 @@ object functionClass {
 
     fun error_open(errorstring: String) {
         println("数据异常" + errorstring)
+    }
+
+    fun setanimvisible_tbottom(view: View) {
+        val showAnim = TranslateAnimation(
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, -1.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f
+        )
+        showAnim.setDuration(500)
+        view.startAnimation(showAnim)
+        view.visibility = View.VISIBLE
+    }
+
+    fun setanimvisible_totop(view: View) {
+        val showAnim = TranslateAnimation(
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 1.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f
+        )
+        showAnim.setDuration(500)
+        view.startAnimation(showAnim)
+        view.visibility = View.VISIBLE
+    }
+
+    fun setanimgone_tobottomy(view: View) {
+        val hideAnim = TranslateAnimation(
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 1.0f
+        )
+        hideAnim.duration = 500
+        view.startAnimation(hideAnim)
+        view.visibility = View.GONE
+    }
+
+    fun setanimgone_totopy(view: View) {
+        val hideAnim = TranslateAnimation(
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, 0.0f,
+            Animation.RELATIVE_TO_SELF, -1.0f
+        )
+        hideAnim.duration = 500
+        view.startAnimation(hideAnim)
+        view.visibility = View.GONE
     }
 
 

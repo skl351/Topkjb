@@ -52,18 +52,18 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
         registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
-    var parentId=0
-    var replyType=0
-    var commentsId=0
+    var parentId = 0
+    var replyType = 0
+    var commentsId = 0
     var sendtype = 1//1评论 2回复
     var mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
                 Sp.huifuintent -> {
-                    parentId=intent.getIntExtra("parentId",0)
-                    replyType=intent.getIntExtra("replyType",0)
-                    commentsId=intent.getIntExtra("commentsId",0)
+                    parentId = intent.getIntExtra("parentId", 0)
+                    replyType = intent.getIntExtra("replyType", 0)
+                    commentsId = intent.getIntExtra("commentsId", 0)
                     sendtype = 2
                     id_edit.requestFocus()
                     id_edit.setText("")
@@ -75,19 +75,19 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
         }
     }
 
-    lateinit var list_head:ArrayList<RoundImageView>
-    lateinit var list_head_big:ArrayList<View>
+    lateinit var list_head: ArrayList<RoundImageView>
+    lateinit var list_head_big: ArrayList<View>
     override fun init_view() {
         super.init_view()
 
-        list_head_big=ArrayList<View>()
+        list_head_big = ArrayList<View>()
         list_head_big.add(id_head_1)
         list_head_big.add(id_head_2)
         list_head_big.add(id_head_3)
         list_head_big.add(id_head_4)
         list_head_big.add(id_head_5)
         list_head_big.add(id_head_6)
-        list_head= ArrayList()
+        list_head = ArrayList()
         list_head.add(id_image1)
         list_head.add(id_image2)
         list_head.add(id_image3)
@@ -120,9 +120,9 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
         id_edit.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(p0: TextView?, actionId: Int, p2: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    if (sendtype==1){
+                    if (sendtype == 1) {
                         init_send()
-                    }else{
+                    } else {
                         init_huifu()
                     }
                 }
@@ -131,6 +131,7 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
 
         })
     }
+
     private fun init_huifu() {
         var text = id_edit.text.toString()
         twoModel.informationReplyinsertInformationReply(
@@ -162,6 +163,7 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
 
             })
     }
+
     private fun init_send() {
         var text = id_edit.text.toString()
         twoModel.informationCommentsinsertInformationComments(
@@ -203,32 +205,9 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
     lateinit var adapter_comment: adapter_user_comment2
     private fun init_data() {
         init_zixun()
-        init_getzanhead()
     }
 
-    private fun init_getzanhead() {
-        twoModel.highlightsLikesselectHighlightsLikesCount(functionClass.getToken(), id)
-            .enqueue(object : retrofit2.Callback<Result<Int>> {
-                override fun onFailure(call: Call<Result<Int>>, t: Throwable) {
 
-                }
-
-                override fun onResponse(call: Call<Result<Int>>, response: Response<Result<Int>>) {
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        id_dianzanshu.text = bean?.result.toString() + "人点赞"
-                        var listhead = bean?.message
-                        for (i in 0..listhead?.size!! - 1) {
-                            list_head_big.get(i).visibility=View.VISIBLE
-                            ImageLoader.getInstance().displayImage(listhead.get(i),list_head.get(i))
-                        }
-                    } else {
-
-                    }
-                }
-
-            })
-    }
     var id = 0
     var collect_check = 0
     var like_check = 0
@@ -259,7 +238,7 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
                             "yyyy-MM-dd hh:mm"
                         )
                     )
-                    id_readTimes.text=bean?.result?.readTimes+"人阅读"
+                    id_readTimes.text = bean?.result?.readTimes + "人阅读"
                     if (bean?.result?.likeStatus!!) {
                         like_check = 1
                     } else {
@@ -279,6 +258,13 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
                         id_like_image.setImageResource(R.mipmap.icon_love_off)
                     } else {
                         id_like_image.setImageResource(R.mipmap.icon_love_on)
+                    }
+                    id_dianzanshu.text = bean?.result.likeCounts + "人点赞"
+                    var listhead = bean?.result?.likeHeadImg
+                    for (i in 0..listhead?.size!! - 1) {
+                        list_head_big.get(i).visibility = View.VISIBLE
+                        ImageLoader.getInstance()
+                            .displayImage(listhead.get(i), list_head.get(i))
                     }
 
                 } else {
@@ -317,7 +303,7 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
                     if ("success".equals(bean?.flag)) {
                         list = bean?.result?.list!!
                         adapter_comment = adapter_user_comment2(this@fragmenttwo_detail_zixun, list)
-                        adapter_comment.textType=3
+                        adapter_comment.textType = 3
                         id_RecyclerView.adapter = adapter_comment
                     } else {
                         Show_toast.showText(this@fragmenttwo_detail_zixun, "咨询评论list失败")

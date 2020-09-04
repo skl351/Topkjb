@@ -24,13 +24,14 @@ interface ApiService {
         @Header("x-auth-token") token: String,
         @Body userDataVO: JsonObject
     ): Call<Result<String>>
+
     /**
      * 更新用户信息
      */
     @POST("user/updateDynamicBackground")
     fun userupdateDynamicBackground(
         @Header("x-auth-token") token: String,
-        @Query("imgUrl") imgUrl:String
+        @Query("imgUrl") imgUrl: String
     ): Call<Result<Int>>
 
     /**
@@ -57,6 +58,14 @@ interface ApiService {
         @Query("username") username: String,
         @Query("captcha") captcha: String
     ): Call<Result<beanuserlogin>>
+    /**
+     * 更换手机号
+     */
+    @GET("user/updateUserTel")
+    fun userupdateUserTel(
+        @Header("x-auth-token") token: String,
+        @Query("tel") tel: String
+    ): Call<Result<beanuserlogin>>
 
     /**
      * 首页banner
@@ -74,6 +83,17 @@ interface ApiService {
         @Header("x-auth-token") token: String,
         @Query("lat") lat: String,
         @Query("lng") lng: String
+    ): Call<Result<ArrayList<bean_main_item>>>
+
+    /**
+     *获取最近场地list
+     */
+    @GET("gymnasium/gymnasiumList")
+    fun gymnasiumgymnasiumList(
+        @Header("x-auth-token") token: String,
+        @Query("lat") lat: Double,
+        @Query("lng") lng: Double,
+        @Query("gymType") gymType: String
     ): Call<Result<ArrayList<bean_main_item>>>
 
     /**
@@ -166,6 +186,7 @@ interface ApiService {
         @Header("x-auth-token") token: String,
         @Query("informationId") informationId: Int
     ): Call<Result<bean_twopage_item_3he1.bean_twopage_item_3he1_item>>
+
     /**
      * 根据iD查询点赞数量头像
      */
@@ -264,8 +285,7 @@ interface ApiService {
         @Query("userId") userId: Int,
         @Field("text") text: String,
         @Query("pic") pic: String,
-        @Query("gymnasiumId") gymnasiumId: Int,
-        @Query("userScore") userScore: String
+        @Query("gymnasiumId") gymnasiumId: Int
     ): Call<Result<String>>
 
     /**
@@ -365,6 +385,7 @@ interface ApiService {
         @Query("currentPage") currentPage: Int,
         @Query("pageSize") pageSize: Int
     ): Call<Result<bean_total_list>>
+
     /**
      * 成为取消粉丝
      */
@@ -374,6 +395,7 @@ interface ApiService {
         @Query("fansId") fansId: Int,
         @Query("starId") starId: Int
     ): Call<Result<String>>
+
     /**
      * 炫亮点回复list
      */
@@ -384,6 +406,7 @@ interface ApiService {
         @Query("currentPage") currentPage: Int,
         @Query("pageSize") pageSize: Int
     ): Call<Result<bean_user_comment>>
+
     /**
      * 圈子回复list
      */
@@ -394,6 +417,7 @@ interface ApiService {
         @Query("currentPage") currentPage: Int,
         @Query("pageSize") pageSize: Int
     ): Call<Result<bean_user_comment>>
+
     /**
      * 咨询回复list
      */
@@ -418,6 +442,7 @@ interface ApiService {
         @Query("replyType") replyType: Int,
         @Query("commentsId") commentsId: Int
     ): Call<Result<String>>
+
     /**
      * 圈子回复操作
      * 圈子添加回复reply_type = 0是对评论，reply_type = 1是对回复，
@@ -431,6 +456,7 @@ interface ApiService {
         @Query("replyType") replyType: Int,
         @Query("commentsId") commentsId: Int
     ): Call<Result<String>>
+
     /**
      * 咨询回复操作
      * 咨询添加回复reply_type = 0是对评论，reply_type = 1是对回复，
@@ -444,6 +470,7 @@ interface ApiService {
         @Query("replyType") replyType: Int,
         @Query("commentsId") commentsId: Int
     ): Call<Result<String>>
+
     /**
      * 获取消费场馆
      */
@@ -452,7 +479,39 @@ interface ApiService {
         @Header("x-auth-token") token: String
     ): Call<Result<ArrayList<bean_gym_payed_item>>>
 
+    /**
+     *sportstype
+     */
+    @GET("sports/selectAllGroundingSports")
+    fun selectAllGroundingSports(
+    ): Call<Result<ArrayList<bean_type_item>>>
 
+    /**
+     * 根据关键字找场馆
+     */
+    @GET("gymnasium/gymLikeSearch")
+    fun gymnasiumgymLikeSearch(
+        @Header("x-auth-token") token: String,
+        @Query("keyword") keyword: String
+    ): Call<Result<ArrayList<bean_main_item>>>
+
+    /**
+     * 根据id找场馆详情
+     */
+    @POST("gymnasium/selectGymDetailPage")
+    fun gymnasiumselectGymDetailPage(
+        @Header("x-auth-token") token: String,
+        @Query("gymID") gymID: Int
+    ): Call<Result<bean_main_item_newdetail>>
+
+    /**
+     * 根据id找场馆详情
+     */
+    @POST("coach/selectCoach")
+    fun coachselectCoach(
+        @Header("x-auth-token") token: String,
+        @Query("coachID") coachID: Int
+    ): Call<Result<bean_coach_item>>
 
 
 }

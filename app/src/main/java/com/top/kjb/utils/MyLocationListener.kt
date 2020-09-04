@@ -4,6 +4,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.baidu.location.BDAbstractLocationListener
 import com.baidu.location.BDLocation
+import com.baidu.mapapi.map.MyLocationData
 import com.top.kjb.MyApplicatipn
 
 
@@ -45,10 +46,10 @@ class MyLocationListener : BDAbstractLocationListener() {
         )
         if (errorCode == 161 || errorCode == 61) {
             var intent = Intent(Sp.location_send)
-            intent.putExtra("lat", latitude.toString())
-            intent.putExtra("lng", longitude.toString())
-            intent.putExtra("locationplace", location.district)
+            intent.putExtra("locationinfo", location)
             MyApplicatipn.a?.sendBroadcast(intent)
+
+
             //得到后
         } else {
             Toast.makeText(MyApplicatipn.a, "定位失败", Toast.LENGTH_SHORT).show()

@@ -18,6 +18,9 @@ class LoginModel {
     fun phonelogin(username:String,captcha:String): Call<Result<beanuserlogin>> {
         return RetrofitManager.service.phonelogin(username,captcha)
     }
+    fun userupdateUserTel(token:String,tel:String): Call<Result<beanuserlogin>> {
+        return RetrofitManager.service.userupdateUserTel(token,tel)
+    }
 
 
 

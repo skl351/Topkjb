@@ -10,8 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.top.kjb.R
+import com.top.kjb.Userabout.LoginActivity
 import com.top.kjb.bean.bean_twopage_item2
 import com.top.kjb.tabfragment.fragmenttwo_view.fragmenttwo_detail_zixun
+import com.top.kjb.utils.functionClass
 
 /**
  * Created by MaiBenBen on 2019/1/22.
@@ -65,6 +67,11 @@ class adapter_twopage_zixun : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         p0.id_click_zixun_view.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
+                if (!functionClass.islogin()) {
+                    var intent = Intent(mycontent, LoginActivity::class.java)
+                    mycontent?.startActivity(intent)
+                    return
+                }
                 var intent = Intent(mycontent, fragmenttwo_detail_zixun::class.java)
                 intent.putExtra("id",bean?.id)
                 mycontent?.startActivity(intent)

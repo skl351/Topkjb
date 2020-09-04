@@ -35,13 +35,13 @@ class TwoModel {
         return RetrofitManager.service.twoselectselectAllInformation(token,currentPage,pageSize)
     }
     fun highlightsCommentsselectComments(token:String,highlightsId:Int,currentPage:Int,pageSize:Int): Call<Result<bean_user_comment>> {
-        return RetrofitManager.service.highlightsCommentsselectComments(token,highlightsId,currentPage,pageSize)
+        return RetrofitManager.service.highlightsCommentsselectComments(token,highlightsId,currentPage,100)
     }
     fun circleCommentsselectComments(token:String,highlightsId:Int,currentPage:Int,pageSize:Int): Call<Result<bean_user_comment>> {
-        return RetrofitManager.service.circleCommentsselectComments(token,highlightsId,currentPage,pageSize)
+        return RetrofitManager.service.circleCommentsselectComments(token,highlightsId,currentPage,100)
     }
     fun informationCommentsselectComments(token:String,highlightsId:Int,currentPage:Int,pageSize:Int): Call<Result<bean_user_comment>> {
-        return RetrofitManager.service.informationCommentsselectComments(token,highlightsId,currentPage,pageSize)
+        return RetrofitManager.service.informationCommentsselectComments(token,highlightsId,currentPage,100)
     }
     fun highlightsLikesinsertHighlightsLikes(token:String,highlightsId:Int,type:Int,likeStatus:Int,favoriteStatus:Int): Call<Result<Int>> {
         return RetrofitManager.service.highlightsLikesinsertHighlightsLikes(token,highlightsId,type,likeStatus,favoriteStatus)
@@ -52,8 +52,8 @@ class TwoModel {
     fun informationLikesinsertInformationLikes(token:String,highlightsId:Int,type:Int,likeStatus:Int,favoriteStatus:Int): Call<Result<Int>> {
         return RetrofitManager.service.informationLikesinsertInformationLikes(token,highlightsId,type,likeStatus,favoriteStatus)
     }
-    fun highlightsinsertHighlights(token:String,userId:Int,text:String,pic:String,gymnasiumId:Int,userScore:String): Call<Result<String>> {
-        return RetrofitManager.service.highlightsinsertHighlights(token,userId,text,pic,gymnasiumId,userScore)
+    fun highlightsinsertHighlights(token:String,userId:Int,text:String,pic:String,gymnasiumId:Int): Call<Result<String>> {
+        return RetrofitManager.service.highlightsinsertHighlights(token,userId,text,pic,gymnasiumId)
     }
     fun circleinsertCircle(token:String,userId:Int,text:String,pic:String): Call<Result<String>> {
         return RetrofitManager.service.circleinsertCircle(token,userId,text,pic)

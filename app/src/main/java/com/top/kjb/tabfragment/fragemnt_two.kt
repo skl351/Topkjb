@@ -44,11 +44,12 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        id_top_bar_2.layoutParams.height=functionClass.getbarHight(activity!!)
         registerBoradcastReceiver()
         init_click()
         init_refre()
         init_view()
-        init_xuanliangdian()
+        init_guanzhu()
 
     }
 
@@ -65,13 +66,13 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
                 Sp.publishsuccess -> {
                     when (current_item) {
                         0 -> {
-                            init_xuanliangdian()
+                            init_guanzhu()
                         }
                         1 -> {
-                            init_circle()
+                            init_xuanliangdian()
                         }
                         2 -> {//关注
-                            init_guanzhu()
+
                         }
                         3 -> {
                             init_zixun()
@@ -90,7 +91,20 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
             .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
                 override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
                     println("失败" + t.toString())
+                    try {
+                        list_3he1.clear()
+                        adapter.notifyDataSetChanged()
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
+                    try {
+                        list_zixun.clear()
+                        adapter2.notifyDataSetChanged()
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                     refreshLayout.finishRefresh()
+                    id_attion_view_back.visibility=View.VISIBLE
                 }
 
                 override fun onResponse(
@@ -100,11 +114,13 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
                     println("关注成功" + response?.body()?.result)
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
+                        id_attion_view_back.visibility=View.GONE
                         list_3he1 = bean?.result?.list!!
                         adapter = adapter_twopage(activity!!, list_3he1)
                         id_RecyclerView.adapter = adapter
                     } else {
                         Show_toast.showText(activity, "关注list失败")
+
                     }
                     refreshLayout.finishRefresh()
 
@@ -119,7 +135,20 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
             .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
                 override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
                     println("失败" + t.toString())
+                    try {
+                        list_3he1.clear()
+                        adapter.notifyDataSetChanged()
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
+                    try {
+                        list_zixun.clear()
+                        adapter2.notifyDataSetChanged()
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                     refreshLayout.finishLoadMore()
+                    id_attion_view_back.visibility=View.VISIBLE
                 }
 
                 override fun onResponse(
@@ -129,6 +158,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
                     println("关注成功" + response?.body()?.result)
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
+                        id_attion_view_back.visibility=View.GONE
                         var list = bean?.result?.list!!
                         if (list.size != 0) {
                             list_3he1.addAll(list)
@@ -230,6 +260,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
     }
 
     fun init_xuanliangdian() {
+        id_attion_view_back.visibility=View.GONE
         refreshLayout.setNoMoreData(false)
         currentpage = 1
         twoModel.twoselectAllHighlights(functionClass.getToken(), currentpage, pagesize)
@@ -261,6 +292,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
     }
 
     fun init_xuanliangdian2() {
+        id_attion_view_back.visibility=View.GONE
         currentpage++
         twoModel.twoselectAllHighlights(functionClass.getToken(), currentpage, pagesize)
             .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
@@ -296,6 +328,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
     }
 
     fun init_zixun() {
+        id_attion_view_back.visibility=View.GONE
         refreshLayout.setNoMoreData(false)
         currentpage = 1
         twoModel.twoselectselectAllInformation(functionClass.getToken(), currentpage, pagesize)
@@ -326,6 +359,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
     }
 
     fun init_zixun2() {
+        id_attion_view_back.visibility=View.GONE
         currentpage++
         twoModel.twoselectselectAllInformation(functionClass.getToken(), currentpage, pagesize)
             .enqueue(object : retrofit2.Callback<Result<bean_twopage_item2>> {
@@ -397,8 +431,8 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
                 id_click_two_img.visibility = View.INVISIBLE
                 id_click_three_img.visibility = View.INVISIBLE
                 id_click_four_img.visibility = View.INVISIBLE
+                init_guanzhu()
 
-                init_xuanliangdian()
             }
             R.id.id_click_two -> {
                 id_click_publish.visibility = View.VISIBLE
@@ -411,7 +445,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
                 id_click_two_img.visibility = View.VISIBLE
                 id_click_three_img.visibility = View.INVISIBLE
                 id_click_four_img.visibility = View.INVISIBLE
-                init_circle()
+                init_xuanliangdian()
             }
             R.id.id_click_three -> {
                 id_click_publish.visibility = View.GONE
@@ -424,7 +458,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
                 id_click_two_img.visibility = View.INVISIBLE
                 id_click_three_img.visibility = View.VISIBLE
                 id_click_four_img.visibility = View.INVISIBLE
-                init_guanzhu()
+                //yun dong
             }
             R.id.id_click_four -> {
                 id_click_publish.visibility = View.GONE
@@ -446,13 +480,13 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
     override fun onRefresh(refreshLayout: RefreshLayout) {
         when (current_item) {
             0 -> {
-                init_xuanliangdian()
+                init_guanzhu()
             }
             1 -> {
-                init_circle()
+                init_xuanliangdian()
             }
             2 -> {
-                init_guanzhu()
+//                init_guanzhu()
             }
             3 -> {
                 init_zixun()
@@ -463,13 +497,13 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         when (current_item) {
             0 -> {
-                init_xuanliangdian2()
+                init_guanzhu2()
             }
             1 -> {
-                init_circle2()
+                init_xuanliangdian2()
             }
             2 -> {
-                init_guanzhu2()
+//                init_guanzhu2()
             }
             3 -> {
                 init_zixun2()

@@ -2,8 +2,11 @@ package com.top.kjb
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import com.baidu.mapapi.SDKInitializer
 import com.nostra13.universalimageloader.core.DisplayImageOptions
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
@@ -16,9 +19,23 @@ import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.top.kjb.net.HeaderInterceptor
+import com.top.kjb.utils.PrivateConstants
 import com.top.kjb.utils.SharedPreferenceUtils
+import com.top.kjb.utils.Sp
+import com.top.kjb.utils.functionClass
+import com.umeng.analytics.MobclickAgent
+import com.umeng.commonsdk.UMConfigure
+import com.umeng.message.IUmengRegisterCallback
+import com.umeng.message.PushAgent
+import com.umeng.message.UmengNotificationClickHandler
+import com.umeng.message.entity.UMessage
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.android.agoo.huawei.HuaWeiRegister
+import org.android.agoo.oppo.OppoRegister
+import org.android.agoo.vivo.VivoRegister
+import org.android.agoo.xiaomi.MiPushRegistar
+import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 class MyApplicatipn : Application() {
@@ -35,6 +52,59 @@ class MyApplicatipn : Application() {
         init_retrofit2()
         init_log()
         init_refresh()//刷新
+        init_Umeng()
+        SDKInitializer.initialize(this)//百度
+
+    }
+
+    /**
+     * 友盟统计和推送
+     */
+    private fun init_Umeng() {
+        UMConfigure.setLogEnabled(true)
+
+        /*
+注意: 即使您已经在AndroidManifest.xml中配置过appkey和channel值，也需要在App代码中调用初始化接口（如需要使用AndroidManifest.xml中配置好的appkey和channel值，UMConfigure.init调用中appkey和channel参数请置为null）。
+*/
+        println("umeng=============" + Sp.UmengAppkey + "," + Sp.UMENG_MESSAGE_SECRET)
+        UMConfigure.init(
+            this,
+            Sp.UmengAppkey,
+            "Umeng",
+            UMConfigure.DEVICE_TYPE_PHONE,
+            Sp.UMENG_MESSAGE_SECRET
+        );
+        val mPushAgent = PushAgent.getInstance(this)
+//        mPushAgent.setNotificaitonOnForeground(false);//前台不显示推送
+////注册推送服务，每次调用register方法都会回调该接口
+//
+//
+        mPushAgent?.register(object : IUmengRegisterCallback {
+
+            override fun onSuccess(deviceToken: String) {
+                //注册成功会返回device token
+                println("deviceToken" + deviceToken)
+                Sp.UmengDevicetokens = deviceToken
+            }
+
+            override fun onFailure(s: String, s1: String) {
+                println("umengdeviceTokenfail" + "" + s + "," + s1)
+            }
+        })
+//        mPushAgent?.displayNotificationNumber = 10//推送条数
+
+//        MiPushRegistar.register(
+//            this,
+//            PrivateConstants.XM_PUSH_APPID,
+//            PrivateConstants.XM_PUSH_APPKEY
+//        );//小米
+//        HuaWeiRegister.register(this);//华为
+//        VivoRegister.register(this);//vivo
+//        OppoRegister.register(
+//            this,
+//            "a1c1a535e8374971910536f78ca47a7b",
+//            "5f033627d2604168b1f5a5c98850abcc"
+//        );//oppo
     }
 
     /**
@@ -58,7 +128,10 @@ class MyApplicatipn : Application() {
         })
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(object : DefaultRefreshHeaderCreator {
-            override fun createRefreshHeader(context: Context, layout: RefreshLayout): RefreshHeader {
+            override fun createRefreshHeader(
+                context: Context,
+                layout: RefreshLayout
+            ): RefreshHeader {
                 layout.setPrimaryColorsId(R.color.white, android.R.color.black)//全局设置主题颜色
                 return ClassicsHeader(context)//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
             }
@@ -66,7 +139,10 @@ class MyApplicatipn : Application() {
         })
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator(object : DefaultRefreshFooterCreator {
-            override fun createRefreshFooter(context: Context, layout: RefreshLayout): RefreshFooter {
+            override fun createRefreshFooter(
+                context: Context,
+                layout: RefreshLayout
+            ): RefreshFooter {
                 //指定为经典Footer，默认是 BallPulseFooter
                 return ClassicsFooter(context).setDrawableSize(20F)
             }

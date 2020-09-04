@@ -4,13 +4,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
+    <ImageView
+        android:background="@color/white"
+        android:id="@+id/id_top_bar_3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        />
     <LinearLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right">
-
+        <TextView
+            android:id="@+id/id_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自行车"/>
         <RelativeLayout
             android:id="@+id/id_click_information"
             android:layout_width="50dp"
@@ -439,6 +448,7 @@
                     android:background="@color/color_f4f4f4" />
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

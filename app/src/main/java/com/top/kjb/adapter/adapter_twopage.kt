@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.top.kjb.R
+import com.top.kjb.Userabout.LoginActivity
 import com.top.kjb.bean.bean_twopage_item_3he1
 import com.top.kjb.customview.RoundImageView
 import com.top.kjb.tabfragment.fragmentthree_view.fragmentthree_user_center
 import com.top.kjb.tabfragment.fragmenttwo_view.fragmenttwo_detail_quanzi
 import com.top.kjb.tabfragment.fragmenttwo_view.fragmenttwo_detail_xuanliangdian2
+import com.top.kjb.utils.functionClass
 
 /**
  * Created by MaiBenBen on 2019/1/22.
@@ -67,6 +69,11 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         var bean = mData?.get(p1)
         p0.id_RecyclerView_image?.setOnTouchListener(object :View.OnTouchListener{
             override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                if (!functionClass.islogin()) {
+                    var intent = Intent(mycontent, LoginActivity::class.java)
+                    mycontent?.startActivity(intent)
+                    return true
+                }
                 if (p1?.action==MotionEvent.ACTION_UP){
                     if (bean?.textType==1){
                         var intent = Intent(mycontent, fragmenttwo_detail_quanzi::class.java)
@@ -87,6 +94,11 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         })
         p0.big_view?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
+                if (!functionClass.islogin()) {
+                    var intent = Intent(mycontent, LoginActivity::class.java)
+                    mycontent?.startActivity(intent)
+                    return
+                }
                 if (bean?.textType==1){
                     var intent = Intent(mycontent, fragmenttwo_detail_quanzi::class.java)
                     intent.putExtra("id",bean?.id)
@@ -104,6 +116,11 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         })
         p0.id_click_user_info.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
+                if (!functionClass.islogin()) {
+                    var intent = Intent(mycontent, LoginActivity::class.java)
+                    mycontent?.startActivity(intent)
+                    return
+                }
                 var intent = Intent(mycontent, fragmentthree_user_center::class.java)
                 intent.putExtra("userId",bean?.userId)
                 mycontent?.startActivity(intent)

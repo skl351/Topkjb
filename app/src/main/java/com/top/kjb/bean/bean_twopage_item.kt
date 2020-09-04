@@ -22,9 +22,12 @@ class bean_twopage_item_3he1 :baseBean(){
         var type=3
         var likeStatus=false
         var favoriteStatus=false
+        var followStatus=false
         var pic=""
         var gymPic=""
         var distance=""
+        var likeCounts=""
          var picList=ArrayList<String>()
+         var likeHeadImg=ArrayList<String>()
     }
 }

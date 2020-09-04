@@ -71,7 +71,7 @@ class fragmentone_detail : BaseActivity(), View.OnClickListener {
                         id_time_long.text = gymnasium?.businessHours
                         id_years.text = gymnasium?.openYear+"年"
                         id_all_area.text = "总面积"+gymnasium?.area+"m²"
-                        id_all_peoples.text = "容纳"+gymnasium?.area+"人"
+                        id_all_peoples.text = "容纳"+gymnasium?.specificAddress+"人"
                         id_star_view.rating = gymnasium?.userEvaluate!!
                         id_show_score.setText(gymnasium.userEvaluate.toString())
                         id_all_num_comment.setText(response?.body()?.result?.gymUserEvaluateNum.toString())
