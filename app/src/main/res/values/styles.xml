@@ -5,8 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="android:textSize">@dimen/title_size_14</item>
         <item name="android:textColor">@color/color_333333</item>
-<!--        <item name="android:textColorHint">@color/default_texthintColor</item>-->
-<!--        <item name="android:windowBackground">@color/white</item>-->
+        <!--        <item name="android:textColorHint">@color/default_texthintColor</item>-->
+        <!--        <item name="android:windowBackground">@color/white</item>-->
     </style>
     <style name="MyProgressDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@color/white2</item>

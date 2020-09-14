@@ -15,6 +15,7 @@ import com.top.kjb.bean.*
 import com.top.kjb.customview.dialog.selectlocatonitem_dialog
 import com.top.kjb.model.MainModel
 import com.top.kjb.originpack.BaseActivity
+import com.top.kjb.tabfragment.fragmentone_view.fragmentone_place_info
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.functionClass
 import kotlinx.android.synthetic.main.layout_fragmentone_newdetail_view.*
@@ -107,8 +108,12 @@ class fragmentone_newdetail : BaseActivity(), View.OnClickListener {
     override fun init_intent() {
         super.init_intent()
         id = intent.getIntExtra("id", 0)
-        lat = intent.getStringExtra("lat")
-        lng = intent.getStringExtra("lng")
+        try {
+            lat = intent.getStringExtra("lat")
+            lng = intent.getStringExtra("lng")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 
@@ -127,6 +132,7 @@ class fragmentone_newdetail : BaseActivity(), View.OnClickListener {
         id_click_phone.setOnClickListener(this)
         id_location_goto.setOnClickListener(this)
         id_click_back.setOnClickListener(this)
+        id_click_place_info.setOnClickListener(this)
     }
 
     var phone = ""
@@ -134,11 +140,15 @@ class fragmentone_newdetail : BaseActivity(), View.OnClickListener {
     var lng = ""
     override fun onClick(p0: View?) {
         when (p0?.id) {
+            R.id.id_click_place_info -> {
+                return
+                var intent = Intent(this, fragmentone_place_info::class.java)
+                startActivity(intent)
+            }
             R.id.id_click_back -> {
                 onBackPressed()
             }
             R.id.id_location_goto -> {
-                println("sdfsdfsdf " + lat + "," + lng)
                 val dialog = selectlocatonitem_dialog(this)
                 var bean = bean_main_item()
                 bean.lat = lat

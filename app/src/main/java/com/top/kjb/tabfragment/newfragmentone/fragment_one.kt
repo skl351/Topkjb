@@ -1,20 +1,25 @@
 package com.top.kjb.tabfragment.newfragmentone
 
 import android.Manifest
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.app.AlertDialog
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import android.widget.ZoomControls
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.baidu.location.BDLocation
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLng
@@ -24,16 +29,21 @@ import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.enums.PopupAnimation
 import com.top.kjb.MainActivity
 import com.top.kjb.R
+import com.top.kjb.adapter.adapter_searchlist
 import com.top.kjb.bean.Result
 import com.top.kjb.bean.bean_main_item
 import com.top.kjb.bean.bean_type_item
 import com.top.kjb.customview.DrivingRouteOverlay
 import com.top.kjb.customview.dialog.selectlocatonitem_dialog
 import com.top.kjb.customview.dialog.sport_type_dialog
+import com.top.kjb.location.OrientSensor
 import com.top.kjb.model.MainModel
 import com.top.kjb.originpack.BaseFragment
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.Sp
+import com.top.kjb.utils.Sp.status_search_dialog
+import com.top.kjb.utils.Sp.status_show
+import com.top.kjb.utils.Sp.status_show_dialog
 import com.top.kjb.utils.functionClass
 import com.top.kjb.utils.java_util
 import com.yzq.zxinglibrary.android.CaptureActivity
@@ -42,7 +52,7 @@ import per.wsj.library.AndRatingBar
 import retrofit2.Call
 import retrofit2.Response
 
-class fragment_one : BaseFragment(), View.OnClickListener {
+class fragment_one : BaseFragment(), View.OnClickListener, OrientSensor.OrientCallBack {
     val mainModel: MainModel by lazy { MainModel() }
     override fun onClick(p0: View?) {
         when (p0?.id) {
@@ -57,7 +67,6 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                 XPopup.Builder(getContext())
                     .popupAnimation(PopupAnimation.ScrollAlphaFromTop)
                     .isCenterHorizontal(true)
-                    .offsetY(functionClass.getbarHight(activity!!))
                     .asCustom(dialog)
                     .show();
             }
@@ -99,16 +108,46 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                         )
                         return
                     } else {
-                        (activity as MainActivity).init_questlocation()
+                        (activity as MainActivity).init_start()
                     }
                 } else {
-                    (activity as MainActivity).init_questlocation()
+                    (activity as MainActivity).init_start()
                 }
 
             }
             R.id.id_click_search -> {
-                var intent = Intent(activity, SearchActivity::class.java)
-                startActivity(intent)
+                if (status_show) {
+                    hidetop()
+                    status_show = !status_show
+                }
+                if (status_show_dialog) {
+                    hide_bottom_location()
+                    status_show_dialog = !status_show_dialog
+                }
+                if (!status_search_dialog) {
+                    id_RecyclerView_big.visibility = View.VISIBLE
+                    functionClass.setanimvisible_tbottom(id_top_bar_2_big)
+                    status_search_dialog = !status_search_dialog
+                }
+//                var intent = Intent(activity, SearchActivity::class.java)
+//                startActivity(intent)
+            }
+            R.id.id_top_bar_2_big -> {
+
+            }
+            R.id.id_cancel -> {
+                if (status_search_dialog) {
+                    hide_editabout()
+                    status_search_dialog = !status_search_dialog
+                }
+                if (status_show) {
+                    hidetop()
+                } else {
+                    showtop()
+                }
+                status_show = !status_show
+                hide_editabout()
+
             }
         }
     }
@@ -120,6 +159,8 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         id_click_erweima.setOnClickListener(this)
         id_click_location_left_bottom.setOnClickListener(this)
         id_click_search.setOnClickListener(this)
+        id_top_bar_2_big.setOnClickListener(this)
+        id_cancel.setOnClickListener(this)
     }
 
     override fun onCreateView(
@@ -130,20 +171,63 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         return inflater.inflate(R.layout.layout_mainpage, null)
     }
 
-    var status_show = true
-    var status_show_dialog = false
-    override fun init_view() {
-        super.init_view()
+    private fun init_banner() {
+        mainModel.mainbannergetad(functionClass.getToken())
+            .enqueue(object : retrofit2.Callback<Result<ArrayList<String>>> {
+                override fun onFailure(call: Call<Result<ArrayList<String>>>, t: Throwable) {
+                    println("失败" + t.toString())
+                    functionClass.error_open(t.toString())
+                }
 
+                override fun onResponse(
+                    call: Call<Result<ArrayList<String>>>,
+                    response: Response<Result<ArrayList<String>>>
+                ) {
+                    var bean = response?.body()
+                    if ("success".equals(bean?.flag)) {
+                        var list = bean?.result
+                        id_banner.setViewUrls(activity, list, null)
+                    } else {
+                        Toast.makeText(activity, "bannner flag false", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            })
     }
 
-    private fun showtop(idTopBar1Big: LinearLayout?) {
-        functionClass.setanimvisible_tbottom(idTopBar1Big!!)
+
+    override fun init_view() {
+        super.init_view()
+        id_edit_view.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                id_RecyclerView_big.visibility = View.VISIBLE
+            }
+
+        })
+        id_edit_view.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                var text = p0.toString()
+                init_search(text)
+            }
+
+        })
+    }
+
+    open fun showtop() {
+        functionClass.setanimvisible_tbottom(id_top_bar_1_big!!)
         (activity as MainActivity).showbottom()
     }
 
-    private fun hidetop(idTopBar1Big: LinearLayout?) {
-        functionClass.setanimgone_totopy(idTopBar1Big!!)
+    open fun hidetop() {
+        functionClass.setanimgone_totopy(id_top_bar_1_big!!)
         (activity as MainActivity).hidebottom()
     }
 
@@ -153,18 +237,20 @@ class fragment_one : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         id_top_bar_1.layoutParams.height = functionClass.getbarHight(activity!!)
+        id_top_bar_2.layoutParams.height = functionClass.getbarHight(activity!!)
         registerBoradcastReceiver()
         init_view()
         init_refre()
         init_click()
         init_data()
-
+        init_banner()
 
     }
 
     private fun init_refre() {
 
-
+        val layoutmanager = LinearLayoutManager(activity)
+        id_RecyclerView?.layoutManager = layoutmanager
     }
 
     var list_type = ArrayList<bean_type_item>()
@@ -190,17 +276,23 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                             val view = View.inflate(activity, R.layout.layout_type_tab, null)
                             view.findViewById<TextView>(R.id.id_text)
                                 .setText(list.get(i).sportsName)
+                            view.findViewById<TextView>(R.id.id_text).setTextSize(16f)
                             view.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(p0: View?) {
                                     for (z in 0..id_main_tab_group.childCount - 1) {
                                         (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text) as TextView).setTextSize(
-                                            14f
+                                            16f
                                         )
                                         (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text) as TextView).setTypeface(
                                             Typeface.defaultFromStyle(Typeface.NORMAL)
                                         );
+                                        (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text_line)).visibility =
+                                            View.GONE
                                     }
-                                    view.findViewById<TextView>(R.id.id_text).setTextSize(16f)
+
+                                    view.findViewById<TextView>(R.id.id_text).setTextSize(18f)
+                                    view.findViewById<View>(R.id.id_text_line).visibility =
+                                        View.VISIBLE
                                     (id_main_tab_group.getChildAt(i).findViewById<View>(R.id.id_text) as TextView).setTypeface(
                                         Typeface.defaultFromStyle(Typeface.BOLD)
                                     );
@@ -251,28 +343,37 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         mBaiduMap?.isMyLocationEnabled = true
         val locData = MyLocationData.Builder()
             .accuracy(location.radius) // 此处设置开发者获取到的方向信息，顺时针0-360
-//            .direction(location.direction)
+//            .direction(360f)
             .latitude(location.latitude)
             .longitude(location.longitude).build()
         mBaiduMap?.setMyLocationData(locData)
-//        var bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher);
-//        var configuration =
-//            MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, true, bitmap);
-//        mBaiduMap?.setMyLocationConfigeration(configuration);
+
         bmapView.visibility = View.VISIBLE
 
+        // 修改为自定义图层
+        val currentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.icon_location_my_icon)
+        mBaiduMap?.setMyLocationConfiguration(
+            MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.NORMAL,
+                true,
+                currentMarker
+            )
+        )
         mBaiduMap?.setOnMapClickListener(object : BaiduMap.OnMapClickListener {
             override fun onMapClick(p0: LatLng?) {
                 if (status_show) {
-
-                    hidetop(id_top_bar_1_big)
+                    hidetop()
                 } else {
-                    showtop(id_top_bar_1_big)
+                    showtop()
                 }
                 status_show = !status_show
                 if (status_show_dialog) {
                     hide_bottom_location()
                     status_show_dialog = !status_show_dialog
+                }
+                if (status_search_dialog) {
+                    hide_editabout()
+                    status_search_dialog = !status_search_dialog
                 }
             }
 
@@ -281,7 +382,17 @@ class fragment_one : BaseFragment(), View.OnClickListener {
             }
 
         })
+
+
+        // 注册方向监听
+        //        }
+// 注册方向监听
+        myOrientationListener = OrientSensor(activity, this)
+        myOrientationListener.registerOrient()
     }
+
+    var myCurrentX = 0f
+    lateinit var myOrientationListener: OrientSensor
 
     private fun registerBoradcastReceiver() {
         val intentFilter = IntentFilter()
@@ -291,6 +402,7 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         activity?.registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
+    lateinit var new_location: BDLocation
     var flag_first = false
     var new_lat = "0"//当前
     var new_lng = "0"//当前
@@ -304,14 +416,18 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                     for (z in 0..id_main_tab_group.childCount - 1) {
                         if (list_type.get(z).sportsName.equals(str)) {
                             (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text) as TextView).setTextSize(
-                                16f
+                                18f
                             )
                             (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text) as TextView).setTypeface(
                                 Typeface.defaultFromStyle(Typeface.BOLD)
                             )
+                            (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text_line)).visibility =
+                                View.VISIBLE
                         } else {
+                            (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text_line)).visibility =
+                                View.GONE
                             (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text) as TextView).setTextSize(
-                                14f
+                                16f
                             )
                             (id_main_tab_group.getChildAt(z).findViewById<View>(R.id.id_text) as TextView).setTypeface(
                                 Typeface.defaultFromStyle(Typeface.NORMAL)
@@ -324,6 +440,8 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                     init_getplacelist(str)
                 }
                 Sp.searchback -> {
+                    hide_editabout_rey()
+
                     var list_s = intent.getSerializableExtra("list") as ArrayList<String>
                     var item = intent.getParcelableExtra<bean_main_item>("bean_search_item")
                     item.businessHours = list_s
@@ -332,7 +450,41 @@ class fragment_one : BaseFragment(), View.OnClickListener {
 
                 }
                 Sp.location_send -> {
+                    var flag = intent.getBooleanExtra("flag", false)
+                    if (!flag) {
+                        if (functionClass.getetworkstate(activity!!).equals("G")) {
+                            AlertDialog.Builder(activity)
+                                .setTitle("定位不准确，请打开定位")
+//                    .setMessage(R.string.gpsNotifyMsg) // 拒绝, 退出应用
+                                .setNegativeButton("取消",
+                                    object : DialogInterface.OnClickListener {
+                                        override fun onClick(p0: DialogInterface?, p1: Int) {
+                                            p0?.dismiss()
+                                        }
+
+
+                                    })
+                                .setPositiveButton(
+                                    "确定",
+                                    object : DialogInterface.OnClickListener {
+                                        override fun onClick(p0: DialogInterface?, p1: Int) {
+                                            val intent =
+                                                Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                                            activity?.startActivityForResult(intent, Sp.REQUEST_GPS)
+                                        }
+
+                                    })
+                                .setCancelable(false)
+                                .show()
+                        } else {
+                            Toast.makeText(activity, "定位失败，建议打开gps并重新定位", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+
+
                     var location = intent.getParcelableExtra<BDLocation>("locationinfo")
+                    new_location = location
                     new_lat = location.latitude.toString()
                     new_lng = location.longitude.toString()
                     var locationplace = location.district
@@ -367,7 +519,7 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         mBaiduMap?.setMapStatus(mapStatusUpdate)
         val locData = MyLocationData.Builder()
             .accuracy(location.radius) // 此处设置开发者获取到的方向信息，顺时针0-360
-//            .direction(location.direction)
+//            .direction(360f)
             .latitude(location.latitude)
             .longitude(location.longitude).build()
         mBaiduMap?.setMyLocationData(locData)
@@ -386,7 +538,7 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                 BitmapDescriptorFactory.fromBitmap(
                     java_util().getBitmap(
                         activity,
-                        R.mipmap.icon_location
+                        R.mipmap.icon_location_flag
                     )
                 )
             ) // 设置 Marker 覆盖物的图标
@@ -401,7 +553,7 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         var mInfoWindow = InfoWindow(BitmapDescriptorFactory.fromView(view), latLngC, -47, object :
             InfoWindow.OnInfoWindowClickListener {
             override fun onInfoWindowClick() {
-                click_point(latLngC,item)
+                click_point(latLngC, item)
                 mMarkerC.remove()
 
 
@@ -453,7 +605,7 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                     BitmapDescriptorFactory.fromBitmap(
                         java_util().getBitmap(
                             activity,
-                            R.mipmap.icon_location
+                            R.mipmap.icon_location_flag
                         )
                     )
                 ) // 设置 Marker 覆盖物的图标
@@ -478,7 +630,7 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                         val view = View.inflate(activity, R.layout.layout_map_point, null)
                         view.findViewById<TextView>(R.id.id_location_text).setText(list.get(i).name)
                         var mInfoWindow =
-                            InfoWindow(BitmapDescriptorFactory.fromView(view), latLng, -47, object :
+                            InfoWindow(BitmapDescriptorFactory.fromView(view), latLng, -80, object :
                                 InfoWindow.OnInfoWindowClickListener {
                                 override fun onInfoWindowClick() {
                                     click_point(latLng, list.get(i))
@@ -632,8 +784,18 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         (activity as MainActivity).showbottom_location(view)
     }
 
-    private fun hide_bottom_location() {
+    open fun hide_bottom_location() {
         (activity as MainActivity).hidebottom_location()
+    }
+
+    fun hide_editabout() {
+        java_util().hintKeyBoard(activity)
+        functionClass.setanimgone_totopy(id_top_bar_2_big)
+    }
+
+    fun hide_editabout_rey() {
+        java_util().hintKeyBoard(activity)
+        id_RecyclerView_big.visibility = View.GONE
     }
 
     override fun onResume() {
@@ -641,6 +803,10 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         // 在activity执行onResume时必须调用mMapView. onResume ()
         bmapView.onResume()
         super.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     override fun onPause() {
@@ -656,7 +822,7 @@ class fragment_one : BaseFragment(), View.OnClickListener {
         mBaiduMap?.setMyLocationEnabled(false);
         bmapView?.onDestroy();
         super.onDestroy()
-
+        myOrientationListener.unregisterOrient()
     }
 
 
@@ -681,7 +847,10 @@ class fragment_one : BaseFragment(), View.OnClickListener {
                 ) {
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
-
+                        if (bean?.result?.size == 0) {
+                            Show_toast.showText(activity, "没有查到对应场馆")
+                            return
+                        }
                         addmarkers(bean?.result!!)
 
                     } else {
@@ -693,6 +862,67 @@ class fragment_one : BaseFragment(), View.OnClickListener {
             })
 
 
+    }
+
+    lateinit var list_search: ArrayList<bean_main_item>
+    lateinit var adapter_search: adapter_searchlist
+    private fun init_search(text: String) {
+        mainModel.gymnasiumgymLikeSearch(functionClass.getToken(), text)
+            .enqueue(object :
+                retrofit2.Callback<com.top.kjb.bean.Result<ArrayList<bean_main_item>>> {
+                override fun onFailure(
+                    call: Call<com.top.kjb.bean.Result<ArrayList<bean_main_item>>>,
+                    t: Throwable
+                ) {
+                    functionClass.error_open(t.toString())
+                    Show_toast.showText(activity, "查询结果不存在")
+                    id_no_data.visibility = View.VISIBLE
+                    try {
+                        list_search.clear()
+                        adapter_search.notifyDataSetChanged()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onResponse(
+                    call: Call<com.top.kjb.bean.Result<ArrayList<bean_main_item>>>,
+                    response: Response<com.top.kjb.bean.Result<ArrayList<bean_main_item>>>
+                ) {
+                    var bean = response?.body()
+                    if ("success".equals(bean?.flag)) {
+                        list_search = bean?.result!!
+                        if (list_search.size == 0) {
+                            id_no_data.visibility = View.VISIBLE
+                        } else {
+                            id_no_data.visibility = View.GONE
+                        }
+                        adapter_search = adapter_searchlist(activity!!, list_search)
+                        id_RecyclerView.adapter = adapter_search
+
+                    } else {
+                        try {
+                            list_search.clear()
+                            adapter_search.notifyDataSetChanged()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                        id_no_data.visibility = View.VISIBLE
+                    }
+
+                }
+
+            })
+    }
+
+    override fun Orient(orient: Int) {
+//        println("滚动的角度"+orient)
+        val locData = MyLocationData.Builder()
+            .accuracy(new_location.radius) // 此处设置开发者获取到的方向信息，顺时针0-360
+            .direction(orient.toFloat())
+            .latitude(new_location.latitude)
+            .longitude(new_location.longitude).build()
+        mBaiduMap?.setMyLocationData(locData)
     }
 
 

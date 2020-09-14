@@ -58,14 +58,25 @@ interface ApiService {
         @Query("username") username: String,
         @Query("captcha") captcha: String
     ): Call<Result<beanuserlogin>>
+
     /**
      * 更换手机号
      */
-    @GET("user/updateUserTel")
+    @POST("user/updateUserTel")
     fun userupdateUserTel(
         @Header("x-auth-token") token: String,
         @Query("tel") tel: String
     ): Call<Result<beanuserlogin>>
+
+    /**
+     * 验证码正确
+     */
+    @POST("captcha/checkSMS")
+    fun captchacheckSMS(
+        @Header("x-auth-token") token: String,
+        @Query("tel") tel: String,
+        @Query("captcha") captcha: String
+    ): Call<Result<String>>
 
     /**
      * 首页banner
@@ -506,6 +517,14 @@ interface ApiService {
 
     /**
      * 根据id找场馆详情
+     */
+    @POST("violations/insertViolations")
+    fun violationsinsertViolations(
+        @Header("x-auth-token") token: String,
+        @Query("coachID") coachID: Int
+    ): Call<Result<bean_coach_item>>
+    /**
+     * 举报神策
      */
     @POST("coach/selectCoach")
     fun coachselectCoach(

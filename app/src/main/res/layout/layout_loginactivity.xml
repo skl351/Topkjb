@@ -42,12 +42,12 @@
                         android:textSize="20sp" />
 
                     <ImageView
-                        android:visibility="gone"
                         android:id="@+id/id_yzm_line"
                         android:layout_width="30dp"
                         android:layout_height="3dp"
                         android:layout_marginTop="3dp"
-                        android:background="@color/black" />
+                        android:background="@color/black"
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -69,9 +69,9 @@
                     android:textSize="@dimen/title_size_16" />
 
                 <ImageView
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
                     android:background="@color/color_f4f4f4" />
             </RelativeLayout>
 
@@ -88,33 +88,33 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:inputType="number"
                         android:id="@+id/id_yzm_edit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="请输入6位验证码"
+                        android:inputType="number"
                         android:maxLength="6"
                         android:textSize="@dimen/title_size_16" />
 
                     <TextView
-                        android:layout_alignParentRight="true"
-                        android:gravity="center"
                         android:id="@+id/id_click_send_sms"
                         android:layout_width="100dp"
                         android:layout_height="39dp"
+                        android:layout_alignParentRight="true"
                         android:background="@drawable/back_90cir_1cbe6f"
+                        android:gravity="center"
                         android:text="发送验证码"
                         android:textColor="@color/white"
                         android:textSize="@dimen/title_size_14" />
+
                     <ImageView
-                        android:layout_alignParentBottom="true"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
                         android:background="@color/color_f4f4f4" />
                 </RelativeLayout>
-
 
 
                 <TextView
@@ -142,6 +142,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/id_show_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

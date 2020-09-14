@@ -78,7 +78,7 @@ public class DrivingRouteOverlay extends OverlayManager {
                             .icon(BitmapDescriptorFactory.fromBitmap(
                                     new java_util().getBitmap(
                                             MyApplicatipn.Companion.getA(),
-                                            R.mipmap.icon_location
+                                            R.mipmap.icon_location_flag
                                     )
                             ))
                             .zIndex(10));

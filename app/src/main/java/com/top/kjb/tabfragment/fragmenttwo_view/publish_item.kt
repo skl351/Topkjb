@@ -120,6 +120,8 @@ class publish_item : BaseActivity(), View.OnClickListener {
             .enqueue(object : retrofit2.Callback<Result<bean_qiniu_token>> {
                 override fun onFailure(call: Call<Result<bean_qiniu_token>>, t: Throwable) {
                     functionClass.error_open(t.toString())
+                    id_click_publish.isEnabled = true
+
                 }
 
                 override fun onResponse(
@@ -213,6 +215,7 @@ class publish_item : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.id_click_publish -> {
+                id_click_publish.isEnabled = false
                 pubilsh_zhiqian()
             }
             R.id.id_click_select_place -> {
@@ -315,6 +318,7 @@ class publish_item : BaseActivity(), View.OnClickListener {
 
         if (text.length == 0 && pic.equals("")) {
             Show_toast.showText(this@publish_item, "发表内容不能为空")
+            id_click_publish.isEnabled = false
             return
         }
         var userId = functionClass.getUserId()
@@ -329,6 +333,7 @@ class publish_item : BaseActivity(), View.OnClickListener {
             .enqueue(object : retrofit2.Callback<Result<String>> {
                 override fun onFailure(call: Call<Result<String>>, t: Throwable) {
                     functionClass.error_open(t.toString())
+                    id_click_publish.isEnabled = false
                 }
 
                 override fun onResponse(
@@ -344,7 +349,9 @@ class publish_item : BaseActivity(), View.OnClickListener {
                         finish()
                     } else {
                         Show_toast.showText(this@publish_item, "发表失败")
+                        finish()
                     }
+
                 }
 
             })

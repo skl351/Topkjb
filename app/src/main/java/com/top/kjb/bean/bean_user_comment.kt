@@ -8,6 +8,7 @@ class bean_user_comment : baseBean() {
 
     class bean_user_comment {
         var id = 0
+        var userId = 0
         var commentsText = ""
         var username = ""
         var parentUserName = ""

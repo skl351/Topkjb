@@ -34,7 +34,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     override fun init_view() {
         super.init_view()
-        var a=object : TextWatcher {
+        var a = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
             }
@@ -73,28 +73,29 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         id_top.findViewById<View>(R.id.id_back).setOnClickListener(this)
     }
 
-    var flag_60=59
-    var handler_60=object :Handler(){
+    var flag_60 = 59
+    var handler_60 = object : Handler() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
-            if (flag_60==1){
+            if (flag_60 == 1) {
                 id_click_send_sms.setText("发送验证码")
-            }else{
+            } else {
                 id_click_send_sms.setText(flag_60.toString())
                 flag_60--
-                sendEmptyMessageDelayed(0,1000)
+                sendEmptyMessageDelayed(0, 1000)
             }
 
         }
     }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.id_click_login -> {
                 init_login()
             }
             R.id.id_click_send_sms -> {
-                if(id_phone_edit.text.toString().length!=11){
-                    Show_toast.showText(this,"手机号码不正确")
+                if (id_phone_edit.text.toString().length != 11) {
+                    Show_toast.showText(this, "手机号码不正确")
                     return
                 }
                 handler_60.sendEmptyMessage(0)
@@ -123,7 +124,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             .enqueue(object : retrofit2.Callback<Result<beanuserlogin>> {
                 override fun onFailure(call: Call<Result<beanuserlogin>>, t: Throwable) {
                     println("失败" + t.toString())
-                    Show_toast.showText(this@LoginActivity,"验证码错误")
+                    Show_toast.showText(this@LoginActivity, "验证码错误")
                 }
 
                 override fun onResponse(
@@ -138,9 +139,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                         functionClass.setUserId(bean?.result?.user?.id!!)
                         functionClass.setUsername(bean?.result?.user?.username.toString())
                         functionClass.setmotto(bean?.result?.user?.motto.toString())
+                        functionClass.setmotto(bean?.result?.user?.motto.toString())
                         functionClass.setHeadImg(bean?.result?.user?.headImg.toString())
+                        functionClass.settel(bean?.result?.user?.tel.toString())
                         Show_toast.showText(this@LoginActivity, "登录成功")
-                        var intent=Intent(Sp.loginoutsuccess)
+                        var intent = Intent(Sp.loginoutsuccess)
                         sendBroadcast(intent)
                         finish()
 

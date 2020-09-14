@@ -67,7 +67,6 @@ class adapter_searchlist : RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 intent.putExtra("bean_search_item", mData?.get(p1))
                 intent.putExtra("list",mData?.get(p1)?.businessHours)
                 mycontent?.sendBroadcast(intent)
-                (mycontent as BaseActivity).finish()
             }
 
         })

@@ -15,6 +15,7 @@ import com.top.kjb.bean.bean_attention_fans
 import com.top.kjb.bean.bean_main_item
 import com.top.kjb.customview.RoundImageView
 import com.top.kjb.tabfragment.fragmentone_view.fragmentone_detail
+import com.top.kjb.utils.Sp
 
 /**
  * Created by MaiBenBen on 2019/1/22.
@@ -63,7 +64,24 @@ class adapter_user_attention_fans : RecyclerView.Adapter<RecyclerView.ViewHolder
         p0.id_name.setText(bean?.nickName)
         p0.id_motto.setText(bean?.motto)
         ImageLoader.getInstance().displayImage(bean?.imgUrl, p0.id_head)
+        if (bean?.mutualFollowState == 1) {
+            p0.id_attent_text.setText("已关注")
+            p0.id_attent_text.setTextColor(mycontent?.getColor(R.color.color_1cbe6f)!!)
+            p0.id_attent_text.isSelected = true
+        } else {
 
+            p0.id_attent_text.setTextColor(mycontent?.getColor(R.color.color_a4a4a4)!!)
+            p0.id_attent_text.isSelected = false
+            p0.id_attent_text.setText("关注")
+        }
+        p0.id_attent_text.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                var intent = Intent(Sp.attent_goto)
+                intent.putExtra("userid",bean?.fansID)
+                mycontent?.sendBroadcast(intent)
+            }
+
+        })
     }
 
     class ItemViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
@@ -81,12 +99,14 @@ class adapter_user_attention_fans : RecyclerView.Adapter<RecyclerView.ViewHolder
         lateinit var id_head: RoundImageView
         lateinit var id_name: TextView
         lateinit var id_motto: TextView
+        lateinit var id_attent_text: TextView
 
         constructor(itemView: View) : super(itemView) {
 
+            id_attent_text = itemView.findViewById(R.id.id_attent_text)
             id_name = itemView.findViewById(R.id.id_name)
             id_head = itemView.findViewById(R.id.id_head)
-            id_motto=itemView.findViewById(R.id.id_motto)
+            id_motto = itemView.findViewById(R.id.id_motto)
 //            id_name=itemView.findViewById(R.id.id_name)
 //            id_summary=itemView.findViewById(R.id.id_summary)
 //            id_show_score=itemView.findViewById(R.id.id_show_score)

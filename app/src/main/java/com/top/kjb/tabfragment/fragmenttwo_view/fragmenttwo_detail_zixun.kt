@@ -231,13 +231,14 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
                 if ("success".equals(bean?.flag)) {
                     id_text.setText(bean?.result?.text)
                     var pic = bean?.result?.pic
-
+                    ImageLoader.getInstance().displayImage(pic, id_big_img)
                     id_time.setText(
                         functionClass.getTime_ms(
                             bean?.result?.startTime.toString(),
                             "yyyy-MM-dd hh:mm"
                         )
                     )
+                    top_text.setText(bean?.result?.title)
                     id_readTimes.text = bean?.result?.readTimes + "人阅读"
                     if (bean?.result?.likeStatus!!) {
                         like_check = 1

@@ -19,6 +19,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnItemClickListener;
 import com.luck.picture.lib.tools.DateUtils;
 import com.top.kjb.R;
+import com.top.kjb.customview.roundimage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -89,8 +90,8 @@ public class GridImageAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView mImg;
-        ImageView mIvDel;
+        roundimage mImg;
+        View mIvDel;
         TextView tvDuration;
 
         public ViewHolder(View view) {

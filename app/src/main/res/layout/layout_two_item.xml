@@ -40,6 +40,7 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:textSize="@dimen/title_size_16"
                         android:id="@+id/id_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -58,19 +59,21 @@
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="@color/color_a4a4a4"
-                        android:textSize="@dimen/title_size_12" />
+                        android:textSize="@dimen/title_size_14" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 
         <TextView
+            android:textSize="@dimen/title_size_16"
             android:id="@+id/id_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:lineSpacingExtra="6dp"
             android:maxLines="3"
-            android:text=""
+            android:ellipsize="end"
+            android:text="好"
             android:textColor="@color/color_5c5c5c" />
 
         <LinearLayout

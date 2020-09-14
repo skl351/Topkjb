@@ -19,6 +19,7 @@ import com.top.kjb.adapter.adapter_user_comment2;
 import com.top.kjb.adapter.adapter_user_comment_huifu;
 import com.top.kjb.bean.Result;
 import com.top.kjb.bean.bean_user_comment;
+import com.top.kjb.model.ThreeModel;
 import com.top.kjb.model.TwoModel;
 import com.top.kjb.utils.Show_toast;
 import com.top.kjb.utils.Sp;
@@ -48,14 +49,16 @@ public class huifu_bottom extends BottomPopupView {
     TextView id_username;
     TextView id_time;
     TextView id_use_commit_text;
+    TextView id_click_attion;
     RecyclerView id_RecyclerView;
 
     @Override
     protected void onCreate() {
         super.onCreate();
-
+        threeModel=new ThreeModel();
         registerBoradcastReceiver();
         id_RecyclerView = findViewById(R.id.id_RecyclerView);
+        id_click_attion = findViewById(R.id.id_click_attion);
         id_click_big_view = findViewById(R.id.id_click_big_view);
         id_head_img = findViewById(R.id.id_head_img);
         id_username = findViewById(R.id.id_username);
@@ -70,6 +73,13 @@ public class huifu_bottom extends BottomPopupView {
         id_username.setText(bean_main.getUsername());
         id_time.setText(functionClass.INSTANCE.getTime_ms(bean_main.getStartTime().toString(), "yyyy-MM-dd hh:mm"));
         id_use_commit_text.setText(bean_main.getCommentsText());
+
+//        if (bean_main.getUserId() == functionClass.INSTANCE.getUserId()) {
+//
+//            id_click_attion.setVisibility(View.GONE);
+//        } else {
+//            id_click_attion.setVisibility(View.VISIBLE);
+//        }
         switch (textType) {
             case 1:
                 quanzi();
@@ -95,7 +105,7 @@ public class huifu_bottom extends BottomPopupView {
                 dismiss();
             }
         });
-
+//        id_click_attion.setOnClickListener();
     }
 
     private void registerBoradcastReceiver() {
@@ -105,11 +115,11 @@ public class huifu_bottom extends BottomPopupView {
         getContext().registerReceiver(receiver, intentFilter);
     }
 
-    BroadcastReceiver receiver=new BroadcastReceiver(){
+    BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (Sp.INSTANCE.getHuifudimess().equals(intent.getAction() )){
+            if (Sp.INSTANCE.getHuifudimess().equals(intent.getAction())) {
                 dismiss();
             }
         }
@@ -222,4 +232,8 @@ public class huifu_bottom extends BottomPopupView {
     public void settexttype(int textType) {
         this.textType = textType;
     }
+
+    ThreeModel threeModel;
+
+
 }

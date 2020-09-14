@@ -14,8 +14,12 @@ class bean_twopage_item_3he1 :baseBean(){
         var gymDescribe=""
         var startTime=""
         var readTimes=""
+        var title=""
         var gymnasiumId=0
         var userScore=0f
+        var comprehensiveScore=0f
+        var lat=""
+        var lng=""
         var id=0
         var userId=0
         var textType=0
@@ -25,6 +29,7 @@ class bean_twopage_item_3he1 :baseBean(){
         var followStatus=false
         var pic=""
         var gymPic=""
+        var gymHeadImg=""
         var distance=""
         var likeCounts=""
          var picList=ArrayList<String>()

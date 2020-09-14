@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    tool:ignore="LockedOrientationActivity"
     package="com.top.kjb">
     <!--步数传感器-->
     <!-- 协处理器计步权限 -->
@@ -55,72 +57,103 @@
         </activity>
         <activity
             android:name=".Userabout.LoginActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask" />
         <activity
             android:name=".Userabout.Forgetpassword"
+            android:screenOrientation="portrait"
+            android:launchMode="standard" />
+        <activity
+            android:name=".Userabout.updataphoneActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="standard" />
+        <activity
+            android:name=".Userabout.updataphoneActivity2"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentone_view.fragmentone_detail"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.fragmentthree_user_center"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentone_view.user_comment_list"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.Mysetting"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.Myselfinfo"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.vip.top_vip"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentone_view.fragmentone_place_info"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.fragmentthree_cikajilu"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail_xuanliangdian2"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail_zixun"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.userinfo.mysettingactivity.xieyiAndtiaokuan"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.userinfo.mysettingactivity.informationAndtixing"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.Information"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.orderlist.my_order_list"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.newfragmentone.fragmentone_newdetail"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.Mysafety"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.publish_item"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.newfragmentone.coach_detail"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail_quanzi"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.fragmentthree_view.fragmentthree_attention"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
         <activity
             android:name=".tabfragment.newfragmentone.SearchActivity"
+            android:screenOrientation="portrait"
             android:launchMode="standard" />
 
 

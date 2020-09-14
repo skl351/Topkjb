@@ -34,8 +34,9 @@ class updataphoneActivity : BaseActivity(), View.OnClickListener {
 
     override fun init_view() {
         super.init_view()
-        id_click_yzm_text.setText("更换手机号")
+        id_click_yzm_text.setText("当前手机号")
         id_click_login.setText("确定")
+        id_show_login.visibility=View.GONE
         var a = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
@@ -121,37 +122,34 @@ class updataphoneActivity : BaseActivity(), View.OnClickListener {
     fun init_login() {
         var phone = id_phone_edit.text.toString()
         var yzm = id_yzm_edit.text.toString()
-
-        loginModel.userupdateUserTel(phone, yzm)
-            .enqueue(object : retrofit2.Callback<Result<beanuserlogin>> {
-                override fun onFailure(call: Call<Result<beanuserlogin>>, t: Throwable) {
+        loginModel.captchacheckSMS(functionClass.getToken(), phone, yzm)
+            .enqueue(object : retrofit2.Callback<Result<String>> {
+                override fun onFailure(call: Call<Result<String>>, t: Throwable) {
                     println("失败" + t.toString())
                     Show_toast.showText(this@updataphoneActivity, "验证码错误")
                 }
 
                 override fun onResponse(
-                    call: Call<Result<beanuserlogin>>,
-                    response: Response<Result<beanuserlogin>>
+                    call: Call<Result<String>>,
+                    response: Response<Result<String>>
                 ) {
-                    println("登录成功" + response?.body()?.result)
+                    println("验证成功" + response?.body()?.result)
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
 
-                        functionClass.setToken(bean?.result?.token.toString())
-                        functionClass.setUserId(bean?.result?.user?.id!!)
-                        functionClass.setUsername(bean?.result?.user?.username.toString())
-                        functionClass.setmotto(bean?.result?.user?.motto.toString())
-                        functionClass.setHeadImg(bean?.result?.user?.headImg.toString())
-                        Show_toast.showText(this@updataphoneActivity, "修改成功")
+                        var intent =
+                            Intent(this@updataphoneActivity, updataphoneActivity2::class.java)
+                        startActivity(intent)
                         finish()
 
                     } else {
-                        Show_toast.showText(this@updataphoneActivity, "修改失败")
+                        Show_toast.showText(this@updataphoneActivity, "验证失败")
 
                     }
                 }
 
             })
+
     }
 
     private fun init_sendmsm() {

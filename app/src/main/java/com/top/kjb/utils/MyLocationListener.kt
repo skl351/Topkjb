@@ -1,11 +1,16 @@
 package com.top.kjb.utils
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
+import android.provider.Settings
+import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.baidu.location.BDAbstractLocationListener
 import com.baidu.location.BDLocation
-import com.baidu.mapapi.map.MyLocationData
 import com.top.kjb.MyApplicatipn
+import com.top.kjb.R
 
 
 class MyLocationListener : BDAbstractLocationListener() {
@@ -47,12 +52,22 @@ class MyLocationListener : BDAbstractLocationListener() {
         if (errorCode == 161 || errorCode == 61) {
             var intent = Intent(Sp.location_send)
             intent.putExtra("locationinfo", location)
+            intent.putExtra("flag",true)
             MyApplicatipn.a?.sendBroadcast(intent)
 
 
             //得到后
         } else {
-            Toast.makeText(MyApplicatipn.a, "定位失败", Toast.LENGTH_SHORT).show()
+
+            var lo = BDLocation()
+            lo.latitude = 30.194645
+            lo.longitude = 121.267968
+            var intent = Intent(Sp.location_send)
+            intent.putExtra("flag",false)
+            intent.putExtra("locationinfo", lo)
+            MyApplicatipn.a?.sendBroadcast(intent)
+
+
         }
 
     }

@@ -110,6 +110,7 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
         id_back.setOnClickListener(this)
         id_edit_ziliao.setOnClickListener(this)
         id_back_image.setOnClickListener(this)
+        id_click_attion.setOnClickListener(this)
     }
 
     override fun init_view() {
@@ -146,6 +147,7 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
         })
     }
 
+    var followStatus = false
     val threeModel: ThreeModel by lazy { ThreeModel() }
     private fun init_data() {
         threeModel.usergetUserCenter(functionClass.getToken(), userId)
@@ -166,8 +168,23 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
                         id_fansNum.setText(bean?.result?.fansNum.toString())
                         id_followNum.setText(bean?.result?.followNum.toString())
                         id_user_summary.setText(bean?.result?.motto)
+                        followStatus = bean?.result?.followStatus!!
                         ImageLoader.getInstance()
                             .displayImage(bean?.result?.dynamicBackground, id_backimage)
+
+                        if (followStatus) {
+                            id_click_attion.setTextColor(resources.getColor(R.color.color_1cbe6f))
+                            id_click_attion.background =
+                                resources.getDrawable(R.drawable.check_attention)
+                            id_click_attion.isSelected = true
+
+
+                        } else {
+                            id_click_attion.background =
+                                resources.getDrawable(R.drawable.check_attention2)
+                            id_click_attion.isSelected = false
+                            id_click_attion.setTextColor(resources.getColor(R.color.white))
+                        }
                     }
                 }
 
@@ -282,12 +299,15 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.id_back_image -> {
-                var bottom = upcenterimage_bottom(this)
-                XPopup.Builder(this)
-                    .hasShadowBg(true)
-                    .atView(id_back_image)
-                    .asCustom(bottom)
-                    .show()
+                if (userId == functionClass.getUserId()) {
+                    var bottom = upcenterimage_bottom(this)
+                    XPopup.Builder(this)
+                        .hasShadowBg(true)
+                        .atView(id_back_image)
+                        .asCustom(bottom)
+                        .show()
+                }
+
             }
             R.id.id_edit_ziliao -> {
                 var intent = Intent(this, Myselfinfo::class.java)
@@ -295,6 +315,9 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
             }
             R.id.id_back -> {
                 onBackPressed()
+            }
+            R.id.id_click_attion -> {
+                guanzhuto()
             }
         }
     }
@@ -332,7 +355,7 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
                                     p2: JSONObject?
                                 ) {
                                     println("=====" + p0 + "," + p1 + "," + p2)
-                                    image_no =Sp.qiiu + p0.toString()
+                                    image_no = Sp.qiiu + p0.toString()
                                     init_save()
                                 }
 
@@ -352,8 +375,8 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
         super.onDestroy()
         unregisterReceiver(mBroadcastReceiver)
     }
-    private fun init_save() {
 
+    private fun init_save() {
 
 
         threeModel.userupdateDynamicBackground(functionClass.getToken(), image_no)
@@ -372,6 +395,49 @@ class fragmentthree_user_center : BaseActivity(), View.OnClickListener {
                         init_data()
                     } else {
                         Show_toast.showText(this@fragmentthree_user_center, "更新失败")
+                    }
+                }
+
+            })
+    }
+
+    private fun guanzhuto() {
+        threeModel.fansbecome_cancel_fans(
+            functionClass.getToken(),
+            functionClass.getUserId(),
+            userId
+        )
+            .enqueue(object : retrofit2.Callback<Result<String>> {
+                override fun onFailure(call: Call<Result<String>>, t: Throwable) {
+                    id_click_attion.isEnabled = true
+                }
+
+                override fun onResponse(
+                    call: Call<Result<String>>,
+                    response: Response<Result<String>>
+                ) {
+                    var intent = Intent(Sp.attent_gotoed)
+                    sendBroadcast(intent)
+                    id_click_attion.isEnabled = true
+                    var bean = response?.body()
+                    if ("success".equals(bean?.flag)) {
+                        if (followStatus) {
+                            id_click_attion.background =
+                                resources.getDrawable(R.drawable.check_attention2)
+                            id_click_attion.isSelected = false
+                            id_click_attion.setTextColor(resources.getColor(R.color.white))
+
+                        } else {
+                            id_click_attion.setTextColor(resources.getColor(R.color.color_1cbe6f))
+                            id_click_attion.background =
+                                resources.getDrawable(R.drawable.check_attention)
+                            id_click_attion.isSelected = true
+                        }
+                        followStatus = !followStatus
+
+                        Show_toast.showText(this@fragmentthree_user_center, bean?.result)
+                    } else {
+                        Show_toast.showText(this@fragmentthree_user_center, "关注失败")
                     }
                 }
 

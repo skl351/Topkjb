@@ -8,7 +8,12 @@ object Sp {
     val REQUEST_CODE_Location2=203
     val REQUEST_CODE_SCAN=201
     val REQUEST_CODE_camera=202
+    val REQUEST_GPS=204
 
+
+    var status_show = true//顶部和底部
+    var status_show_dialog = false//定位info显示
+    var status_search_dialog = false//定位info显示
     /**
      *umeng 相关key
      */
@@ -29,4 +34,7 @@ object Sp {
     val select_type="com.topkjb.select_type"
     val sexselect="com.topkjb.sexselect"
     val curstep_num="com.topkjb.curstep_num"
+    val attent_goto="com.topkjb.attent_goto"
+    val attent_gotoed="com.topkjb.attent_gotoed"
+    val jubaoinfo="com.topkjb.jubaoinfo"
 }

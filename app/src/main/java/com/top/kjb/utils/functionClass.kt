@@ -1,6 +1,7 @@
 package com.top.kjb.utils
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
@@ -31,6 +32,7 @@ object functionClass {
     fun setcurStep(date: String, step: Int) {
         SharedPreferenceUtils.save("step" + date, step)
     }
+
     //当前第一次
     fun getcurStep(date: String): Int {
         return SharedPreferenceUtils.getInt("step" + date, 0)
@@ -83,6 +85,14 @@ object functionClass {
 
     fun getmotto(): String {
         return SharedPreferenceUtils.getString("motto", "")
+    }
+
+    fun settel(tel: String) {
+        SharedPreferenceUtils.save("tel", tel)
+    }
+
+    fun gettel(): String {
+        return SharedPreferenceUtils.getString("tel", "")
     }
 
 
@@ -240,5 +250,20 @@ object functionClass {
         view.visibility = View.GONE
     }
 
+    //
+    fun getetworkstate(context: Context): String {
+        var strNetworkType = ""
+        val connManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager // 获取网络服务
+        val networkInfo = connManager.activeNetworkInfo
+        if (networkInfo != null && networkInfo.isAvailable) {
+            if (networkInfo.type === ConnectivityManager.TYPE_MOBILE) {
+                strNetworkType = "G"
+            } else if (networkInfo.type === ConnectivityManager.TYPE_WIFI) {
+                strNetworkType = "WIFI"
+            }
+        }
+        return strNetworkType
+    }
 
 }

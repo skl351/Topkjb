@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <com.top.kjb.customview.Topnavigationbar
+        android:id="@+id/id_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:top_text="账号与安全" />

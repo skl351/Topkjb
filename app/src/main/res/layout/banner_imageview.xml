@@ -4,10 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/id_image_big"
     android:padding="10dp"
+    android:background="@color/white2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <com.top.kjb.customview.roundimage
-        app:round="15dp"
+        app:round="10dp"
         android:id="@+id/id_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

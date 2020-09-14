@@ -11,6 +11,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,11 +24,14 @@ import com.gyf.immersionbar.ImmersionBar
 import com.top.kjb.originpack.BaseActivity
 import com.top.kjb.originpack.BaseFragment
 import com.top.kjb.tabfragment.fragemnt_two
+import com.top.kjb.tabfragment.fragemnt_two_communication
 import com.top.kjb.tabfragment.fragment_three
 import com.top.kjb.tabfragment.newfragmentone.fragment_one
 import com.top.kjb.utils.MyLocationListener
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.Sp
+import com.top.kjb.utils.Sp.status_show
+import com.top.kjb.utils.Sp.status_show_dialog
 import com.top.kjb.utils.functionClass
 import com.yzq.zxinglibrary.android.CaptureActivity
 import com.yzq.zxinglibrary.common.Constant
@@ -49,28 +53,58 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         init_golocation()
     }
 
+    var exitTime: Long = 0
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event?.getAction() == KeyEvent.ACTION_DOWN) {
 
+            if (!status_show || status_show_dialog) {
+                if (!status_show) {
+                    (bottom_tabist?.get(0) as fragment_one).showtop()
+                    status_show = !status_show
+                }
+                if (status_show_dialog) {
+                    (bottom_tabist?.get(0) as fragment_one).hide_bottom_location()
+                    status_show_dialog = !status_show_dialog
+                }
 
+                return true
+            }
 
+//            var home = Intent(Intent.ACTION_MAIN);
+//            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            home.addCategory(Intent.CATEGORY_HOME);
+//            startActivity(home);
 
-    fun init_questlocation() {
-        mLocationClient?.requestLocation()
+            if (System.currentTimeMillis() - exitTime > 2000) {
+                Show_toast.showText(this, "再按一次退出程序");
+                exitTime = System.currentTimeMillis()
+            } else {
+                onBackPressed()
+            }
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
+
     fun init_start() {
-        mLocationClient?.start()
+        if (mLocationClient?.isStarted!!) {
+            mLocationClient?.requestLocation()
+        } else {
+            mLocationClient?.start()
+        }
     }
 
 
     open fun init_golocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val checkCallPhonePermission = ContextCompat.checkSelfPermission(
-                this!!,
+                this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
             if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
-                    this!!,
+                    this,
                     arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
                     Sp.REQUEST_CODE_Location
                 )
@@ -125,7 +159,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     private fun init_viewpage() {
         id_icon_1.isSelected = true
         id_text_1.isSelected = true
-        myViewpage.offscreenPageLimit = 2
+        myViewpage.offscreenPageLimit = 3
         myViewpage.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return bottom_tabist?.get(position)!!
@@ -152,6 +186,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                         clickthree()
 
                     }
+                    3 -> {
+
+                        clickfour()
+
+                    }
                 }
             }
         })
@@ -163,9 +202,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         bottom_tabist = ArrayList()
         val fragment1 = fragment_one()
         val fragment2 = fragemnt_two()
+        val fragment2_communication = fragemnt_two_communication()
         val fragment3 = fragment_three()
         bottom_tabist?.add(fragment1)
         bottom_tabist?.add(fragment2)
+        bottom_tabist?.add(fragment2_communication)
         bottom_tabist?.add(fragment3)
     }
 
@@ -173,10 +214,12 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         currpage = 0
         id_icon_1.isSelected = true
         id_icon_2.isSelected = false
+        id_icon_2_2.isSelected = false
         id_icon_3.isSelected = false
 
         id_text_1.isSelected = true
         id_text_2.isSelected = false
+        id_text_2_2.isSelected = false
         id_text_3.isSelected = false
     }
 
@@ -184,10 +227,12 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         currpage = 1
         id_icon_1.isSelected = false
         id_icon_2.isSelected = true
+        id_icon_2_2.isSelected = false
         id_icon_3.isSelected = false
 
         id_text_1.isSelected = false
         id_text_2.isSelected = true
+        id_text_2_2.isSelected = false
         id_text_3.isSelected = false
     }
 
@@ -195,10 +240,25 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         currpage = 2
         id_icon_1.isSelected = false
         id_icon_2.isSelected = false
+        id_icon_2_2.isSelected = true
+        id_icon_3.isSelected = false
+
+        id_text_1.isSelected = false
+        id_text_2.isSelected = false
+        id_text_2_2.isSelected = true
+        id_text_3.isSelected = false
+    }
+
+    fun clickfour() {
+        currpage = 3
+        id_icon_1.isSelected = false
+        id_icon_2.isSelected = false
+        id_icon_2_2.isSelected = false
         id_icon_3.isSelected = true
 
         id_text_1.isSelected = false
         id_text_2.isSelected = false
+        id_text_2_2.isSelected = false
         id_text_3.isSelected = true
     }
 
@@ -208,6 +268,8 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         id_click1.setOnClickListener(this)
         id_icon_2.setOnClickListener(this)
         id_click2.setOnClickListener(this)
+        id_click2_2.setOnClickListener(this)
+        id_icon_2_2.setOnClickListener(this)
         id_icon_3.setOnClickListener(this)
         id_click3.setOnClickListener(this)
     }
@@ -220,8 +282,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             R.id.id_icon_2, R.id.id_click2 -> {
                 myViewpage.currentItem = 1
             }
-            R.id.id_icon_3, R.id.id_click3 -> {
+            R.id.id_icon_2_2, R.id.id_click2_2 -> {
                 myViewpage.currentItem = 2
+            }
+            R.id.id_icon_3, R.id.id_click3 -> {
+                myViewpage.currentItem = 3
             }
 
         }
@@ -246,16 +311,16 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 //LocationMode. Device_Sensors：仅使用设备；
         option.setCoorType("BD09ll")
 
-        option.setScanSpan(0)
+//        option.setScanSpan(0)
 
         //可选，设置发起定位请求的间隔，int类型，单位ms
 //如果设置为0，则代表单次定位，即仅定位一次，默认为0
 //如果设置非0，需设置1000ms以上才有效
-        option.isOpenGps = true
+        option.isOpenGps = false
 //可选，设置是否使用gps，默认false
 //使用高精度和仅用设备两种定位模式的，参数必须设置为true
 
-        option.isLocationNotify = true
+//        option.isLocationNotify = true
 //可选，设置是否当GPS有效时按照1S/1次频率输出GPS结果，默认false
 
         option.setIgnoreKillProcess(false)
@@ -283,6 +348,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
 // 扫描二维码/条码回传
         // 扫描二维码/条码回传
         if (requestCode == Sp.REQUEST_CODE_SCAN && resultCode == Activity.RESULT_OK) {
@@ -290,6 +356,11 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                 val content = data.getStringExtra(Constant.CODED_CONTENT)
                 Show_toast.showText(this, "扫描结果为$content")
             }
+        }
+        println("requestCode" + requestCode)
+        if (requestCode == Sp.REQUEST_GPS) {
+            init_start()
+
         }
     }
 
@@ -315,8 +386,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         functionClass.setanimgone_tobottomy(id_locatio_view_bottom)
         id_locatio_view_bottom.removeAllViews()
     }
-
-
 
 
 }

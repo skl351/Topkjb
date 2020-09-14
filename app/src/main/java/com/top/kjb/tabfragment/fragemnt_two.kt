@@ -1,38 +1,29 @@
 package com.top.kjb.tabfragment
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener
+import com.lxj.xpopup.XPopup
 import com.top.kjb.R
 import com.top.kjb.Userabout.LoginActivity
-import com.top.kjb.adapter.adapter_twopage
-import com.top.kjb.adapter.adapter_twopage_zixun
-import com.top.kjb.bean.Result
-import com.top.kjb.bean.bean_twopage_item2
-import com.top.kjb.bean.bean_twopage_item_3he1
 import com.top.kjb.model.TwoModel
 import com.top.kjb.originpack.BaseFragment
+import com.top.kjb.tabfragment.fragmenttwo_view.fragment_two_newlist
 import com.top.kjb.tabfragment.fragmenttwo_view.publish_item
-import com.top.kjb.utils.Show_toast
-import com.top.kjb.utils.Sp
 import com.top.kjb.utils.functionClass
 import kotlinx.android.synthetic.main.layout_fragmentone.id_RecyclerView
 import kotlinx.android.synthetic.main.layout_fragmenttwo.*
-import retrofit2.Call
-import retrofit2.Response
 
 
-class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, OnLoadMoreListener {
+class fragemnt_two : BaseFragment(), View.OnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,137 +35,138 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        id_top_bar_2.layoutParams.height=functionClass.getbarHight(activity!!)
-        registerBoradcastReceiver()
+        id_top_bar_2.layoutParams.height = functionClass.getbarHight(activity!!)
+
         init_click()
         init_refre()
         init_view()
-        init_guanzhu()
+        init_viewpage()
 
     }
 
-    private fun registerBoradcastReceiver() {
-        val intentFilter = IntentFilter()
-        intentFilter.addAction(Sp.publishsuccess)
-        activity?.registerReceiver(mBroadcastReceiver, intentFilter)
+    private fun init_viewpage() {
+        getfragment()
+        init_adapter()
     }
 
-    var mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    var mFragments = ArrayList<Fragment>()
+    var framgent1: Fragment? = null
+    var framgent2: Fragment? = null
+    var framgent3: Fragment? = null
+    var framgent4: Fragment? = null
+    private fun getfragment() {
+        framgent1 = fragment_two_newlist()
+        var Bundle = Bundle()
+        Bundle.putInt("current", 0)
+        framgent1?.arguments = Bundle
+        framgent2 = fragment_two_newlist()
+        var Bundle2 = Bundle()
+        Bundle2.putInt("current", 1)
+        framgent2?.arguments = Bundle2
+        framgent3 = fragment_two_newlist()
+        var Bundle3 = Bundle()
+        Bundle3.putInt("current", 2)
+        framgent3?.arguments = Bundle3
+        framgent4 = fragment_two_newlist()
+        var Bundle4 = Bundle()
+        Bundle4.putInt("current", 3)
+        framgent4?.arguments = Bundle4
+        mFragments.add(framgent1 as Fragment)
+        mFragments.add(framgent2 as Fragment)
+        mFragments.add(framgent3 as Fragment)
+        mFragments.add(framgent4 as Fragment)
+    }
 
-        override fun onReceive(context: Context, intent: Intent) {
-            when (intent.action) {
-                Sp.publishsuccess -> {
-                    when (current_item) {
-                        0 -> {
-                            init_guanzhu()
-                        }
-                        1 -> {
-                            init_xuanliangdian()
-                        }
-                        2 -> {//关注
+    var mAdapter: FragmentPagerAdapter? = null
+    var currentIndex: Int = 0
+    var num_item_page = 4
+    private fun init_adapter() {
+        view_pager_myself.offscreenPageLimit = 4
+        mAdapter = object : FragmentPagerAdapter(activity?.supportFragmentManager!!) {
+            override fun getItem(position: Int): androidx.fragment.app.Fragment {
+                return mFragments.get(position)
+            }
 
-                        }
-                        3 -> {
-                            init_zixun()
-                        }
-                    }
-                }
+            override fun getCount(): Int {
+                return mFragments.size
+            }
+
+
+        }
+        view_pager_myself.adapter = mAdapter
+
+        view_pager_myself.addOnPageChangeListener(object :
+            androidx.viewpager.widget.ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
 
             }
-        }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                if (currentIndex == 0 && position == 0) {//0->1
+                    chagetext(0)
+                    val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
+                    lp.leftMargin =
+                        (positionOffset * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    myImgtag.setLayoutParams(lp)
+                } else if (currentIndex == 1 && position == 0) {//1->0
+                    chagetext(1)
+                    val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
+                    lp.leftMargin =
+                        (-(1 - positionOffset) * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    myImgtag.setLayoutParams(lp)
+                } else if (currentIndex == 1 && position == 1) {//0->1
+                    chagetext(1)
+                    val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
+                    lp.leftMargin =
+                        (positionOffset * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    myImgtag.setLayoutParams(lp)
+                } else if (currentIndex == 2 && position == 1) {//1->0
+                    chagetext(2)
+                    val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
+                    lp.leftMargin =
+                        (-(1 - positionOffset) * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    myImgtag.setLayoutParams(lp)
+                } else if (currentIndex == 2 && position == 2) {//0->1
+                    chagetext(2)
+                    val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
+                    lp.leftMargin =
+                        (positionOffset * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    myImgtag.setLayoutParams(lp)
+                } else if (currentIndex == 3 && position == 2) {//1->0
+                    chagetext(3)
+                    val lp = myImgtag.getLayoutParams() as RelativeLayout.LayoutParams
+                    lp.leftMargin =
+                        (-(1 - positionOffset) * (can_move_view.width.div(num_item_page)) + currentIndex * can_move_view.width.div(
+                            num_item_page
+                        )).toInt() + id_line1.width / 2 - id_line1.width / 6
+                    myImgtag.setLayoutParams(lp)
+                }
+
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                currentIndex = position
+            }
+
+        })
+
     }
 
-    private fun init_guanzhu() {
-        refreshLayout.setNoMoreData(false)
-        currentpage = 1
-        twoModel.userFollowselectUserFollow(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
-                    println("失败" + t.toString())
-                    try {
-                        list_3he1.clear()
-                        adapter.notifyDataSetChanged()
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                    }
-                    try {
-                        list_zixun.clear()
-                        adapter2.notifyDataSetChanged()
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                    }
-                    refreshLayout.finishRefresh()
-                    id_attion_view_back.visibility=View.VISIBLE
-                }
-
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item_3he1>>,
-                    response: Response<Result<bean_twopage_item_3he1>>
-                ) {
-                    println("关注成功" + response?.body()?.result)
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        id_attion_view_back.visibility=View.GONE
-                        list_3he1 = bean?.result?.list!!
-                        adapter = adapter_twopage(activity!!, list_3he1)
-                        id_RecyclerView.adapter = adapter
-                    } else {
-                        Show_toast.showText(activity, "关注list失败")
-
-                    }
-                    refreshLayout.finishRefresh()
-
-                }
-
-            })
-    }
-
-    private fun init_guanzhu2() {
-        currentpage++
-        twoModel.userFollowselectUserFollow(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
-                    println("失败" + t.toString())
-                    try {
-                        list_3he1.clear()
-                        adapter.notifyDataSetChanged()
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                    }
-                    try {
-                        list_zixun.clear()
-                        adapter2.notifyDataSetChanged()
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                    }
-                    refreshLayout.finishLoadMore()
-                    id_attion_view_back.visibility=View.VISIBLE
-                }
-
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item_3he1>>,
-                    response: Response<Result<bean_twopage_item_3he1>>
-                ) {
-                    println("关注成功" + response?.body()?.result)
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        id_attion_view_back.visibility=View.GONE
-                        var list = bean?.result?.list!!
-                        if (list.size != 0) {
-                            list_3he1.addAll(list)
-                            adapter.notifyDataSetChanged()
-                        } else {
-                            refreshLayout?.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-                        }
-                    } else {
-                        Show_toast.showText(activity, "关注list失败")
-                    }
-                    refreshLayout.finishLoadMore()
-
-                }
-
-            })
-    }
 
     private fun init_refre() {
 
@@ -182,227 +174,22 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
         id_RecyclerView?.layoutManager = layoutmanager
     }
 
-    lateinit var list_3he1: ArrayList<bean_twopage_item_3he1.bean_twopage_item_3he1_item>
-    lateinit var adapter: adapter_twopage
-    lateinit var list_zixun: ArrayList<bean_twopage_item2.bean_twopage_item2_item>
-    lateinit var adapter2: adapter_twopage_zixun
-
 
     val twoModel: TwoModel by lazy { TwoModel() }
     var currentpage = 1
     var pagesize = 10
-    fun init_circle() {
-        refreshLayout.setNoMoreData(false)
-        currentpage = 1
-        twoModel.twoselectAllCircle(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
-                    println("失败" + t.toString())
-                    refreshLayout.finishRefresh()
-                }
 
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item_3he1>>,
-                    response: Response<Result<bean_twopage_item_3he1>>
-                ) {
-                    println("圈子成功" + response?.body()?.result)
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        list_3he1 = bean?.result?.list!!
-                        adapter = adapter_twopage(activity!!, list_3he1)
-                        id_RecyclerView.adapter = adapter
-                    } else {
-                        Show_toast.showText(activity, "圈子list失败")
-                    }
-                    refreshLayout.finishRefresh()
-
-                }
-
-            })
-
-
-    }
-
-    fun init_circle2() {
-        currentpage++
-        twoModel.twoselectAllCircle(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
-                    println("失败" + t.toString())
-                    refreshLayout.finishLoadMore()
-                }
-
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item_3he1>>,
-                    response: Response<Result<bean_twopage_item_3he1>>
-                ) {
-                    println("圈子成功" + response?.body()?.result)
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        var list = bean?.result?.list!!
-                        if (list.size != 0) {
-                            list_3he1.addAll(list)
-                            adapter.notifyDataSetChanged()
-                        } else {
-                            refreshLayout?.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-                        }
-
-                    } else {
-                        Show_toast.showText(activity, "圈子list失败")
-                    }
-                    refreshLayout.finishLoadMore()
-
-                }
-
-            })
-
-
-    }
-
-    fun init_xuanliangdian() {
-        id_attion_view_back.visibility=View.GONE
-        refreshLayout.setNoMoreData(false)
-        currentpage = 1
-        twoModel.twoselectAllHighlights(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
-                    functionClass.error_open(t.toString())
-                    refreshLayout.finishRefresh()
-                }
-
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item_3he1>>,
-                    response: Response<Result<bean_twopage_item_3he1>>
-                ) {
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        list_3he1 = bean?.result?.list!!
-                        adapter = adapter_twopage(activity!!, list_3he1)
-                        id_RecyclerView.adapter = adapter
-                    } else {
-                        Show_toast.showText(activity, "炫亮点list失败")
-                    }
-
-                    refreshLayout.finishRefresh()
-                }
-
-            })
-
-
-    }
-
-    fun init_xuanliangdian2() {
-        id_attion_view_back.visibility=View.GONE
-        currentpage++
-        twoModel.twoselectAllHighlights(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item_3he1>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item_3he1>>, t: Throwable) {
-                    functionClass.error_open(t.toString())
-                    refreshLayout.finishLoadMore()
-                }
-
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item_3he1>>,
-                    response: Response<Result<bean_twopage_item_3he1>>
-                ) {
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        var list = bean?.result?.list!!
-                        if (list.size != 0) {
-                            list_3he1.addAll(list)
-                            adapter.notifyDataSetChanged()
-                        } else {
-                            refreshLayout?.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-                        }
-
-                    } else {
-                        Show_toast.showText(activity, "炫亮点list失败")
-                    }
-                    refreshLayout.finishLoadMore()
-
-                }
-
-            })
-
-
-    }
-
-    fun init_zixun() {
-        id_attion_view_back.visibility=View.GONE
-        refreshLayout.setNoMoreData(false)
-        currentpage = 1
-        twoModel.twoselectselectAllInformation(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item2>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item2>>, t: Throwable) {
-                    println("失败" + t.toString())
-                    refreshLayout.finishRefresh()
-                }
-
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item2>>,
-                    response: Response<Result<bean_twopage_item2>>
-                ) {
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        list_zixun = bean?.result?.list!!
-                        adapter2 = adapter_twopage_zixun(activity!!, list_zixun)
-                        id_RecyclerView.adapter = adapter2
-                    } else {
-                        Show_toast.showText(activity, "咨询list失败")
-                    }
-                    refreshLayout.finishRefresh()
-
-                }
-
-            })
-
-    }
-
-    fun init_zixun2() {
-        id_attion_view_back.visibility=View.GONE
-        currentpage++
-        twoModel.twoselectselectAllInformation(functionClass.getToken(), currentpage, pagesize)
-            .enqueue(object : retrofit2.Callback<Result<bean_twopage_item2>> {
-                override fun onFailure(call: Call<Result<bean_twopage_item2>>, t: Throwable) {
-                    println("失败" + t.toString())
-                    refreshLayout.finishLoadMore()
-                }
-
-                override fun onResponse(
-                    call: Call<Result<bean_twopage_item2>>,
-                    response: Response<Result<bean_twopage_item2>>
-                ) {
-                    var bean = response?.body()
-                    if ("success".equals(bean?.flag)) {
-                        var list = bean?.result?.list!!
-                        if (list.size != 0) {
-                            list_zixun.addAll(list)
-                            adapter2.notifyDataSetChanged()
-                        } else {
-                            refreshLayout?.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-                        }
-                    } else {
-                        Show_toast.showText(activity, "咨询list失败")
-                    }
-                    refreshLayout.finishLoadMore()
-                }
-
-            })
-
-    }
 
     override fun init_view() {
         super.init_view()
-        refreshLayout.setOnRefreshListener(this)
-        refreshLayout.setOnLoadMoreListener(this)
     }
 
     override fun init_click() {
         super.init_click()
-        id_click_one.setOnClickListener(this)
-        id_click_two.setOnClickListener(this)
-        id_click_three.setOnClickListener(this)
-        id_click_four.setOnClickListener(this)
+        id_line1.setOnClickListener(this)
+        id_line2.setOnClickListener(this)
+        id_line3.setOnClickListener(this)
+        id_line4.setOnClickListener(this)
         id_click_publish.setOnClickListener(this)
     }
 
@@ -410,6 +197,7 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.id_click_publish -> {
+
                 if (!functionClass.islogin()) {
                     var intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
@@ -420,94 +208,52 @@ class fragemnt_two : BaseFragment(), View.OnClickListener, OnRefreshListener, On
                 startActivity(intent)
 
             }
-            R.id.id_click_one -> {
+            R.id.id_line1 -> {
+                view_pager_myself.setCurrentItem(0)
                 id_click_publish.visibility = View.VISIBLE
                 current_item = 0
-                id_click_one_text.setTextColor(resources.getColor(R.color.color_333333))
-                id_click_two_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_three_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_four_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_id_click_one_img.visibility = View.VISIBLE
-                id_click_two_img.visibility = View.INVISIBLE
-                id_click_three_img.visibility = View.INVISIBLE
-                id_click_four_img.visibility = View.INVISIBLE
-                init_guanzhu()
+                chagetext(current_item)
 
             }
-            R.id.id_click_two -> {
+            R.id.id_line2 -> {
+                view_pager_myself.setCurrentItem(1)
                 id_click_publish.visibility = View.VISIBLE
                 current_item = 1
-                id_click_one_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_two_text.setTextColor(resources.getColor(R.color.color_333333))
-                id_click_three_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_four_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_id_click_one_img.visibility = View.INVISIBLE
-                id_click_two_img.visibility = View.VISIBLE
-                id_click_three_img.visibility = View.INVISIBLE
-                id_click_four_img.visibility = View.INVISIBLE
-                init_xuanliangdian()
+                chagetext(current_item)
             }
-            R.id.id_click_three -> {
+            R.id.id_line3 -> {
+                view_pager_myself.setCurrentItem(2)
                 id_click_publish.visibility = View.GONE
                 current_item = 2
-                id_click_one_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_two_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_three_text.setTextColor(resources.getColor(R.color.color_333333))
-                id_click_four_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_id_click_one_img.visibility = View.INVISIBLE
-                id_click_two_img.visibility = View.INVISIBLE
-                id_click_three_img.visibility = View.VISIBLE
-                id_click_four_img.visibility = View.INVISIBLE
+                chagetext(current_item)
                 //yun dong
             }
-            R.id.id_click_four -> {
+            R.id.id_line4 -> {
+                view_pager_myself.setCurrentItem(3)
                 id_click_publish.visibility = View.GONE
                 current_item = 3
-                id_click_one_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_two_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_three_text.setTextColor(resources.getColor(R.color.color_a4a4a4))
-                id_click_four_text.setTextColor(resources.getColor(R.color.color_333333))
-                id_id_click_one_img.visibility = View.INVISIBLE
-                id_click_two_img.visibility = View.INVISIBLE
-                id_click_three_img.visibility = View.INVISIBLE
-                id_click_four_img.visibility = View.VISIBLE
-                init_zixun()
+                chagetext(current_item)
             }
 
         }
     }
 
-    override fun onRefresh(refreshLayout: RefreshLayout) {
-        when (current_item) {
-            0 -> {
-                init_guanzhu()
-            }
-            1 -> {
-                init_xuanliangdian()
-            }
-            2 -> {
-//                init_guanzhu()
-            }
-            3 -> {
-                init_zixun()
-            }
-        }
-    }
 
-    override fun onLoadMore(refreshLayout: RefreshLayout) {
-        when (current_item) {
+    fun chagetext(i: Int) {
+        id_line1.setTypeface(Typeface.DEFAULT);
+        id_line1.setTextColor(resources.getColor(R.color.color_a4a4a4))
+        id_line2.setTypeface(Typeface.DEFAULT);
+        id_line2.setTextColor(resources.getColor(R.color.color_a4a4a4))
+        when (i) {
             0 -> {
-                init_guanzhu2()
+                id_line1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                id_line1.setTextColor(resources.getColor(R.color.color_1cbe6f))
             }
             1 -> {
-                init_xuanliangdian2()
-            }
-            2 -> {
-//                init_guanzhu2()
-            }
-            3 -> {
-                init_zixun2()
+                id_line2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                id_line2.setTextColor(resources.getColor(R.color.color_1cbe6f))
             }
         }
+
     }
 }

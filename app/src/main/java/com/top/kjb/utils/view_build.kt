@@ -96,7 +96,7 @@ object view_build {
             val layoutmanager = GridLayoutManager(mycontent, 3)
             son_view.findViewById<RecyclerView>(R.id.id_RecyclerView_image).layoutManager =
                 layoutmanager
-            if ("".equals(bean?.pic)) {
+            if ("".equals(bean?.pic)||null.equals(bean?.pic)) {
                 son_view.findViewById<RecyclerView>(R.id.id_RecyclerView_image)?.visibility =
                     View.GONE
             } else {

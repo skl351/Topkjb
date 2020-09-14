@@ -1,210 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:background="@color/white2"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingTop="28dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/back_top_15cir_white"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="28dp"
+        android:paddingRight="15dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/title_size_20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="此卡不限时，全店随心练"/>
+                android:layout_centerVertical="true"
+                android:text="此卡不限时，全店随心练"
+                android:textSize="@dimen/title_size_20" />
+
             <RelativeLayout
                 android:id="@+id/id_click_close"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
                 <ImageView
-                    android:layout_margin="3dp"
                     android:layout_width="13dp"
                     android:layout_height="13dp"
-                    android:src="@mipmap/icon_delete"/>
+                    android:layout_margin="3dp"
+                    android:src="@mipmap/icon_delete" />
             </RelativeLayout>
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_marginTop="3dp"
-                android:textColor="@color/color_eebf98"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="本平台所有健身会所均可适用"/>
+                android:layout_marginTop="3dp"
+                android:text="本平台所有健身会所均可适用"
+                android:textColor="@color/color_eebf98" />
         </RelativeLayout>
+
         <ImageView
-            android:layout_marginTop="14dp"
-            android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_pay_small_back"/>
+            android:layout_marginTop="14dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/icon_pay_small_back" />
+
         <RelativeLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购买次数"
                 android:textColor="@color/color_333333"
-                android:textSize="@dimen/title_size_15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="购买次数"/>
+                android:textSize="@dimen/title_size_15" />
+
             <LinearLayout
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:orientation="horizontal">
+
                 <RelativeLayout
-                    android:background="@drawable/back_90cir_f4f4f4"
                     android:layout_width="24dp"
-                    android:layout_height="24dp">
+                    android:layout_height="24dp"
+                    android:background="@drawable/back_90cir_f4f4f4">
+
                     <TextView
-                        android:textColor="@color/color_aaaaaa"
-                        android:layout_centerInParent="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="—"/>
+                        android:layout_centerInParent="true"
+                        android:text="—"
+                        android:textColor="@color/color_aaaaaa" />
                 </RelativeLayout>
+
                 <TextView
+                    android:layout_width="66dp"
+                    android:layout_height="26dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:background="@drawable/back_90cir_f4f4f4"
                     android:gravity="center"
-                    android:textSize="@dimen/title_size_13"
+                    android:text="1"
                     android:textColor="@color/color_333333"
-                    android:layout_width="66dp"
-                    android:layout_height="26dp"
-                    android:text="1"/>
+                    android:textSize="@dimen/title_size_13" />
+
                 <RelativeLayout
-                    android:background="@drawable/back_90cir_f4f4f4"
                     android:layout_width="24dp"
-                    android:layout_height="24dp">
+                    android:layout_height="24dp"
+                    android:background="@drawable/back_90cir_f4f4f4">
+
                     <TextView
-                        android:textColor="@color/color_aaaaaa"
-                        android:layout_centerInParent="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+"/>
+                        android:layout_centerInParent="true"
+                        android:text="+"
+                        android:textColor="@color/color_aaaaaa" />
                 </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
-        <ImageView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_f4f4f4"/>
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <ImageView
-                android:src="@mipmap/icon_yue_pay"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-            <TextView
-                android:layout_weight="1"
-                android:layout_marginLeft="9dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="余额支付"/>
-            <ImageView
-                android:src="@drawable/check_selectplace"
-                android:layout_width="16dp"
-                android:layout_height="16dp"/>
-        </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_f4f4f4"/>
+            android:layout_marginTop="20dp"
+            android:background="@color/color_f4f4f4" />
+
         <LinearLayout
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
+
             <ImageView
-                android:src="@mipmap/icon_ali_pay"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_yue_pay" />
+
             <TextView
-                android:layout_weight="1"
-                android:layout_marginLeft="9dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="支付宝支付"/>
+                android:layout_marginLeft="9dp"
+                android:layout_weight="1"
+                android:text="余额支付" />
+
             <ImageView
-                android:src="@drawable/check_selectplace"
                 android:layout_width="16dp"
-                android:layout_height="16dp"/>
+                android:layout_height="16dp"
+                android:src="@drawable/check_selectplace" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_f4f4f4"/>
+            android:background="@color/color_f4f4f4" />
+
         <LinearLayout
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
+
             <ImageView
-                android:src="@mipmap/icon_weix_pay"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_ali_pay" />
+
             <TextView
-                android:layout_weight="1"
-                android:layout_marginLeft="9dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="微信支付"/>
+                android:layout_marginLeft="9dp"
+                android:layout_weight="1"
+                android:text="支付宝支付" />
+
             <ImageView
-                android:src="@drawable/check_selectplace"
                 android:layout_width="16dp"
-                android:layout_height="16dp"/>
+                android:layout_height="16dp"
+                android:src="@drawable/check_selectplace" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_f4f4f4"/>
+            android:background="@color/color_f4f4f4" />
+
         <LinearLayout
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
+
             <ImageView
-                android:src="@mipmap/icon_yinliang_pay"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_weix_pay" />
+
             <TextView
-                android:layout_weight="1"
-                android:layout_marginLeft="9dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="银联支付"/>
+                android:layout_marginLeft="9dp"
+                android:layout_weight="1"
+                android:text="微信支付" />
+
             <ImageView
-                android:src="@drawable/check_selectplace"
                 android:layout_width="16dp"
-                android:layout_height="16dp"/>
+                android:layout_height="16dp"
+                android:src="@drawable/check_selectplace" />
         </LinearLayout>
-        
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_f4f4f4" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_yinliang_pay" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:layout_weight="1"
+                android:text="银联支付" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/check_selectplace" />
+        </LinearLayout>
+
         <TextView
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:textSize="@dimen/title_size_18"
-            android:textColor="@color/white"
-            android:text="去支付15元"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/back_90cir_1cbe6f"/>
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/back_90cir_1cbe6f"
+            android:gravity="center"
+            android:text="去支付15元"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_size_18" />
 
     </LinearLayout>
 </LinearLayout>

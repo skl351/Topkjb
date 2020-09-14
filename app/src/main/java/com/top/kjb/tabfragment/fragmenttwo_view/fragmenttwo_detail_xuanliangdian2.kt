@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lxj.xpopup.XPopup
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.top.kjb.R
 import com.top.kjb.adapter.adapter_nine_image
@@ -22,9 +23,11 @@ import com.top.kjb.bean.Result
 import com.top.kjb.bean.bean_twopage_item_3he1
 import com.top.kjb.bean.bean_user_comment
 import com.top.kjb.customview.RoundImageView
+import com.top.kjb.customview.dialog.jubao_select_bottom
 import com.top.kjb.model.ThreeModel
 import com.top.kjb.model.TwoModel
 import com.top.kjb.originpack.BaseActivity
+import com.top.kjb.tabfragment.newfragmentone.fragmentone_newdetail
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.Sp
 import com.top.kjb.utils.functionClass
@@ -50,6 +53,7 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
     private fun registerBoradcastReceiver() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(Sp.huifuintent)
+        intentFilter.addAction(Sp.jubaoinfo)
         registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
@@ -66,6 +70,11 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
 
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
+                Sp.jubaoinfo -> {
+                    var jubao = intent.getStringExtra("jubao")
+                    Show_toast.showText(this@fragmenttwo_detail_xuanliangdian2,"举报成功")
+
+                }
                 Sp.huifuintent -> {
                     parentId = intent.getIntExtra("parentId", 0)
                     replyType = intent.getIntExtra("replyType", 0)
@@ -284,12 +293,31 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
                     }
                     try {
                         gymnasiumId = bean?.result?.gymnasiumId!!
-                        id_changdi_name.text = bean?.result?.gymName
-                        id_changdi_summary.text = bean?.result?.gymDescribe
-                        id_star_view.rating = bean?.result?.userScore!!
-                        id_show_score.setText(bean?.result?.userScore.toString())
-                        ImageLoader.getInstance().displayImage(bean?.result?.gymPic, id_head)
-                        id_location_long.setText("距您：" + bean?.result?.distance)
+                        if (gymnasiumId!=0){
+                            id_big_view.visibility=View.VISIBLE
+                            id_changdi_name.text = bean?.result?.gymName
+                            id_changdi_summary.text = bean?.result?.gymDescribe
+                            id_star_view.rating = bean?.result?.comprehensiveScore!!
+                            id_show_score.setText(bean?.result?.comprehensiveScore.toString())
+                            ImageLoader.getInstance().displayImage(bean?.result?.gymHeadImg, id_head)
+                            id_location_long.setText("距您：" + bean?.result?.distance)
+                            id_big_view.setOnClickListener(object :View.OnClickListener{
+                                override fun onClick(p0: View?) {
+                                    val intent = Intent(
+                                        this@fragmenttwo_detail_xuanliangdian2,
+                                        fragmentone_newdetail::class.java
+                                    )
+                                    intent.putExtra("lat", bean?.result?.lat)
+                                    intent.putExtra("lng", bean?.result?.lng)
+                                    intent.putExtra("id", bean?.result?.gymnasiumId!!)
+                                    startActivity(intent)
+                                }
+
+                            })
+                        }else{
+                            id_big_view.visibility = View.GONE
+                        }
+
                     } catch (e: Exception) {
                         e.printStackTrace()
                         id_big_view.visibility = View.GONE
@@ -399,11 +427,20 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
         id_like_image_big.setOnClickListener(this)
         id_collect_img_big.setOnClickListener(this)
         id_click_attion.setOnClickListener(this)
+        id_click_jubao.setOnClickListener(this)
     }
 
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.id_click_jubao -> {
+                var bottom = jubao_select_bottom(this)
+                XPopup.Builder(this)
+                    .hasShadowBg(true)
+                    .atView(id_click_jubao)
+                    .asCustom(bottom)
+                    .show()
+            }
             R.id.id_click_attion -> {
                 id_click_attion.isEnabled = false
                 guanzhuto()
@@ -513,7 +550,7 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
     private fun guanzhuto() {
         threeModel.fansbecome_cancel_fans(
             functionClass.getToken(),
-            userId_1,
+            functionClass.getUserId(),
             userId_1
         )
             .enqueue(object : retrofit2.Callback<Result<String>> {
@@ -525,6 +562,8 @@ class fragmenttwo_detail_xuanliangdian2 : BaseActivity(), View.OnClickListener {
                     call: Call<Result<String>>,
                     response: Response<Result<String>>
                 ) {
+                    var intent=Intent(Sp.attent_gotoed)
+                    sendBroadcast(intent)
                     id_click_attion.isEnabled = true
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {

@@ -11,6 +11,7 @@ import com.lxj.xpopup.core.PositionPopupView;
 import com.top.kjb.R;
 import com.top.kjb.adapter.adapter_type_sports;
 import com.top.kjb.bean.bean_type_item;
+import com.top.kjb.utils.functionClass;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,12 +29,14 @@ public class sport_type_dialog extends PositionPopupView {
 
     RecyclerView id_RecyclerView_type;
     View id_click_dialog_detele;
+    View smart_type_top;
     @Override
     protected void onCreate() {
         super.onCreate();
+        smart_type_top = findViewById(R.id.smart_type_top);
         id_click_dialog_detele = findViewById(R.id.id_click_dialog_detele);
         id_RecyclerView_type = findViewById(R.id.id_RecyclerView_type);
-
+        smart_type_top.getLayoutParams().height= functionClass.INSTANCE.getbarHight(getContext());
         GridLayoutManager layoutmanager = new GridLayoutManager(getContext(), 3);
         id_RecyclerView_type.setLayoutManager(layoutmanager);
         id_click_dialog_detele.setOnClickListener(view -> {

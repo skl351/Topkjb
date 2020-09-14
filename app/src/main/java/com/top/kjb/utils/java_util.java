@@ -1,5 +1,6 @@
 package com.top.kjb.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -55,7 +56,7 @@ public class java_util {
         return bitmap;
     }
 
-    public  String  bmapTranQQMap(double lat,double lng){
+    public String bmapTranQQMap(double lat, double lng) {
         Double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
         Double x = lng - 0.0065;
         Double y = lat - 0.006;
@@ -64,7 +65,20 @@ public class java_util {
         Double lngs = z * Math.cos(theta);
         Double lats = z * Math.sin(theta);
 
-        return lats+","+lngs;
+        return lats + "," + lngs;
     }
 
+    public void hintKeyBoard(Activity context) {
+        //拿到InputMethodManager
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        //如果window上view获取焦点 && view不为空
+        if (imm.isActive() && context.getCurrentFocus() != null) {
+            //拿到view的token 不为空
+            if (context.getCurrentFocus().getWindowToken() != null) {
+                //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
+                imm.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+
+    }
 }

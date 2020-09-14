@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,134 +11,235 @@
         android:clickable="true"
         android:visibility="invisible" />
 
-<LinearLayout
-    android:id="@+id/id_top_bar_1_big"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <ImageView
-        android:background="@color/white"
-        android:id="@+id/id_top_bar_1"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        />
     <LinearLayout
+        android:id="@+id/id_top_bar_1_big"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/topTab"
+
+        <ImageView
+            android:id="@+id/id_top_bar_1"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp">
+            android:layout_height="20dp"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/id_click_location"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+                android:id="@+id/topTab"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="15dp">
 
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@mipmap/icon_location" />
-
-                <TextView
-                    android:id="@+id/id_locationplace"
+                <LinearLayout
+                    android:id="@+id/id_click_location"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/color_333333"
-                    android:textSize="@dimen/title_size_18" />
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@mipmap/icon_location" />
+
+                    <TextView
+                        android:id="@+id/id_locationplace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/title_size_18" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/id_click_erweima"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_sao_one_sao" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/id_click_search"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_small_search" />
+                </RelativeLayout>
+
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/id_click_erweima"
-                android:layout_width="50dp"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/icon_sao_one_sao" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/id_click_search"
-                android:layout_width="50dp"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/icon_small_search" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/id_main_tab_group_big"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_below="@id/topTab"
-            android:background="@color/white"
-            android:visibility="visible">
-
-            <HorizontalScrollView
-                android:id="@+id/id_main_tab_group_hor"
+                android:id="@+id/id_main_tab_group_big"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginRight="60dp"
-                android:scrollbars="none">
+                android:layout_below="@id/topTab"
+                android:background="@color/white"
+                android:visibility="visible">
 
-                <LinearLayout
-                    android:id="@+id/id_main_tab_group"
+                <HorizontalScrollView
+                    android:id="@+id/id_main_tab_group_hor"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:layout_marginRight="60dp"
+                    android:scrollbars="none">
 
-                </LinearLayout>
-            </HorizontalScrollView>
+                    <LinearLayout
+                        android:id="@+id/id_main_tab_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                    </LinearLayout>
+                </HorizontalScrollView>
 
 
-            <RelativeLayout
-                android:id="@+id/id_click_more_top"
-                android:layout_width="57dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true">
+                <RelativeLayout
+                    android:id="@+id/id_click_more_top"
+                    android:layout_width="57dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:background="@mipmap/ic_launcher" />
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/icon_type_click_icon" />
+                </RelativeLayout>
+
+
             </RelativeLayout>
+        </LinearLayout>
+        <!--广告top-->
+        <RelativeLayout
+            android:id="@+id/id_banner_big"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-
+            <com.top.kjb.customview.Imagebanner
+                android:id="@+id/id_banner"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:background="@color/white2"
+                app:autoPlayDuration="5000"
+                app:indicatorPosition="centerBottom"
+                app:indicatorShape="oval"
+                app:indicatorSpace="6dp"
+                app:isAutoPlay="true"
+                app:selectedIndicatorColor="@color/white"
+                app:selectedIndicatorHeight="6dp"
+                app:selectedIndicatorWidth="6dp"
+                app:unSelectedIndicatorColor="@color/gray"
+                app:unSelectedIndicatorHeight="6dp"
+                app:unSelectedIndicatorWidth="6dp" />
         </RelativeLayout>
     </LinearLayout>
-</LinearLayout>
 
 
     <ImageView
         android:id="@+id/id_click_location_left_bottom"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="90dp"
-        android:background="@mipmap/ic_launcher" />
+        android:src="@mipmap/icon_my_location" />
 
+    <LinearLayout
+        android:id="@+id/id_top_bar_2_big"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/id_top_bar_2"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/id_edit_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/back_90cir_f4f4f4"
+                    android:paddingLeft="15dp"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/title_size_16" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/id_cancel"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/title_size_16" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_RecyclerView_big"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/id_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:paddingTop="10dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/id_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:text="查询结果不存在"
+                android:textColor="@color/color_aaaaaa"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

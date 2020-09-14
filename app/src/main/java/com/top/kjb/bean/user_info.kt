@@ -11,4 +11,5 @@ class user_info:baseBean() {
     var followNum=0
     var motto=""
     var dynamicBackground=""
+    var followStatus=false
 }

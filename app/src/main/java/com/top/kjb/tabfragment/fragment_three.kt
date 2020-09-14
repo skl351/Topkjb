@@ -83,12 +83,16 @@ class fragment_three : BaseFragment(), View.OnClickListener, OnRefreshListener ,
             if (functionClass.getcurStep(str) == 0) {
                 //当天第一次
                 functionClass.setcurStep(str, event.values[0].toInt())
-                id_step.setText("0" + "步")
+                id_step.setText("0")
                 println("当天1：" + event.values[0])
             } else {
                 //当天不是第一次
                 var cur_step = event.values[0].toInt() - functionClass.getcurStep(str)
-                id_step.setText(cur_step.toString() + "步")
+               var baifenbi= (cur_step.toFloat()/4000)*100
+                print("=-=-=-"+baifenbi.toInt())
+                circle_progress_bar3.value= baifenbi.toFloat()
+                id_step.setText(cur_step.toString())
+
                 println("当天2：" +cur_step)
             }
 
@@ -117,6 +121,7 @@ class fragment_three : BaseFragment(), View.OnClickListener, OnRefreshListener ,
     private fun registerBoradcastReceiver() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(Sp.loginoutsuccess)
+        intentFilter.addAction(Sp.attent_gotoed)
         activity?.registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
@@ -126,6 +131,9 @@ class fragment_three : BaseFragment(), View.OnClickListener, OnRefreshListener ,
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
 
+                Sp.attent_gotoed->{
+                    init_data()
+                }
                 Sp.loginoutsuccess -> {
                     init_data()
                 }
@@ -232,8 +240,6 @@ class fragment_three : BaseFragment(), View.OnClickListener, OnRefreshListener ,
         id_click_follow.setOnClickListener(this)
         id_click_user_info.setOnClickListener(this)
         id_click_setting.setOnClickListener(this)
-        id_click_cikajilu.setOnClickListener(this)
-        id_click_order_jilu.setOnClickListener(this)
         id_click_vip.setOnClickListener(this)
     }
 
@@ -248,15 +254,6 @@ class fragment_three : BaseFragment(), View.OnClickListener, OnRefreshListener ,
                 var intent = Intent(activity, top_vip::class.java)
                 startActivity(intent)
             }
-            R.id.id_click_order_jilu -> {
-                if (!functionClass.islogin()) {
-                    var intent = Intent(activity, LoginActivity::class.java)
-                    startActivity(intent)
-                    return
-                }
-                var intent = Intent(activity, my_order_list::class.java)
-                startActivity(intent)
-            }
 
             R.id.id_click_information -> {
                 if (!functionClass.islogin()) {
@@ -268,15 +265,6 @@ class fragment_three : BaseFragment(), View.OnClickListener, OnRefreshListener ,
                 startActivity(intent)
             }
 
-            R.id.id_click_cikajilu -> {
-                if (!functionClass.islogin()) {
-                    var intent = Intent(activity, LoginActivity::class.java)
-                    startActivity(intent)
-                    return
-                }
-                var intent = Intent(activity!!, fragmentthree_cikajilu::class.java)
-                startActivity(intent)
-            }
             R.id.id_click_setting -> {
                 if (!functionClass.islogin()) {
                     var intent = Intent(activity, LoginActivity::class.java)

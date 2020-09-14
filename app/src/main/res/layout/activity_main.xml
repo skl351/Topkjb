@@ -86,7 +86,31 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/id_click2_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
+                    <Button
+                        android:id="@+id/id_icon_2_2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/tabselect_three_icon" />
+
+                    <TextView
+                        android:id="@+id/id_text_2_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/tab_three_text"
+                        android:textColor="@drawable/tabcheckcolor"
+                        android:textSize="@dimen/title_size_10" />
+
+
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/id_click3"
                     android:layout_width="wrap_content"

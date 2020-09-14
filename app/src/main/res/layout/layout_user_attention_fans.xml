@@ -52,12 +52,13 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/id_attent_text"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:background="@drawable/check_attention"
         android:gravity="center"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:text="已关注"
+        android:text="关注"
         android:visibility="visible" />
 </LinearLayout>

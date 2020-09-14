@@ -11,4 +11,5 @@ class bean_attention_fans :baseBean(){
     var nickName = ""
     var imgUrl = ""
     var motto = ""
+    var mutualFollowState =1
 }

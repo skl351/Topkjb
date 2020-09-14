@@ -76,7 +76,7 @@
             android:lineSpacingExtra="5dp"
             android:maxLength="10000"
             android:text=""
-            android:textColor="@color/color_a4a4a4"
+            android:textColor="@color/color_394159"
             android:textSize="@dimen/title_size_16" />
         <androidx.recyclerview.widget.RecyclerView
             android:paddingTop="10dp"
