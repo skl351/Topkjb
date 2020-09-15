@@ -2,11 +2,13 @@ package com.top.kjb
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.baidu.mapapi.SDKInitializer
+import com.hyphenate.EMCallBack
+import com.hyphenate.chat.EMClient
+import com.hyphenate.chat.EMOptions
+import com.hyphenate.easeui.EaseUI
 import com.nostra13.universalimageloader.core.DisplayImageOptions
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
@@ -19,23 +21,13 @@ import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.top.kjb.net.HeaderInterceptor
-import com.top.kjb.utils.PrivateConstants
 import com.top.kjb.utils.SharedPreferenceUtils
 import com.top.kjb.utils.Sp
-import com.top.kjb.utils.functionClass
-import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.message.IUmengRegisterCallback
 import com.umeng.message.PushAgent
-import com.umeng.message.UmengNotificationClickHandler
-import com.umeng.message.entity.UMessage
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.android.agoo.huawei.HuaWeiRegister
-import org.android.agoo.oppo.OppoRegister
-import org.android.agoo.vivo.VivoRegister
-import org.android.agoo.xiaomi.MiPushRegistar
-import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 class MyApplicatipn : Application() {
@@ -54,6 +46,8 @@ class MyApplicatipn : Application() {
         init_refresh()//刷新
         init_Umeng()
         SDKInitializer.initialize(this)//百度
+        val options = EMOptions()
+        EaseUI.getInstance().init(this, options)
 
     }
 

@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/can_move_view"
@@ -50,6 +50,20 @@
                     android:textSize="@dimen/title_size_15" />
             </LinearLayout>
 
+          <LinearLayout
+              android:paddingRight="20dp"
+              android:gravity="right"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+              <TextView
+                  android:id="@+id/id_click_liner"
+                  android:gravity="center_vertical"
+                  android:textColor="@color/color_424242"
+                  android:textSize="@dimen/title_size_16"
+                  android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:text="联系人"/>
+          </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

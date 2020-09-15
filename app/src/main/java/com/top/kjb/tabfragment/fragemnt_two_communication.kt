@@ -17,6 +17,8 @@ import com.top.kjb.Userabout.LoginActivity
 import com.top.kjb.model.TwoModel
 import com.top.kjb.originpack.BaseFragment
 import com.top.kjb.tabfragment.fragmenttwo_view.chat.layout_chat_one
+import com.top.kjb.tabfragment.fragmenttwo_view.chat.layout_chat_two
+import com.top.kjb.tabfragment.fragmenttwo_view.chat.liner_list
 import com.top.kjb.tabfragment.fragmenttwo_view.fragment_two_newlist
 import com.top.kjb.utils.functionClass
 import kotlinx.android.synthetic.main.layout_fragmenttwo_new.*
@@ -51,7 +53,7 @@ class fragemnt_two_communication : BaseFragment(), View.OnClickListener {
     var framgent2: Fragment? = null
     private fun getfragment() {
         framgent1 = layout_chat_one()
-        framgent2 = layout_chat_one()
+        framgent2 = layout_chat_two()
         mFragments.add(framgent1 as Fragment)
         mFragments.add(framgent2 as Fragment)
     }
@@ -116,11 +118,16 @@ class fragemnt_two_communication : BaseFragment(), View.OnClickListener {
         super.init_click()
         id_line1.setOnClickListener(this)
         id_line2.setOnClickListener(this)
+        id_click_liner.setOnClickListener(this)
     }
 
     var current_item = 0
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.id_click_liner -> {
+                var intent = Intent(activity, liner_list::class.java)
+                startActivity(intent)
+            }
 
             R.id.id_line1 -> {
                 current_item = 0
