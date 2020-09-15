@@ -5,10 +5,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatDelegate
 import com.baidu.mapapi.SDKInitializer
-import com.hyphenate.EMCallBack
-import com.hyphenate.chat.EMClient
-import com.hyphenate.chat.EMOptions
-import com.hyphenate.easeui.EaseUI
 import com.nostra13.universalimageloader.core.DisplayImageOptions
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
@@ -46,9 +42,6 @@ class MyApplicatipn : Application() {
         init_refresh()//刷新
         init_Umeng()
         SDKInitializer.initialize(this)//百度
-        val options = EMOptions()
-        EaseUI.getInstance().init(this, options)
-
     }
 
     /**

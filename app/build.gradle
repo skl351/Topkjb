@@ -167,9 +167,6 @@ dependencies {
     //vivo push通道
     implementation 'com.umeng.umsdk:vivo-push:2.3.5'
     implementation 'com.umeng.umsdk:vivo-umengaccs:1.1.0'
-    /*
-   环信
-     */
-    implementation project(path: ':easeui')
+
 
 }
