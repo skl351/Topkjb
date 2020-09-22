@@ -14,6 +14,7 @@ class bean_main_item() :baseBean(), Parcelable {
     var comprehensiveScore = 0f
     var gymID=0
     var pic=""
+    var headImg=""
     var address=""
     var lat="0"
     var lng="0"

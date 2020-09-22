@@ -56,11 +56,35 @@
                         android:layout_marginTop="2dp"
                         android:text="@string/tab_one_text"
                         android:textColor="@drawable/tabcheckcolor"
-                        android:textSize="@dimen/title_size_10" />
+                        android:textSize="@dimen/title_size_12" />
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/id_click1_sport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
+                    <Button
+                        android:id="@+id/id_icon_1_sport"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/tabselect_one_icon_sport" />
+
+                    <TextView
+                        android:id="@+id/id_text_1_sport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="约运动"
+                        android:textColor="@drawable/tabcheckcolor"
+                        android:textSize="@dimen/title_size_12" />
+
+
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/id_click2"
                     android:layout_width="wrap_content"
@@ -82,7 +106,7 @@
                         android:layout_marginTop="2dp"
                         android:text="@string/tab_two_text"
                         android:textColor="@drawable/tabcheckcolor"
-                        android:textSize="@dimen/title_size_10" />
+                        android:textSize="@dimen/title_size_12" />
 
 
                 </LinearLayout>
@@ -98,16 +122,16 @@
                         android:id="@+id/id_icon_2_2"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:background="@drawable/tabselect_three_icon" />
+                        android:background="@drawable/tabselect_two_info_icon" />
 
                     <TextView
                         android:id="@+id/id_text_2_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="@string/tab_three_text"
+                        android:text="消息"
                         android:textColor="@drawable/tabcheckcolor"
-                        android:textSize="@dimen/title_size_10" />
+                        android:textSize="@dimen/title_size_12" />
 
 
                 </LinearLayout>
@@ -132,7 +156,7 @@
                         android:layout_marginTop="2dp"
                         android:text="@string/tab_three_text"
                         android:textColor="@drawable/tabcheckcolor"
-                        android:textSize="@dimen/title_size_10" />
+                        android:textSize="@dimen/title_size_12" />
 
 
                 </LinearLayout>

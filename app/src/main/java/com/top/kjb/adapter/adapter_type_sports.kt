@@ -60,7 +60,6 @@ class adapter_type_sports : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             p0.settag(1)
         }
         p0.id_big_view.layoutParams.width = functionClass.getScreenWidth(mycontent!!) / 3
-        ImageLoader.getInstance().displayImage(mData?.get(p1)?.sportsBgimage, p0.id_big_background)
         p0.id_type_text.setText(mData?.get(p1)?.sportsName)
         p0.id_big_view.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
@@ -85,7 +84,6 @@ class adapter_type_sports : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return tag
         }
 
-        lateinit var id_big_background: roundimage
         var big_view: LinearLayout? = null
 
         lateinit var id_type_text: TextView
@@ -94,7 +92,6 @@ class adapter_type_sports : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         constructor(itemView: View) : super(itemView) {
 
             id_type_text = itemView.findViewById(R.id.id_type_text)
-            id_big_background = itemView.findViewById(R.id.id_big_background)
             id_big_view = itemView.findViewById(R.id.id_big_view)
         }
     }

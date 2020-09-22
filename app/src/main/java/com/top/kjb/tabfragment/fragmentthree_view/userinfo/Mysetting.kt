@@ -51,11 +51,7 @@ class Mysetting : BaseActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.id_click_loginout -> {
-                functionClass.setToken("")
-                functionClass.setUserId(0)
-                functionClass.setUsername("")
-                functionClass.setmotto("")
-                functionClass.setHeadImg("")
+                functionClass.setuserinfo(0,"","","","","")
                 Show_toast.showText(this, "退出登录成功")
                 var intent = Intent(Sp.loginoutsuccess)
                 sendBroadcast(intent)

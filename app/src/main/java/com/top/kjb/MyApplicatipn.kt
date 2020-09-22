@@ -16,12 +16,18 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.tencent.imsdk.v2.V2TIMSDKConfig
+import com.tencent.qcloud.tim.uikit.TUIKit
+import com.tencent.qcloud.tim.uikit.config.CustomFaceConfig
+import com.tencent.qcloud.tim.uikit.config.GeneralConfig
 import com.top.kjb.net.HeaderInterceptor
+import com.top.kjb.tabfragment.chat.util.GenerateTestUserSig
 import com.top.kjb.utils.SharedPreferenceUtils
 import com.top.kjb.utils.Sp
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.message.IUmengRegisterCallback
 import com.umeng.message.PushAgent
+import com.zhy.autolayout.config.AutoLayoutConifg
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -42,6 +48,17 @@ class MyApplicatipn : Application() {
         init_refresh()//刷新
         init_Umeng()
         SDKInitializer.initialize(this)//百度
+        init_chat()
+    }
+
+    private fun init_chat() {
+         // 配置 Config，请按需配置
+       var configs = TUIKit.getConfigs();
+       configs.setSdkConfig( V2TIMSDKConfig());
+       configs.setCustomFaceConfig( CustomFaceConfig());
+       configs.setGeneralConfig( GeneralConfig());
+
+       TUIKit.init(this, GenerateTestUserSig.SDKAPPID, configs);
     }
 
     /**

@@ -86,11 +86,18 @@ interface ApiService {
         @Header("x-auth-token") token: String
     ): Call<Result<ArrayList<String>>>
 
-    /**
+    /**弃用
      *获取最近场地list
      */
     @GET("gymnasium/gymnasiumList")
     fun main_zuijing(
+        @Header("x-auth-token") token: String,
+        @Query("lat") lat: String,
+        @Query("lng") lng: String
+    ): Call<Result<ArrayList<bean_main_item>>>
+
+    @GET("gymnasium/gymnasiumLists")
+    fun bottom_address(
         @Header("x-auth-token") token: String,
         @Query("lat") lat: String,
         @Query("lng") lng: String
@@ -523,6 +530,7 @@ interface ApiService {
         @Header("x-auth-token") token: String,
         @Query("coachID") coachID: Int
     ): Call<Result<bean_coach_item>>
+
     /**
      * 举报神策
      */
@@ -531,6 +539,73 @@ interface ApiService {
         @Header("x-auth-token") token: String,
         @Query("coachID") coachID: Int
     ): Call<Result<bean_coach_item>>
+
+    /**
+     * 根据type得到运动列表
+     */
+    @GET("togetherLog/searchTogetherLog")
+    fun togetherLogsearchTogetherLog(
+        @Header("x-auth-token") token: String,
+        @Query("type") type: Int
+    ): Call<Result<ArrayList<bean_sports_list_item>>>
+
+    /**
+     * 获取自己的运动
+     */
+    @GET("togetherLog/searchMyTogetherLog")
+    fun togetherLogsearchMyTogetherLog(
+        @Header("x-auth-token") token: String,
+        @Query("userId") userId: Int
+    ): Call<Result<ArrayList<bean_sports_list_item>>>
+
+    /**
+     * 发起自己的运动
+     */
+    @GET("togetherLog/insertTogetherLog")
+    fun togetherLoginsertTogetherLog(
+        @Header("x-auth-token") token: String,
+        @Query("userId") userId: Int,
+        @Query("adminId") adminId: Int,
+        @Query("sportId") sportId: Int,
+        @Query("time") time: String,
+        @Query("endTime") endTime: String,
+        @Query("gymnasiumId") gymnasiumId: Int,
+        @Query("name") name: String,
+        @Query("maxPeople") maxPeople: String,
+        @Query("nowPeople") nowPeople: String
+    ): Call<Result<String>>
+
+    /**
+     * 加入
+     */
+    @GET("togetherLog/updateMyTogetherLog")
+    fun togetherLogupdateMyTogetherLog(
+        @Header("x-auth-token") token: String,
+        @Query("userId") userId: Int,
+        @Query("togetherLogId") togetherLogId: Int,
+        @Query("flag") flag: Int
+    ): Call<Result<String>>
+
+    /**
+     * 根据id找运动
+     */
+    @GET("togetherLog/searchTogetherLogById")
+    fun togetherLogsearchTogetherLogById(
+        @Header("x-auth-token") token: String,
+        @Query("userId") userId: Int,
+        @Query("id") id: Int
+    ): Call<Result<bean_sports_list_item>>
+
+    /**
+     * 根据id找运动
+     */
+    @GET("highlights/selectHighlightsList")
+    fun highlightsselectHighlightsList(
+        @Header("x-auth-token") token: String,
+        @Query("typeId") typeId: Int,
+        @Query("currentPage") currentPage: Int,
+        @Query("pageSize") pageSize: Int
+    ): Call<Result<bean_twopage_item_3he1>>
 
 
 }

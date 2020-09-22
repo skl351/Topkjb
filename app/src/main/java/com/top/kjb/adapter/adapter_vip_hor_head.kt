@@ -32,26 +32,41 @@ class adapter_vip_hor_head : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     var mycontent: Context? = null
 
-    constructor(context: Context, list: ArrayList<bean_main_item_newdetail.bean_main_item_newdetail_vipHeadImgList>) : super() {
+    constructor(
+        context: Context,
+        list: ArrayList<bean_main_item_newdetail.bean_main_item_newdetail_vipHeadImgList>
+    ) : super() {
         mData = list
         mInflater = LayoutInflater.from(context)
         mycontent = context
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(
+        p0: ViewGroup,
+        p1: Int
+    ): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val view = mInflater?.inflate(R.layout.layout_vip_hor_head, p0, false)
         val itemViewholder = ItemViewHolder(view!!)
         return itemViewholder
     }
 
-    override fun onBindViewHolder(p0: androidx.recyclerview.widget.RecyclerView.ViewHolder, p1: Int) {
+    override fun onBindViewHolder(
+        p0: androidx.recyclerview.widget.RecyclerView.ViewHolder,
+        p1: Int
+    ) {
         p0 as ItemViewHolder
         if (p0.gettag() == 1) {
             return
         } else {
             p0.settag(1)
         }
-        ImageLoader.getInstance().displayImage(mData?.get(p1)?.headImg,p0.id_vip_head)
+
+        if (p1 == 0) {
+            p0.id_image_tab?.visibility = View.VISIBLE
+        } else {
+            p0.id_image_tab?.visibility = View.GONE
+        }
+        ImageLoader.getInstance().displayImage(mData?.get(p1)?.headImg, p0.id_vip_head)
 
     }
 
@@ -68,8 +83,11 @@ class adapter_vip_hor_head : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         var big_view: LinearLayout? = null
         var id_vip_head: RoundImageView? = null
 
+        var id_image_tab: View? = null
+
         constructor(itemView: View) : super(itemView) {
 
+            id_image_tab = itemView.findViewById(R.id.id_image_tab)
             id_vip_head = itemView.findViewById(R.id.id_vip_head)
 //            big_view = itemView.findViewById(R.id.big_view)
         }

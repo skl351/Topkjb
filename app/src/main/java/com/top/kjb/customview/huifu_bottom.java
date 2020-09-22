@@ -71,7 +71,7 @@ public class huifu_bottom extends BottomPopupView {
 
         ImageLoader.getInstance().displayImage(bean_main.getHeadImg(), id_head_img);
         id_username.setText(bean_main.getUsername());
-        id_time.setText(functionClass.INSTANCE.getTime_ms(bean_main.getStartTime().toString(), "yyyy-MM-dd hh:mm"));
+        id_time.setText(functionClass.INSTANCE.getTime_ms(bean_main.getStartTime().toString(), "yyyy-MM-dd HH:mm"));
         id_use_commit_text.setText(bean_main.getCommentsText());
 
 //        if (bean_main.getUserId() == functionClass.INSTANCE.getUserId()) {

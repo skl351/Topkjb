@@ -11,6 +11,7 @@
         >
 
        <RelativeLayout
+           android:background="@color/color_F9FAFB"
            android:elevation="1dp"
            android:id="@+id/id_big_view_nei"
            android:padding="10dp"
@@ -20,21 +21,12 @@
            >
            <TextView
                android:id="@+id/id_type_text"
-               android:textColor="@color/white"
+               android:textColor="@color/color_333333"
                android:layout_centerInParent="true"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="健身"/>
        </RelativeLayout>
-        <com.top.kjb.customview.roundimage
-            android:id="@+id/id_big_background"
-            android:layout_alignLeft="@id/id_big_view_nei"
-            android:layout_alignRight="@id/id_big_view_nei"
-            android:layout_alignTop="@id/id_big_view_nei"
-            android:layout_alignBottom="@id/id_big_view_nei"
-            app:round="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 </RelativeLayout>

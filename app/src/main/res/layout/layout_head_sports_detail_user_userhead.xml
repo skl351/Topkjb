@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <com.top.kjb.customview.roundimage
+        android:id="@+id/id_head_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="15dp" />
+
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignRight="@id/id_head_image"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="3dp"
+        android:src="@mipmap/ic_launcher" />
+</RelativeLayout>

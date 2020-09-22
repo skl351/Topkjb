@@ -50,6 +50,10 @@ class MyLocationListener : BDAbstractLocationListener() {
                     + errorCode + location.city
         )
         if (errorCode == 161 || errorCode == 61) {
+            Sp.lat=location.latitude.toString()
+            Sp.lng=location.longitude.toString()
+            Sp.address_big=location.province+location.city+location.district
+            Sp.address_small=location.district
             var intent = Intent(Sp.location_send)
             intent.putExtra("locationinfo", location)
             intent.putExtra("flag",true)

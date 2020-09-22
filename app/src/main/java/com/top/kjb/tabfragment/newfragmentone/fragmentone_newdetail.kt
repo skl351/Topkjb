@@ -17,6 +17,7 @@ import com.top.kjb.model.MainModel
 import com.top.kjb.originpack.BaseActivity
 import com.top.kjb.tabfragment.fragmentone_view.fragmentone_place_info
 import com.top.kjb.utils.Show_toast
+import com.top.kjb.utils.SpacesItemDecoration
 import com.top.kjb.utils.functionClass
 import kotlinx.android.synthetic.main.layout_fragmentone_newdetail_view.*
 import retrofit2.Call
@@ -29,10 +30,16 @@ class fragmentone_newdetail : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_fragmentone_newdetail_view)
         ImmersionBar.with(this).init()
+        init_view()
         init_intent()
         init_click()
         init_refre()
         init_data()
+    }
+
+    override fun init_view() {
+        super.init_view()
+
     }
 
     val mainModel: MainModel by lazy { MainModel() }
@@ -118,7 +125,7 @@ class fragmentone_newdetail : BaseActivity(), View.OnClickListener {
 
 
     private fun init_refre() {
-
+        id_RecyclerView_vip.addItemDecoration(SpacesItemDecoration(-10))
         val layoutmanager = LinearLayoutManager(this)
         layoutmanager.orientation = LinearLayoutManager.HORIZONTAL
         id_RecyclerView?.layoutManager = layoutmanager

@@ -11,10 +11,10 @@ object UrlConstant {
     const val BASE_URL_Test2 = "http://192.168.3.2:8090/api/"//个人版
     const val BASE_URL_Test3 = "http://192.168.3.18:8090/api/"//个人版2
     const val BASE_URL_Test4 = "http://192.168.2.12:8090/api/"//个人版2
-    const val BASE_URL_Test5 = "http://192.168.2.5:8090/api/"//个人版2
+    const val BASE_URL_Test5 = "http://192.168.2.6:8090/api/"//个人版2
 
     //开发
-    var BASE_URL = BASE_URL_Test1
+    var BASE_URL = BASE_URL_Test3
 
 }
 

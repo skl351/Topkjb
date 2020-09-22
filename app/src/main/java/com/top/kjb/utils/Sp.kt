@@ -2,6 +2,10 @@ package com.top.kjb.utils
 
 object Sp {
 
+    var lat=""
+    var lng=""
+    var address_big=""
+    var address_small="慈溪市"
     val qiiu="http://qiniu.topdxm.com/"
 
     val REQUEST_CODE_Location=200
@@ -37,4 +41,6 @@ object Sp {
     val attent_goto="com.topkjb.attent_goto"
     val attent_gotoed="com.topkjb.attent_gotoed"
     val jubaoinfo="com.topkjb.jubaoinfo"
+    val sport_send="com.topkjb.sport_send"
+    val select_bottom_address="com.topkjb.select_bottom_address"
 }

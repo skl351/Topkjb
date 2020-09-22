@@ -1,27 +1,27 @@
 package com.top.kjb.tabfragment
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.Typeface
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.lxj.xpopup.XPopup
+import com.tencent.qcloud.tim.uikit.TUIKit
+import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack
 import com.top.kjb.R
-import com.top.kjb.Userabout.LoginActivity
 import com.top.kjb.model.TwoModel
 import com.top.kjb.originpack.BaseFragment
-import com.top.kjb.tabfragment.fragmenttwo_view.chat.layout_chat_one
-import com.top.kjb.tabfragment.fragmenttwo_view.chat.layout_chat_two
-import com.top.kjb.tabfragment.fragmenttwo_view.chat.liner_list
-import com.top.kjb.tabfragment.fragmenttwo_view.fragment_two_newlist
+import com.top.kjb.tabfragment.chat.layout_chat_one
+import com.top.kjb.tabfragment.chat.layout_chat_two
+import com.top.kjb.tabfragment.chat.util.GenerateTestUserSig
+import com.top.kjb.utils.Sp
 import com.top.kjb.utils.functionClass
 import kotlinx.android.synthetic.main.layout_fragmenttwo_new.*
+import java.util.logging.Logger
 
 
 class fragemnt_two_communication : BaseFragment(), View.OnClickListener {
@@ -37,9 +37,60 @@ class fragemnt_two_communication : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         id_top_bar_2.layoutParams.height = functionClass.getbarHight(activity!!)
+        registerBoradcastReceiver()
         init_click()
         init_view()
-        init_viewpage()
+
+        init_chat_login()
+
+    }
+
+    var mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.action) {
+                Sp.loginoutsuccess -> {
+                    init_chat_login()
+                }
+
+            }
+        }
+    }
+
+    private fun registerBoradcastReceiver() {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(Sp.loginoutsuccess)
+        activity?.registerReceiver(mBroadcastReceiver, intentFilter)
+    }
+
+    private fun init_chat_login() {
+        if ("".equals(functionClass.gettel())) {
+            TUIKit.logout(object :IUIKitCallBack{
+                override fun onSuccess(data: Any?) {
+                    println("腾讯云退出登录成功")
+                }
+
+                override fun onError(module: String?, errCode: Int, errMsg: String?) {
+                    println("腾讯云退出登录失败" + errCode + "," + errMsg)
+                }
+
+            })
+        }else{
+            // 获取userSig函数
+            println("腾讯云登录" + functionClass.gettel())
+            val userSig: String = GenerateTestUserSig.genTestUserSig(functionClass.gettel())
+            TUIKit.login(functionClass.gettel(), userSig, object : IUIKitCallBack {
+                override fun onSuccess(data: Any?) {
+                    println("腾讯云登录成功")
+                    init_viewpage()
+                }
+
+                override fun onError(module: String?, errCode: Int, errMsg: String?) {
+                    println("腾讯云登录失败" + errCode + "," + errMsg)
+                }
+
+            })
+        }
 
     }
 
@@ -52,6 +103,7 @@ class fragemnt_two_communication : BaseFragment(), View.OnClickListener {
     var framgent1: Fragment? = null
     var framgent2: Fragment? = null
     private fun getfragment() {
+        mFragments.clear()
         framgent1 = layout_chat_one()
         framgent2 = layout_chat_two()
         mFragments.add(framgent1 as Fragment)
@@ -125,8 +177,8 @@ class fragemnt_two_communication : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.id_click_liner -> {
-                var intent = Intent(activity, liner_list::class.java)
-                startActivity(intent)
+//                var intent = Intent(activity, liner_list::class.java)
+//                startActivity(intent)
             }
 
             R.id.id_line1 -> {

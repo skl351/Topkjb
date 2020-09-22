@@ -235,7 +235,7 @@ class fragmenttwo_detail_zixun : BaseActivity(), View.OnClickListener {
                     id_time.setText(
                         functionClass.getTime_ms(
                             bean?.result?.startTime.toString(),
-                            "yyyy-MM-dd hh:mm"
+                            "yyyy-MM-dd HH:mm"
                         )
                     )
                     top_text.setText(bean?.result?.title)

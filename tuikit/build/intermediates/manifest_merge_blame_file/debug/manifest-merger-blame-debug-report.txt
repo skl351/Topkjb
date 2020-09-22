@@ -1,0 +1,132 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tencent.qcloud.tim.uikit"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:5:5-79
+11-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:5:22-76
+12    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+12-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:6:5-76
+12-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:6:22-73
+13    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+13-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:7:5-75
+13-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:7:22-72
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:8:5-81
+14-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:8:22-78
+15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+15-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:9:5-80
+15-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:9:22-77
+16    <uses-permission android:name="android.permission.VIBRATE" />
+16-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:10:5-66
+16-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:10:22-63
+17
+18    <application>
+18-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:12:5-64:19
+19        <activity
+19-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:13:9-15:52
+20            android:name="com.tencent.qcloud.tim.uikit.component.video.CameraActivity"
+20-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:14:13-59
+21            android:screenOrientation="portrait" />
+21-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:15:13-49
+22        <activity
+22-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:16:9-18:77
+23            android:name="com.tencent.qcloud.tim.uikit.component.video.VideoViewActivity"
+23-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:17:13-62
+24            android:configChanges="keyboardHidden|orientation|screenSize" />
+24-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:18:13-74
+25        <activity
+25-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:19:9-21:52
+26            android:name="com.tencent.qcloud.tim.uikit.component.photoview.PhotoViewActivity"
+26-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:20:13-66
+27            android:screenOrientation="portrait" />
+27-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:21:13-49
+28        <activity
+28-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:22:9-24:52
+29            android:name="com.tencent.qcloud.tim.uikit.modules.group.info.GroupInfoActivity"
+29-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:23:13-65
+30            android:screenOrientation="portrait" />
+30-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:24:13-49
+31        <activity
+31-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:25:9-27:52
+32            android:name="com.tencent.qcloud.tim.uikit.component.SelectionActivity"
+32-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:26:13-56
+33            android:screenOrientation="portrait" />
+33-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:27:13-49
+34        <activity
+34-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:28:9-31:73
+35            android:name="com.tencent.qcloud.tim.uikit.modules.group.apply.GroupApplyManagerActivity"
+35-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:29:13-74
+36            android:screenOrientation="portrait"
+36-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:30:13-49
+37            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+37-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:31:13-70
+38        <activity
+38-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:32:9-35:73
+39            android:name="com.tencent.qcloud.tim.uikit.modules.group.apply.GroupApplyMemberActivity"
+39-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:33:13-73
+40            android:screenOrientation="portrait"
+40-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:34:13-49
+41            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+41-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:35:13-70
+42        <activity
+42-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:37:9-42:63
+43            android:name="com.tencent.liteav.SelectContactActivity"
+43-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:38:13-68
+44            android:launchMode="singleTop"
+44-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:39:13-43
+45            android:screenOrientation="portrait"
+45-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:40:13-49
+46            android:theme="@style/Theme.AppCompat.NoActionBar"
+46-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:41:13-63
+47            android:windowSoftInputMode="stateAlwaysHidden" />
+47-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:42:13-60
+48        <activity
+48-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:43:9-47:66
+49            android:name="com.tencent.liteav.trtcaudiocalldemo.ui.TRTCAudioCallActivity"
+49-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:44:13-89
+50            android:launchMode="singleTop"
+50-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:45:13-43
+51            android:screenOrientation="portrait"
+51-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:46:13-49
+52            android:theme="@style/Theme.AppCompat.NoActionBar" />
+52-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:47:13-63
+53        <activity
+53-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:48:9-52:66
+54            android:name="com.tencent.liteav.trtcvideocalldemo.ui.TRTCVideoCallActivity"
+54-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:49:13-89
+55            android:launchMode="singleTop"
+55-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:50:13-43
+56            android:screenOrientation="portrait"
+56-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:51:13-49
+57            android:theme="@style/Theme.AppCompat.NoActionBar" />
+57-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:52:13-63
+58
+59        <provider
+59-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:54:9-62:20
+60            android:name="com.tencent.qcloud.tim.uikit.utils.TUIKitFileProvider"
+60-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:55:13-53
+61            android:authorities="${applicationId}.uikit.fileprovider"
+61-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:56:13-70
+62            android:exported="false"
+62-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:57:13-37
+63            android:grantUriPermissions="true" >
+63-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:58:13-47
+64            <meta-data
+64-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:59:13-61:61
+65                android:name="android.support.FILE_PROVIDER_PATHS"
+65-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:60:17-67
+66                android:resource="@xml/file_paths_public" />
+66-->D:\mywork\Topkjb\tuikit\src\main\AndroidManifest.xml:61:17-58
+67        </provider>
+68    </application>
+69
+70</manifest>

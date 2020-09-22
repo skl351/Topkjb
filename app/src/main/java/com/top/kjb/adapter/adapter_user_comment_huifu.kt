@@ -90,7 +90,7 @@ class adapter_user_comment_huifu : RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         p0.id_use_commit_text.setText(bean?.replyText)
         p0.id_love_num.setText(bean?.likesTimes)
-        p0.id_time.setText(functionClass.getTime_ms(bean?.startTime.toString(), "yyyy-MM-dd hh:mm"))
+        p0.id_time.setText(functionClass.getTime_ms(bean?.startTime.toString(), "yyyy-MM-dd HH:mm"))
         var likeStatus = bean?.likeStatus
         if (likeStatus!!) {
             p0.id_zan_img.isSelected = true

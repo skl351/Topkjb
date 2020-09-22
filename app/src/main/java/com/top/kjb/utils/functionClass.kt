@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
@@ -95,6 +96,22 @@ object functionClass {
         return SharedPreferenceUtils.getString("tel", "")
     }
 
+    fun setuserinfo(userid:Int,token:String,username: String,headImg: String,motto:String,phone:String){
+        setUserId(userid)
+        setToken(token)
+        setUsername(username)
+        setHeadImg(headImg)
+        setmotto(motto)
+        settel(phone)
+    }
+
+    fun setfirstsport() {
+        SharedPreferenceUtils.save("firstsport", true)
+    }
+
+    fun getfirstsport(): Boolean {
+        return SharedPreferenceUtils.getBoolean("firstsport", false)
+    }
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)--好
@@ -126,7 +143,16 @@ object functionClass {
         }
         return str
     }
-
+    /**
+     * 将日期转为相应格式
+     *
+     * @param date
+     * @return 格式日期
+     */
+    fun getTime(date: Date, type: String): String {
+        val format = SimpleDateFormat(type)
+        return format.format(date)
+    }
     fun islogin(): Boolean {
         println("-------------" + getToken())
         if ("".equals(getToken())) {
@@ -265,5 +291,7 @@ object functionClass {
         }
         return strNetworkType
     }
+
+
 
 }

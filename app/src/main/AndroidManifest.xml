@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
-    tool:ignore="LockedOrientationActivity"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.top.kjb">
     <!--步数传感器-->
     <!-- 协处理器计步权限 -->
@@ -17,46 +16,45 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- 这个权限用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 这个权限用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 访问网络，网络定位需要上网-->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 
-    <!-- Required chat -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
     <application
+        android:allowBackup="true"
+        tools:replace="android:allowBackup"
+
         android:name=".MyApplicatipn"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -67,128 +65,139 @@
         </activity>
         <activity
             android:name=".Userabout.LoginActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Userabout.Forgetpassword"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Userabout.updataphoneActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tabfragment.sport.request_sports"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tabfragment.sport.joinadd_page"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tabfragment.sport.More_zixun"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tabfragment.sport.sport_notify"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tabfragment.sport.sports_detail_view"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Userabout.updataphoneActivity2"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentone_view.fragmentone_detail"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.fragmentthree_user_center"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentone_view.user_comment_list"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.Mysetting"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.Myselfinfo"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.vip.top_vip"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentone_view.fragmentone_place_info"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.fragmentthree_cikajilu"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail_xuanliangdian2"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail_zixun"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.userinfo.mysettingactivity.xieyiAndtiaokuan"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.userinfo.mysettingactivity.informationAndtixing"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.Information"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.orderlist.my_order_list"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.newfragmentone.fragmentone_newdetail"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.Mysafety"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.publish_item"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.newfragmentone.coach_detail"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmenttwo_view.fragmenttwo_detail_quanzi"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.fragmentthree_view.fragmentthree_attention"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".tabfragment.newfragmentone.SearchActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".tabfragment.fragmenttwo_view.chat.ChatActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
-        <activity
-            android:name=".tabfragment.fragmenttwo_view.chat.liner_list"
-            android:screenOrientation="portrait"
-            android:launchMode="standard" />
+            android:name=".tabfragment.chat.chatbag.ChatActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
-            android:screenOrientation="portrait"
-            />
 
 
         <!--Baidu定位-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="ulGuG920vooDAxi7Q5Nv74W0aFuB8qVl"></meta-data>
+            android:value="XiHd4GzWY6cwozB6nhuzIdthDoVMKujE"></meta-data>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"></service>
-
 
 
         <!--umeng-->
@@ -206,7 +215,7 @@
         <service
             android:name="com.taobao.accs.internal.AccsJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
-            android:process=":channel"/>
+            android:process=":channel" />
 
         <service
             android:name="com.taobao.accs.ChannelService$KernelService"
@@ -266,8 +275,8 @@
 
         <service
             android:name="com.umeng.message.UmengMessageCallbackHandlerService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false">
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE">
             <intent-filter>
                 <action android:name="com.umeng.messge.registercallback.action" />
             </intent-filter>
@@ -287,8 +296,8 @@
 
         <service
             android:name="com.umeng.message.UmengDownloadResourceService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false" />
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
@@ -418,27 +427,6 @@
             android:name="com.vivo.push.app_id"
             android:value="17148" />
         <!-- VIVO end-->
-
-        <!-- 设置环信应用的AppKey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="1100200902042850#demo" />
-        <!-- 声明SDK所需的service SDK核心功能-->
-        <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
-        <service android:name="com.hyphenate.chat.EMJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"
-            />
-        <!-- 声明SDK所需的receiver -->
-        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package"/>
-            </intent-filter>
-            <!-- 可选filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
 
 
     </application>

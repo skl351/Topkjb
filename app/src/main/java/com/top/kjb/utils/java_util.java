@@ -10,9 +10,21 @@ import android.os.Build;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.top.kjb.MainActivity;
+import androidx.fragment.app.FragmentActivity;
+
+import com.ruiwenliu.Horizontallibrary.adapter.BaseRecyclerviewAdapter;
+import com.ruiwenliu.Horizontallibrary.adapter.RecylcerViewHolder;
+import com.top.kjb.R;
+import com.top.kjb.bean.bean_type_item;
 import com.top.kjb.originpack.BaseActivity;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
@@ -81,4 +93,91 @@ public class java_util {
         }
 
     }
+
+
+    public void addliandongline(com.ruiwenliu.Horizontallibrary.HorizontalScrollview horizontalScrollview, ArrayList<bean_type_item> list, FragmentActivity activity) {
+
+        horizontalScrollview.setCustomAdapter(new BaseRecyclerviewAdapter(R.layout.item_viewly, list) {
+
+            @Override
+            protected void convert(RecylcerViewHolder helper, Object item, int position) {
+
+                TextView tv_title = helper.getView(R.id.tv_title);
+                bean_type_item a= (bean_type_item)item;
+                tv_title.setText(a.getSportsName());
+                if (position == getSelectPostion()) {
+                    tv_title.setTextColor(activity.getResources().getColor(R.color.color_333333));
+                    tv_title.setTextSize(18f);
+                    tv_title.getPaint().setFakeBoldText(true);
+                } else {
+                    tv_title.setTextColor(activity.getResources().getColor(R.color.color_9B9BAE));
+                    tv_title.setTextSize(16f);
+                    tv_title.getPaint().setFakeBoldText(false);
+                }
+            }
+        });
+    }
+    public void addliandongline2(com.ruiwenliu.Horizontallibrary.HorizontalScrollview horizontalScrollview, ArrayList<bean_type_item> list, FragmentActivity activity) {
+
+        horizontalScrollview.setCustomAdapter(new BaseRecyclerviewAdapter(R.layout.item_viewly, list) {
+
+            @Override
+            protected void convert(RecylcerViewHolder helper, Object item, int position) {
+
+                TextView tv_title = helper.getView(R.id.tv_title);
+                bean_type_item a= (bean_type_item)item;
+                tv_title.setText(a.getSportsName());
+                if (position == getSelectPostion()) {
+                    tv_title.setTextColor(activity.getResources().getColor(R.color.color_1cbe6f));
+                    tv_title.setTextSize(18f);
+                    tv_title.getPaint().setFakeBoldText(true);
+                } else {
+                    tv_title.setTextColor(activity.getResources().getColor(R.color.color_9B9BAE));
+                    tv_title.setTextSize(16f);
+                    tv_title.getPaint().setFakeBoldText(false);
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 计算周几
+     */
+    public static String getWeek(String data) {
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
+        long lcc = Long.valueOf(data);
+//        int i = Integer.parseInt(data);
+        String times = sdr.format(new Date(lcc));
+        Date date = null;
+        int mydate = 0;
+        String week = "";
+        try {
+            date = sdr.parse(times);
+            Calendar cd = Calendar.getInstance();
+            cd.setTime(date);
+            mydate = cd.get(Calendar.DAY_OF_WEEK);
+            // 获取指定日期转换成星期几
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (mydate == 1) {
+            week = "周日";
+        } else if (mydate == 2) {
+            week = "周一";
+        } else if (mydate == 3) {
+            week = "周二";
+        } else if (mydate == 4) {
+            week = "周三";
+        } else if (mydate == 5) {
+            week = "周四";
+        } else if (mydate == 6) {
+            week = "周五";
+        } else if (mydate == 7) {
+            week = "周六";
+        }
+        return week;
+    }
+
 }

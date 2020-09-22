@@ -2,17 +2,14 @@ package com.top.kjb
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,10 +20,8 @@ import com.baidu.location.LocationClientOption
 import com.gyf.immersionbar.ImmersionBar
 import com.top.kjb.originpack.BaseActivity
 import com.top.kjb.originpack.BaseFragment
-import com.top.kjb.tabfragment.fragemnt_two
-import com.top.kjb.tabfragment.fragemnt_two_communication
-import com.top.kjb.tabfragment.fragment_three
-import com.top.kjb.tabfragment.newfragmentone.fragment_one
+import com.top.kjb.tabfragment.*
+import com.top.kjb.tabfragment.chat.java_chat
 import com.top.kjb.utils.MyLocationListener
 import com.top.kjb.utils.Show_toast
 import com.top.kjb.utils.Sp
@@ -37,6 +32,7 @@ import com.yzq.zxinglibrary.android.CaptureActivity
 import com.yzq.zxinglibrary.common.Constant
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : BaseActivity(), View.OnClickListener {
@@ -51,6 +47,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         init_viewpage()
         init_loction()
         init_golocation()
+        java_chat().login()
     }
 
     var exitTime: Long = 0
@@ -155,11 +152,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    var currpage = 0
     private fun init_viewpage() {
         id_icon_1.isSelected = true
         id_text_1.isSelected = true
-        myViewpage.offscreenPageLimit = 3
+        myViewpage.offscreenPageLimit = 4
         myViewpage.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return bottom_tabist?.get(position)!!
@@ -172,26 +168,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         }
         myViewpage.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
-                when (position) {
-                    0 -> {
-
-                        clickone()
-                    }
-                    1 -> {
-
-                        clicktwo()
-                    }
-                    2 -> {
-
-                        clickthree()
-
-                    }
-                    3 -> {
-
-                        clickfour()
-
-                    }
-                }
+                clickitem(position)
             }
         })
     }
@@ -201,71 +178,49 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         super.init_view()
         bottom_tabist = ArrayList()
         val fragment1 = fragment_one()
-        val fragment2 = fragemnt_two()
+        val fragment1_sport = fragment_one_sprots()
+        val fragment2 = fragmet_two_new()
         val fragment2_communication = fragemnt_two_communication()
         val fragment3 = fragment_three()
         bottom_tabist?.add(fragment1)
+        bottom_tabist?.add(fragment1_sport)
         bottom_tabist?.add(fragment2)
         bottom_tabist?.add(fragment2_communication)
         bottom_tabist?.add(fragment3)
+
+        icon_list = ArrayList()
+        text_list = ArrayList()
+        icon_list.add(id_icon_1)
+        icon_list.add(id_icon_1_sport)
+        icon_list.add(id_icon_2)
+        icon_list.add(id_icon_2_2)
+        icon_list.add(id_icon_3)
+        text_list.add(id_text_1)
+        text_list.add(id_text_1_sport)
+        text_list.add(id_text_2)
+        text_list.add(id_text_2_2)
+        text_list.add(id_text_3)
     }
 
-    fun clickone() {
-        currpage = 0
-        id_icon_1.isSelected = true
-        id_icon_2.isSelected = false
-        id_icon_2_2.isSelected = false
-        id_icon_3.isSelected = false
+    lateinit var icon_list: ArrayList<Button>
+    lateinit var text_list: ArrayList<TextView>
 
-        id_text_1.isSelected = true
-        id_text_2.isSelected = false
-        id_text_2_2.isSelected = false
-        id_text_3.isSelected = false
+    fun clickitem(a: Int) {
+        for (i in 0..text_list.size - 1) {
+            icon_list.get(i).isSelected = false
+            text_list.get(i).isSelected = false
+        }
+        text_list.get(a).isSelected = true
+        icon_list.get(a).isSelected = true
     }
 
-    fun clicktwo() {
-        currpage = 1
-        id_icon_1.isSelected = false
-        id_icon_2.isSelected = true
-        id_icon_2_2.isSelected = false
-        id_icon_3.isSelected = false
-
-        id_text_1.isSelected = false
-        id_text_2.isSelected = true
-        id_text_2_2.isSelected = false
-        id_text_3.isSelected = false
-    }
-
-    fun clickthree() {
-        currpage = 2
-        id_icon_1.isSelected = false
-        id_icon_2.isSelected = false
-        id_icon_2_2.isSelected = true
-        id_icon_3.isSelected = false
-
-        id_text_1.isSelected = false
-        id_text_2.isSelected = false
-        id_text_2_2.isSelected = true
-        id_text_3.isSelected = false
-    }
-
-    fun clickfour() {
-        currpage = 3
-        id_icon_1.isSelected = false
-        id_icon_2.isSelected = false
-        id_icon_2_2.isSelected = false
-        id_icon_3.isSelected = true
-
-        id_text_1.isSelected = false
-        id_text_2.isSelected = false
-        id_text_2_2.isSelected = false
-        id_text_3.isSelected = true
-    }
 
     override fun init_click() {
         super.init_click()
         id_icon_1.setOnClickListener(this)
         id_click1.setOnClickListener(this)
+        id_icon_1_sport.setOnClickListener(this)
+        id_click1_sport.setOnClickListener(this)
         id_icon_2.setOnClickListener(this)
         id_click2.setOnClickListener(this)
         id_click2_2.setOnClickListener(this)
@@ -279,14 +234,17 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             R.id.id_icon_1, R.id.id_click1 -> {
                 myViewpage.currentItem = 0
             }
-            R.id.id_icon_2, R.id.id_click2 -> {
+            R.id.id_icon_1_sport, R.id.id_click1_sport -> {
                 myViewpage.currentItem = 1
             }
-            R.id.id_icon_2_2, R.id.id_click2_2 -> {
+            R.id.id_icon_2, R.id.id_click2 -> {
                 myViewpage.currentItem = 2
             }
-            R.id.id_icon_3, R.id.id_click3 -> {
+            R.id.id_icon_2_2, R.id.id_click2_2 -> {
                 myViewpage.currentItem = 3
+            }
+            R.id.id_icon_3, R.id.id_click3 -> {
+                myViewpage.currentItem = 4
             }
 
         }

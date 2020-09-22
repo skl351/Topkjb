@@ -52,7 +52,7 @@ public class roundimage extends androidx.appcompat.widget.AppCompatImageView {
             int attr = ta.getIndex(i);
             switch (attr) {
                 case R.styleable.roundimage_round:
-                    mBorderRadius= (int) ta.getDimension(attr,0f);
+                    mBorderRadius = (int) ta.getDimension(attr, 0f);
                     break;
                 default:
                     break;

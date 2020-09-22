@@ -58,7 +58,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
@@ -68,7 +68,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-
     implementation 'com.google.code.gson:gson:2.8.5'
 
     //图片显示类
@@ -79,66 +78,77 @@ dependencies {
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
     implementation 'com.lcw.library:imagepicker:2.2.7'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
     //图片压缩
     implementation 'top.zibin:Luban:1.1.8'
+
     /**
-     *   网络请求
+     *    网络请求
      */
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
     /**
-     * logcat
-     * implementation 'com.orhanobut:logger:2.2.0'
+     *  logcat
+     *  implementation 'com.orhanobut:logger:2.2.0'
      */
     implementation 'com.orhanobut:logger:2.2.0'
+
     //定位
-//    implementation files('libs/BaiduLBS_Android.jar')
+
+    //    implementation files('libs/BaiduLBS_Android.jar')
+
     /**
-     * 气泡弹窗
+     *  气泡弹窗
      */
     implementation 'com.lxj:xpopup:1.8.10'
+
     /**
-     * 评分
+     *  评分
      */
     implementation 'com.github.giswangsj:AndRatingBar:1.0.4'
+
     /*二维码*/
     implementation 'com.github.yuzhiqiang1993:zxing:2.2.5'
 
     /*
-    七牛
-     */
+        七牛
+         */
     implementation project(path: ':library')
+
     /**
-     * 沉浸式
+     *  沉浸式
      */
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+
     /**
-     * 点击大图
+     *  点击大图
      */
     implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-6.0.1'
+
     //switch button
     implementation 'com.kyleduo.switchbutton:library:2.0.0'
 
     /**
-     *   聪明的刷新控件
+     *    聪明的刷新控件
      */
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-18'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-18'
 
     //支付宝
     implementation files('libs/alipaySdk-20180601.jar')
+
     /**
-     *   umeng相关
+     *    umeng相关
      */
-//    compile 'com.umeng.umsdk:analytics:8.0.0'
+
+    //    compile 'com.umeng.umsdk:analytics:8.0.0'
     compile 'com.umeng.umsdk:common:9.1.0'
     implementation 'com.umeng.umsdk:push:6.1.0'
     compile 'com.umeng.umsdk:asms:1.1.3'
     compile 'com.umeng.umsdk:crash:0.0.4'
-
-
     implementation 'com.umeng.umsdk:alicloud-httpdns:1.2.5'
     implementation 'com.umeng.umsdk:alicloud-utils:1.1.5'
     implementation 'com.umeng.umsdk:alicloud_beacon:1.0.1'
@@ -146,10 +156,18 @@ dependencies {
     implementation 'com.umeng.umsdk:agoo_networksdk:3.5.5'
     implementation 'com.umeng.umsdk:agoo_tlog:3.0.0.17'
     implementation 'com.umeng.umsdk:agoo_tnet4android:3.1.14.9'
-    implementation 'com.umeng.umsdk:oaid_lenovo:1.0.0' // (可选)
-    implementation 'com.umeng.umsdk:oaid_mi:1.0.0' // (可选)
-    implementation 'com.umeng.umsdk:oaid_oppo:1.0.4' // (可选)
-    implementation 'com.umeng.umsdk:oaid_vivo:1.0.0.1' // (可选)
+    implementation 'com.umeng.umsdk:oaid_lenovo:1.0.0'
+
+    // (可选)
+    implementation 'com.umeng.umsdk:oaid_mi:1.0.0'
+
+    // (可选)
+    implementation 'com.umeng.umsdk:oaid_oppo:1.0.4'
+
+    // (可选)
+    implementation 'com.umeng.umsdk:oaid_vivo:1.0.0.1'
+
+    // (可选)
 
     //小米Push通道
     compile 'com.umeng.umsdk:xiaomi-push:3.7.0'
@@ -167,6 +185,13 @@ dependencies {
     //vivo push通道
     implementation 'com.umeng.umsdk:vivo-push:2.3.5'
     implementation 'com.umeng.umsdk:vivo-umengaccs:1.1.0'
+    implementation files('libs/BaiduLBS_Android.jar')
 
+    implementation project(':tuikit')
 
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+
+    //横向指示器
+    implementation project(':horizontallibrary')
 }

@@ -134,14 +134,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     println("登录成功" + response?.body()?.result)
                     var bean = response?.body()
                     if ("success".equals(bean?.flag)) {
-
-                        functionClass.setToken(bean?.result?.token.toString())
-                        functionClass.setUserId(bean?.result?.user?.id!!)
-                        functionClass.setUsername(bean?.result?.user?.username.toString())
-                        functionClass.setmotto(bean?.result?.user?.motto.toString())
-                        functionClass.setmotto(bean?.result?.user?.motto.toString())
-                        functionClass.setHeadImg(bean?.result?.user?.headImg.toString())
-                        functionClass.settel(bean?.result?.user?.tel.toString())
+                        functionClass.setuserinfo(bean?.result?.user?.id!!,bean?.result?.token.toString(),
+                            bean?.result?.user?.username.toString(),bean?.result?.user?.headImg.toString()
+                            ,bean?.result?.user?.motto.toString(),bean?.result?.user?.tel.toString())
                         Show_toast.showText(this@LoginActivity, "登录成功")
                         var intent = Intent(Sp.loginoutsuccess)
                         sendBroadcast(intent)

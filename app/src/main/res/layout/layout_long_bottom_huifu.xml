@@ -41,14 +41,14 @@
                     android:textSize="@dimen/title_size_15" />
 
                 <TextView
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true"
                     android:text="举报"
                     android:textColor="@color/color_333333"
-                    android:textSize="@dimen/title_size_13" />
+                    android:textSize="@dimen/title_size_13"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <LinearLayout
@@ -106,7 +106,6 @@
                     </LinearLayout>
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/id_click_attion"
                         android:layout_width="wrap_content"
                         android:layout_height="26dp"
@@ -117,7 +116,8 @@
                         android:paddingLeft="18dp"
                         android:paddingRight="18dp"
                         android:text="关注"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <TextView

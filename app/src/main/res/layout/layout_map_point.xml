@@ -8,7 +8,7 @@
         android:paddingLeft="13dp"
         android:gravity="center_vertical"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:background="@drawable/back_90cir_5f6772">
         <TextView
             android:id="@+id/id_location_text"
@@ -16,7 +16,8 @@
             android:textColor="@color/white"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:layout_width="100dp"
+           android:maxWidth="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""/>
         <ImageView
