@@ -17,9 +17,11 @@ import com.top.kjb.adapter.wuxianhuadongtab.TabAdapter
 import com.top.kjb.bean.Result
 import com.top.kjb.bean.bean_sports_list_item
 import com.top.kjb.bean.bean_type_item
+import com.top.kjb.model.ClueModel
 import com.top.kjb.model.MainModel
 import com.top.kjb.model.SportsModel
 import com.top.kjb.originpack.BaseFragment
+import com.top.kjb.tabfragment.club.Club_activity
 import com.top.kjb.tabfragment.sport.More_zixun
 import com.top.kjb.tabfragment.sport.request_sports
 import com.top.kjb.tabfragment.sport.sports_detail_view
@@ -42,6 +44,7 @@ class fragment_one_sprots : BaseFragment(), View.OnClickListener {
 
     val sportsModel: SportsModel by lazy { SportsModel() }
     val mainModel: MainModel by lazy { MainModel() }
+    val clueModel: ClueModel by lazy { ClueModel() }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         id_fragment_one_sports_bar.layoutParams.height = functionClass.getbarHight(activity!!)
         registerBoradcastReceiver()
@@ -50,12 +53,15 @@ class fragment_one_sprots : BaseFragment(), View.OnClickListener {
         init_horline()
         init_banner()
         init_mysports()
+        init_myclub()
 
     }
 
     private fun registerBoradcastReceiver() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(Sp.sport_send)
+        intentFilter.addAction(Sp.loginoutsuccess)
+
         activity?.registerReceiver(mBroadcastReceiver, intentFilter)
     }
 
@@ -63,6 +69,11 @@ class fragment_one_sprots : BaseFragment(), View.OnClickListener {
 
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
+                Sp.loginoutsuccess -> {
+                    init_mysports()
+                    init_myclub()
+
+                }
                 Sp.sport_send -> {
                     init_mysports()
                 }
@@ -71,7 +82,43 @@ class fragment_one_sprots : BaseFragment(), View.OnClickListener {
         }
     }
 
+    private fun init_myclub() {
+        if (!functionClass.islogin()) {
+            id_show_myclub_info.visibility = View.VISIBLE
+            id_RecyclerView_myclub_head.visibility = View.GONE
+            return
+        }
+        id_show_myclub_info.visibility = View.GONE
+        id_RecyclerView_myclub_head.visibility = View.VISIBLE
+        clueModel.clubselectMemberHeadImgList(functionClass.getToken())
+            .enqueue(object : retrofit2.Callback<Result<ArrayList<String>>> {
+                override fun onFailure(call: Call<Result<ArrayList<String>>>, t: Throwable) {
+
+                }
+
+                override fun onResponse(
+                    call: Call<Result<ArrayList<String>>>,
+                    response: Response<Result<ArrayList<String>>>
+                ) {
+
+                    var bean = response?.body()
+                    if ("success".equals(bean?.flag)) {
+                        val adapter = adapter_head_yuanquan(context!!, bean?.result!!)
+                        id_RecyclerView_myclub_head.setAdapter(adapter)
+                    }
+
+                }
+
+            })
+
+
+    }
+
     private fun init_mysports() {
+        if (!functionClass.islogin()) {
+            id_mysport_big.removeAllViews()
+            return
+        }
         sportsModel.togetherLogsearchMyTogetherLog(
             functionClass.getToken(),
             functionClass.getUserId()
@@ -192,7 +239,6 @@ class fragment_one_sprots : BaseFragment(), View.OnClickListener {
                                     intent.putExtra("id", bean_nei?.togetherLogs?.id)
                                     context!!.startActivity(intent)
                                 }
-
                             })
                             id_mysport_big.addView(view)
                         }
@@ -299,17 +345,8 @@ class fragment_one_sprots : BaseFragment(), View.OnClickListener {
             }
         }
         layoutmanager.orientation = LinearLayoutManager.HORIZONTAL
+        layoutmanager.reverseLayout = true
         id_RecyclerView_myclub_head.setLayoutManager(layoutmanager)
-
-        val images = java.util.ArrayList<String>()
-        images.add("")
-        images.add("")
-        images.add("")
-        images.add("")
-        images.add("")
-        images.add("")
-        val adapter = adapter_head_yuanquan(context!!, images)
-        id_RecyclerView_myclub_head.setAdapter(adapter)
     }
 
     override fun init_click() {
@@ -321,19 +358,11 @@ class fragment_one_sprots : BaseFragment(), View.OnClickListener {
     }
 
 
-    fun getBean(): ArrayList<String>? {
-        val list: ArrayList<String> =
-            ArrayList()
-        for (i in 0..5) {
-            list.add("足球")
-        }
-        return list
-    }
-
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.id_click_club -> {
-
+                var intent = Intent(activity, Club_activity::class.java)
+                startActivity(intent)
             }
             R.id.id_click_more_zixun -> {
                 var intent = Intent(activity, More_zixun::class.java)

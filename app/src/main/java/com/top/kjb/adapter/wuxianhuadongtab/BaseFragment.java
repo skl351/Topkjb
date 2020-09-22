@@ -25,7 +25,6 @@ import com.top.kjb.R;
 
 public abstract class BaseFragment extends Fragment {
 
-    SmartRefreshLayout id_SmartRefreshLayout_donggtai;
     RecyclerView goodsRv;
     FrameLayout frameLayout;
     private View mContentView;
@@ -43,7 +42,6 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.fragment_goodsly, container, false);
         goodsRv=mContentView.findViewById(R.id.goodsRv);
-        id_SmartRefreshLayout_donggtai=mContentView.findViewById(R.id.id_SmartRefreshLayout_donggtai);
         id_nodate=mContentView.findViewById(R.id.id_nodate);
         frameLayout=mContentView.findViewById(R.id.framelayout);
         mContext = getContext();

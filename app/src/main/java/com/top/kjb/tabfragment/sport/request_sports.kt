@@ -264,6 +264,12 @@ class request_sports : BaseActivity(), View.OnClickListener {
         } else {
             endTime = id_end_time.text.toString()
         }
+        if (id_select_gym.text.toString().equals("")) {
+            Show_toast.showText(this, "请选择场馆")
+            return
+        } else {
+            endTime = id_end_time.text.toString()
+        }
 
 
         println("send_request" + sportId + "," + maxPeople + "," + time + "," + endTime + "," + name)

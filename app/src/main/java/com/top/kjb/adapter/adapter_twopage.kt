@@ -69,6 +69,7 @@ class adapter_twopage : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         var bean = mData?.get(p1)
         p0.id_RecyclerView_image?.setOnTouchListener(object :View.OnTouchListener{
             override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                return true
                 if (!functionClass.islogin()) {
                     var intent = Intent(mycontent, LoginActivity::class.java)
                     mycontent?.startActivity(intent)

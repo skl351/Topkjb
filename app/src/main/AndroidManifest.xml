@@ -164,6 +164,11 @@
             android:launchMode="standard"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".tabfragment.club.Club_activity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".tabfragment.fragmenttwo_view.publish_item"
             android:launchMode="standard"
             android:screenOrientation="portrait" />

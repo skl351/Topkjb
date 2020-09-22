@@ -26,7 +26,7 @@ import kotlin.collections.ArrayList
  * Email:1054750389@qq.com
  * Desc:
  */
-class GoodsFragment2 : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
+class GoodsFragment2 : BaseFragment2(), OnRefreshListener, OnLoadMoreListener {
     private var mAdapter: adapter_twopage? = null
     private var type = 0
     override fun initView() {

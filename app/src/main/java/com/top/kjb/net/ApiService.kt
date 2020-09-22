@@ -607,5 +607,13 @@ interface ApiService {
         @Query("pageSize") pageSize: Int
     ): Call<Result<bean_twopage_item_3he1>>
 
+    /**
+     * 获取自己的俱乐部队徽
+     */
+    @GET("club/selectMemberHeadImgList")
+    fun clubselectMemberHeadImgList(
+        @Header("x-auth-token") token: String
+    ): Call<Result<ArrayList<String>>>
+
 
 }
